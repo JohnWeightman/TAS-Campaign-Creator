@@ -8,28 +8,69 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// This is the code for your desktop app.
-// Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-
 namespace TAS_Campagin_Creator
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        Campaign Campaign = new Campaign();
+
+        public MainForm()
         {
             InitializeComponent();
+            Campaign.NewModule();
+            UpdateModuleBox();
+            CampaignNameLabel.Text = Campaign.Name;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        #region Menu Bar
+
+        #region File
+
+        private void NewCampaignButton_Click(object sender, EventArgs e)
         {
-            // Click on the link below to continue learning how to build a desktop app using WinForms!
-            System.Diagnostics.Process.Start("http://aka.ms/dotnet-get-started-desktop");
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SaveCampaignButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thanks!");
+
         }
+
+        private void LoadCampaignButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void QuitButton_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to Quit?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.OK) 
+                Environment.Exit(1);
+        }
+
+        #endregion
+
+        #region Modules
+
+        private void addModuleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Campaign.NewModule();
+            UpdateModuleBox();
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Update Interface
+
+        void UpdateModuleBox()
+        {
+            ModuleBox.Items.Clear();
+            foreach (Module Mod in Campaign.Modules)
+                ModuleBox.Items.Add(Mod.Name);
+        }
+
+        #endregion
+
     }
 }
