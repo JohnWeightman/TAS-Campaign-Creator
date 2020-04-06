@@ -13,6 +13,7 @@ namespace TAS_Campagin_Creator
     public partial class MainForm : Form
     {
         Campaign Campaign = new Campaign();
+        int ModNum = 0;
 
         public MainForm()
         {
@@ -70,7 +71,110 @@ namespace TAS_Campagin_Creator
                 ModuleBox.Items.Add(Mod.Name);
         }
 
+        private void ModuleBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string Name = ModuleBox.SelectedItem.ToString();
+            FindModule(Name);
+            ModuleLabel.Text = "Module: " + (ModNum + 1);
+            DisplayModuleStory();
+            DisplayModuleOptions();
+        }
+
+        void FindModule(string Name)
+        {
+            ModNum = 0;
+            foreach (Module Mod in Campaign.Modules)
+            {
+                if (Name == Mod.Name)
+                    break;
+                ModNum += 1;
+            }
+        }
+
+        void DisplayModuleStory()
+        {
+            StoryBox.Clear();
+            foreach (string Text in Campaign.Modules[ModNum].Story)
+                StoryBox.Text += Text + "\n";
+        }
+
+        void DisplayModuleOptions()
+        {
+            OptionsBox.ClearSelected();
+            foreach (string Option in Campaign.Modules[ModNum].Options)
+                OptionsBox.Items.Add(Option);
+        }
+
         #endregion
 
+        #region Update Module Data
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateModuleStory();
+            UpdateModuleOptions();
+        }
+
+        void UpdateModuleStory()
+        {
+            List<string> StoryText = SplitIntoStrings(StoryBox.Text);
+        }
+
+        List<string> SplitIntoStrings(string StoryText)
+        {
+            List<string> Story = new List<string>();
+            bool Done = false;
+            while (!Done)
+            {
+                char[] CharString = StoryText.ToCharArray();
+                bool Found = false;
+                int Count = 0;
+                while (!Found)
+                {
+                    if (CharString[Count] == '/')
+                    {
+                        if (CharString[Count + 1] == '/')
+                        {
+                            char[] chars = StoryText.ToCharArray(0, Count);
+                            string Temp = new string(chars);
+                            Story.Add(Temp);
+                            StoryText = StoryText.Substring(Count + 2);
+                            Found = true;
+                        }
+                    }
+                    else
+                    {
+                        Count++;
+                    }
+                }
+                Done = CheckForSlashes(StoryText.ToCharArray());
+            }
+            return Story;
+        }
+
+        bool CheckForSlashes(char[] CharString)
+        {
+            bool NoSlashes = true;
+            for(int x = 0; x < CharString.Length; x++)
+            {
+                if(CharString[x] == '/')
+                {
+                    if(CharString[x] == '/')
+                    {
+                        NoSlashes = false;
+                        break;
+                    }
+                }
+            }
+            return NoSlashes;
+        }
+
+        void UpdateModuleOptions()
+        {
+
+        }
+
+        #endregion
+        
     }
 }

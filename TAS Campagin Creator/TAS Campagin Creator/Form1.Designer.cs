@@ -39,7 +39,12 @@ namespace TAS_Campagin_Creator
             this.addModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignNameLabel = new System.Windows.Forms.Label();
             this.ModuleBox = new System.Windows.Forms.ListBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.StoryBox = new System.Windows.Forms.RichTextBox();
+            this.StoryLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.OptionsBox = new System.Windows.Forms.ListBox();
+            this.ModuleLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,23 +142,79 @@ namespace TAS_Campagin_Creator
             this.ModuleBox.ItemHeight = 16;
             this.ModuleBox.Location = new System.Drawing.Point(10, 85);
             this.ModuleBox.Name = "ModuleBox";
-            this.ModuleBox.Size = new System.Drawing.Size(200, 516);
+            this.ModuleBox.Size = new System.Drawing.Size(200, 756);
             this.ModuleBox.TabIndex = 3;
+            this.ModuleBox.SelectedIndexChanged += new System.EventHandler(this.ModuleBox_SelectedIndexChanged);
             // 
-            // richTextBox1
+            // StoryBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(220, 85);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(300, 200);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.StoryBox.Location = new System.Drawing.Point(220, 220);
+            this.StoryBox.Name = "StoryBox";
+            this.StoryBox.Size = new System.Drawing.Size(500, 300);
+            this.StoryBox.TabIndex = 4;
+            this.StoryBox.Text = "";
+            // 
+            // StoryLabel
+            // 
+            this.StoryLabel.AutoSize = true;
+            this.StoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StoryLabel.Location = new System.Drawing.Point(220, 185);
+            this.StoryLabel.Name = "StoryLabel";
+            this.StoryLabel.Size = new System.Drawing.Size(261, 32);
+            this.StoryLabel.TabIndex = 5;
+            this.StoryLabel.Text = "Module Story Text";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(220, 525);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(324, 32);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Module Player Options";
+            // 
+            // OptionsBox
+            // 
+            this.OptionsBox.FormattingEnabled = true;
+            this.OptionsBox.ItemHeight = 16;
+            this.OptionsBox.Location = new System.Drawing.Point(220, 560);
+            this.OptionsBox.Name = "OptionsBox";
+            this.OptionsBox.Size = new System.Drawing.Size(500, 260);
+            this.OptionsBox.TabIndex = 7;
+            // 
+            // ModuleLabel
+            // 
+            this.ModuleLabel.AutoSize = true;
+            this.ModuleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModuleLabel.Location = new System.Drawing.Point(220, 85);
+            this.ModuleLabel.Name = "ModuleLabel";
+            this.ModuleLabel.Size = new System.Drawing.Size(140, 32);
+            this.ModuleLabel.TabIndex = 8;
+            this.ModuleLabel.Text = "Module 1";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(220, 120);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(140, 62);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Update Module";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ModuleLabel);
+            this.Controls.Add(this.OptionsBox);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.StoryLabel);
+            this.Controls.Add(this.StoryBox);
             this.Controls.Add(this.ModuleBox);
             this.Controls.Add(this.CampaignNameLabel);
             this.Controls.Add(this.menuStrip);
@@ -179,9 +240,14 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.ToolStripMenuItem QuitButton;
         private System.Windows.Forms.Label CampaignNameLabel;
         private System.Windows.Forms.ListBox ModuleBox;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox StoryBox;
         private System.Windows.Forms.ToolStripMenuItem modulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addModuleToolStripMenuItem;
+        private System.Windows.Forms.Label StoryLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox OptionsBox;
+        private System.Windows.Forms.Label ModuleLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
 
