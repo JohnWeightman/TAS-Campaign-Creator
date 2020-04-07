@@ -95,7 +95,7 @@ namespace TAS_Campagin_Creator
         {
             StoryBox.Clear();
             foreach (string Text in Campaign.Modules[ModNum].Story)
-                StoryBox.Text += Text + "\n";
+                StoryBox.Text += Text + "//";
         }
 
         void DisplayModuleOptions()
@@ -118,6 +118,7 @@ namespace TAS_Campagin_Creator
         void UpdateModuleStory()
         {
             List<string> StoryText = SplitIntoStrings(StoryBox.Text);
+            Campaign.Modules[ModNum].Story = StoryText;
         }
 
         List<string> SplitIntoStrings(string StoryText)
@@ -145,6 +146,8 @@ namespace TAS_Campagin_Creator
                     else
                     {
                         Count++;
+                        if (Count == CharString.Length)
+                            break;
                     }
                 }
                 Done = CheckForSlashes(StoryText.ToCharArray());
@@ -171,7 +174,8 @@ namespace TAS_Campagin_Creator
 
         void UpdateModuleOptions()
         {
-
+            foreach (string Item in OptionsBox.Items)
+                Campaign.Modules[ModNum].Options.Add(Item);
         }
 
         #endregion

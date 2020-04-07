@@ -189,9 +189,9 @@ namespace TAS_Campagin_Creator
             this.ModuleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ModuleLabel.Location = new System.Drawing.Point(220, 85);
             this.ModuleLabel.Name = "ModuleLabel";
-            this.ModuleLabel.Size = new System.Drawing.Size(140, 32);
+            this.ModuleLabel.Size = new System.Drawing.Size(326, 32);
             this.ModuleLabel.TabIndex = 8;
-            this.ModuleLabel.Text = "Module 1";
+            this.ModuleLabel.Text = "Module: Select Module";
             // 
             // button1
             // 
