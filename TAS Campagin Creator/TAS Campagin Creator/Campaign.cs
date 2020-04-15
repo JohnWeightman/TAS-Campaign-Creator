@@ -8,7 +8,7 @@ namespace TAS_Campagin_Creator
 {
     class Campaign
     {
-        public string Name = "Campaign 1";
+        public string Name = "Campaign1";
         public List<Module> Modules = new List<Module>();
         int ModCount = 0;
 
@@ -16,7 +16,7 @@ namespace TAS_Campagin_Creator
         {
             Module NewMod = new Module();
             ModCount += 1;
-            NewMod.Name = "Module " + ModCount;
+            NewMod.Name = "Module" + ModCount;
             Modules.Add(NewMod);
         }
     }
@@ -24,7 +24,7 @@ namespace TAS_Campagin_Creator
     class Module
     {
         public Options Options = new Options();
-        public string Name = "Module 1";
+        public string Name = "Module1";
         public List<string> Story = new List<string>();
     }
 
