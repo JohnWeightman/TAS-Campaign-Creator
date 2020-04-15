@@ -42,6 +42,11 @@ namespace TAS_Campagin_Creator
 
         }
 
+        private void exportCampaignToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Export.ExportCampaign(Campaign);
+        }
+
         private void QuitButton_Click(object sender, EventArgs e)
         {
             if(MessageBox.Show("Are you sure you want to Quit?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.OK) 
@@ -73,11 +78,14 @@ namespace TAS_Campagin_Creator
 
         private void ModuleBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string Name = ModuleBox.SelectedItem.ToString();
-            FindModule(Name);
-            ModuleLabel.Text = "Module: " + (ModNum + 1);
-            DisplayModuleStory();
-            DisplayModuleOptions();
+            if(ModuleBox.SelectedItem != null)
+            {
+                string Name = ModuleBox.SelectedItem.ToString();
+                FindModule(Name);
+                ModuleLabel.Text = "Module: " + (ModNum + 1);
+                DisplayModuleStory();
+                DisplayModuleOptions();
+            }
         }
 
         void FindModule(string Name)
@@ -94,31 +102,52 @@ namespace TAS_Campagin_Creator
         void DisplayModuleStory()
         {
             StoryBox.Clear();
+            int Count = Campaign.Modules[ModNum].Story.Count;
             foreach (string Text in Campaign.Modules[ModNum].Story)
-                StoryBox.Text += Text + "//";
+            {
+                StoryBox.Text += Text;
+                Count--;
+                if (Count > 0)
+                    StoryBox.Text += "//";
+            }
         }
 
         void DisplayModuleOptions()
         {
-            OptionsBox.ClearSelected();
-            foreach (string Option in Campaign.Modules[ModNum].Options)
-                OptionsBox.Items.Add(Option);
+            OptionsBox.Clear();
+            OptionsBox2.Items.Clear();
+            int Count = Campaign.Modules[ModNum].Story.Count;
+            foreach (string Option in Campaign.Modules[ModNum].Options.OptionsList)
+            {
+                OptionsBox.Text += Option;
+                Count--;
+                if (Count > 0)
+                    OptionsBox.Text += "//";
+            }
+            UpdateOptionBox2();
         }
 
         #endregion
 
         #region Update Module Data
 
-        private void button1_Click(object sender, EventArgs e)
+        private void UpdateModuleButton_Click(object sender, EventArgs e)
         {
             UpdateModuleStory();
             UpdateModuleOptions();
+            UpdateOptionBox2();
         }
 
         void UpdateModuleStory()
         {
             List<string> StoryText = SplitIntoStrings(StoryBox.Text);
             Campaign.Modules[ModNum].Story = StoryText;
+        }
+
+        void UpdateModuleOptions()
+        {
+            List<string> Options = SplitIntoStrings(OptionsBox.Text);
+            Campaign.Modules[ModNum].Options.OptionsList = Options;
         }
 
         List<string> SplitIntoStrings(string StoryText)
@@ -128,6 +157,8 @@ namespace TAS_Campagin_Creator
             while (!Done)
             {
                 char[] CharString = StoryText.ToCharArray();
+                if (CharString.Length == 0)
+                    break;
                 bool Found = false;
                 int Count = 0;
                 while (!Found)
@@ -147,10 +178,14 @@ namespace TAS_Campagin_Creator
                     {
                         Count++;
                         if (Count == CharString.Length)
+                        {
                             break;
+                        }
                     }
                 }
                 Done = CheckForSlashes(StoryText.ToCharArray());
+                if(Done)
+                    Story.Add(StoryText);
             }
             return Story;
         }
@@ -172,13 +207,23 @@ namespace TAS_Campagin_Creator
             return NoSlashes;
         }
 
-        void UpdateModuleOptions()
+        #endregion
+
+        #region Other Functions
+
+        void UpdateOptionBox2()
         {
-            foreach (string Item in OptionsBox.Items)
-                Campaign.Modules[ModNum].Options.Add(Item);
+            foreach (string Option in Campaign.Modules[ModNum].Options.OptionsList)
+                OptionsBox2.Items.Add(Option);
+        }
+
+        private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OptionsWindow OptWin = new OptionsWindow();
+            OptWin.Show();
         }
 
         #endregion
-        
+
     }
 }

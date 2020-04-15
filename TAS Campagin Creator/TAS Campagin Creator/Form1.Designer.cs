@@ -42,9 +42,11 @@ namespace TAS_Campagin_Creator
             this.StoryBox = new System.Windows.Forms.RichTextBox();
             this.StoryLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.OptionsBox = new System.Windows.Forms.ListBox();
             this.ModuleLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.UpdateModuleButton = new System.Windows.Forms.Button();
+            this.OptionsBox = new System.Windows.Forms.RichTextBox();
+            this.OptionsBox2 = new System.Windows.Forms.ListBox();
+            this.exportCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +68,7 @@ namespace TAS_Campagin_Creator
             this.NewCampaignButton,
             this.SaveCampaignButton,
             this.LoadCampaignButton,
+            this.exportCampaignToolStripMenuItem,
             this.toolStripMenuItem1,
             this.QuitButton});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -174,15 +177,6 @@ namespace TAS_Campagin_Creator
             this.label1.TabIndex = 6;
             this.label1.Text = "Module Player Options";
             // 
-            // OptionsBox
-            // 
-            this.OptionsBox.FormattingEnabled = true;
-            this.OptionsBox.ItemHeight = 16;
-            this.OptionsBox.Location = new System.Drawing.Point(220, 560);
-            this.OptionsBox.Name = "OptionsBox";
-            this.OptionsBox.Size = new System.Drawing.Size(500, 260);
-            this.OptionsBox.TabIndex = 7;
-            // 
             // ModuleLabel
             // 
             this.ModuleLabel.AutoSize = true;
@@ -193,25 +187,52 @@ namespace TAS_Campagin_Creator
             this.ModuleLabel.TabIndex = 8;
             this.ModuleLabel.Text = "Module: Select Module";
             // 
-            // button1
+            // UpdateModuleButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(220, 120);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 62);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Update Module";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.UpdateModuleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateModuleButton.Location = new System.Drawing.Point(220, 120);
+            this.UpdateModuleButton.Name = "UpdateModuleButton";
+            this.UpdateModuleButton.Size = new System.Drawing.Size(140, 62);
+            this.UpdateModuleButton.TabIndex = 9;
+            this.UpdateModuleButton.Text = "Update Module";
+            this.UpdateModuleButton.UseVisualStyleBackColor = true;
+            this.UpdateModuleButton.Click += new System.EventHandler(this.UpdateModuleButton_Click);
+            // 
+            // OptionsBox
+            // 
+            this.OptionsBox.Location = new System.Drawing.Point(220, 560);
+            this.OptionsBox.Name = "OptionsBox";
+            this.OptionsBox.Size = new System.Drawing.Size(200, 280);
+            this.OptionsBox.TabIndex = 10;
+            this.OptionsBox.Text = "";
+            // 
+            // OptionsBox2
+            // 
+            this.OptionsBox2.FormattingEnabled = true;
+            this.OptionsBox2.ItemHeight = 16;
+            this.OptionsBox2.Location = new System.Drawing.Point(430, 560);
+            this.OptionsBox2.Name = "OptionsBox2";
+            this.OptionsBox2.Size = new System.Drawing.Size(200, 276);
+            this.OptionsBox2.TabIndex = 11;
+            this.OptionsBox2.SelectedIndexChanged += new System.EventHandler(this.OptionsBox2_SelectedIndexChanged);
+            // 
+            // exportCampaignToolStripMenuItem
+            // 
+            this.exportCampaignToolStripMenuItem.Name = "exportCampaignToolStripMenuItem";
+            this.exportCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.exportCampaignToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.exportCampaignToolStripMenuItem.Text = "Export Campaign";
+            this.exportCampaignToolStripMenuItem.Click += new System.EventHandler(this.exportCampaignToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.ModuleLabel);
+            this.Controls.Add(this.OptionsBox2);
             this.Controls.Add(this.OptionsBox);
+            this.Controls.Add(this.UpdateModuleButton);
+            this.Controls.Add(this.ModuleLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.StoryLabel);
             this.Controls.Add(this.StoryBox);
@@ -245,9 +266,11 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.ToolStripMenuItem addModuleToolStripMenuItem;
         private System.Windows.Forms.Label StoryLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox OptionsBox;
         private System.Windows.Forms.Label ModuleLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button UpdateModuleButton;
+        private System.Windows.Forms.RichTextBox OptionsBox;
+        private System.Windows.Forms.ListBox OptionsBox2;
+        private System.Windows.Forms.ToolStripMenuItem exportCampaignToolStripMenuItem;
     }
 }
 
