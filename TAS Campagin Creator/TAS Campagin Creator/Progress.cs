@@ -27,7 +27,8 @@ namespace TAS_Campagin_Creator
         public void UpdateProgress(int CurJob)
         {
             decimal Percent = CalculatePercentage(CurJob);
-            ProBar.Value = CurJob;
+            if(ProBar.Maximum >= CurJob)
+                ProBar.Value = CurJob;
             ProLabel.Text = "Progress: " + Percent + "% - Job " + CurJob + " of " + ProBar.Maximum;
         }
 

@@ -17,7 +17,8 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            Storage.Campaign.NewModule();
+            //Storage.Campaign.NewModule();
+            Storage.AddTempData();
             UpdateModuleBox();
             CampaignNameLabel.Text = Storage.Campaign.Name;
         }
@@ -134,6 +135,7 @@ namespace TAS_Campagin_Creator
         {
             UpdateModuleStory();
             UpdateModuleOptions();
+            UpdateModuleOptionTypes();
             UpdateOptionBox2();
         }
 
@@ -147,6 +149,13 @@ namespace TAS_Campagin_Creator
         {
             List<string> Options = SplitIntoStrings(OptionsBox.Text);
             Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList = Options;
+        }
+
+        void UpdateModuleOptionTypes()
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Options.OptionType.Clear();
+            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionType.Add(0);
         }
 
         List<string> SplitIntoStrings(string StoryText)

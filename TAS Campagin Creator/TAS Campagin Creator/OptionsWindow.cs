@@ -13,7 +13,6 @@ namespace TAS_Campagin_Creator
     public partial class OptionsWindow : Form
     {
         public int OptionNumber;
-        public byte OptionType = 0;
 
         public OptionsWindow()
         {
@@ -32,16 +31,11 @@ namespace TAS_Campagin_Creator
             SetOptionType(1);
         }
 
-        void SetOptionType(byte OptionTypeArg)
+        void SetOptionType(byte OptionType)
         {
-            OptionType = OptionTypeArg;
+            Storage.Campaign.Modules[Storage.ModNum].Options.OptionType[OptionNumber] = OptionType;
         }
 
         #endregion
-
-        private void UpdateOptionButton_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -14,6 +14,7 @@ namespace TAS_Campagin_Creator
         static int TotalJobs = 0;
         static int CampaignJobs = 1;
         static int ModuleJobs = 0;
+        static int OptionJobs = 0;
         static int Progress = 0;
 
         public static void ExportCampaign(Campaign Campaign)
@@ -37,10 +38,22 @@ namespace TAS_Campagin_Creator
                 }
                 XML.WriteEndElement();
                 XML.WriteStartElement("Options");
+                XML.WriteStartElement("OptionsList");
                 for(int y = 0; y < Campaign.Modules[x].Options.OptionsList.Count; y++)
                 {
                     XML.WriteAttributeString("Option" + (y + 1), Campaign.Modules[x].Options.OptionsList[y]);
                 }
+                XML.WriteEndElement();
+                Progress += 1;
+                Pro.UpdateProgress(Progress);
+                XML.WriteStartElement("OptionsType");
+                for(int y = 0; y < Campaign.Modules[x].Options.OptionType.Count; y++)
+                {
+                    XML.WriteAttributeString("OptionType" + (y + 1), Convert.ToString(Campaign.Modules[x].Options.OptionType[y]));
+                }
+                XML.WriteEndElement();
+                Progress += 1;
+                Pro.UpdateProgress(Progress);
                 XML.WriteEndElement();
                 XML.WriteEndElement();
                 Progress += 1;
@@ -56,6 +69,7 @@ namespace TAS_Campagin_Creator
         static void CalculateJobs(Campaign Campaign)
         {
             ModuleJobs = Campaign.Modules.Count;
+            OptionJobs = Campaign.Modules.Count * 2;
             TotalJobs = CampaignJobs + ModuleJobs;
         }
 
@@ -64,6 +78,7 @@ namespace TAS_Campagin_Creator
             TotalJobs = 0;
             CampaignJobs = 1;
             ModuleJobs = 0;
+            OptionJobs = 0;
             Progress = 0;
         }
     }
