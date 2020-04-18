@@ -31,5 +31,6 @@ namespace TAS_Campagin_Creator
     class Options
     {
         public List<string> OptionsList = new List<string>();
+        public List<byte> OptionType = new List<byte>();
     }
 }

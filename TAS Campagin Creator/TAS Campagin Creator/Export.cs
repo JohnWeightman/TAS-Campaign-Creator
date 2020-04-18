@@ -9,6 +9,8 @@ namespace TAS_Campagin_Creator
 {
     static class Export
     {
+        static Progress Pro = new Progress();
+
         static int TotalJobs = 0;
         static int CampaignJobs = 1;
         static int ModuleJobs = 0;
@@ -17,7 +19,6 @@ namespace TAS_Campagin_Creator
         public static void ExportCampaign(Campaign Campaign)
         {
             CalculateJobs(Campaign);
-            Progress Pro = new Progress();
             Pro.Show();
             Pro.InitiliaseProgressBar(TotalJobs);
             XmlWriter XML = XmlWriter.Create("Campaigns\\" + Campaign.Name + ".xml");

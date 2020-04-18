@@ -12,15 +12,14 @@ namespace TAS_Campagin_Creator
 {
     public partial class MainForm : Form
     {
-        Campaign Campaign = new Campaign();
-        int ModNum = 0;
+        OptionsWindow OptWin = new OptionsWindow();
 
         public MainForm()
         {
             InitializeComponent();
-            Campaign.NewModule();
+            Storage.Campaign.NewModule();
             UpdateModuleBox();
-            CampaignNameLabel.Text = Campaign.Name;
+            CampaignNameLabel.Text = Storage.Campaign.Name;
         }
 
         #region Menu Bar
@@ -44,7 +43,7 @@ namespace TAS_Campagin_Creator
 
         private void exportCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Export.ExportCampaign(Campaign);
+            Export.ExportCampaign(Storage.Campaign);
         }
 
         private void QuitButton_Click(object sender, EventArgs e)
@@ -59,7 +58,7 @@ namespace TAS_Campagin_Creator
 
         private void addModuleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Campaign.NewModule();
+            Storage.Campaign.NewModule();
             UpdateModuleBox();
         }
 
@@ -72,7 +71,7 @@ namespace TAS_Campagin_Creator
         void UpdateModuleBox()
         {
             ModuleBox.Items.Clear();
-            foreach (Module Mod in Campaign.Modules)
+            foreach (Module Mod in Storage.Campaign.Modules)
                 ModuleBox.Items.Add(Mod.Name);
         }
 
@@ -82,7 +81,7 @@ namespace TAS_Campagin_Creator
             {
                 string Name = ModuleBox.SelectedItem.ToString();
                 FindModule(Name);
-                ModuleLabel.Text = "Module: " + (ModNum + 1);
+                ModuleLabel.Text = "Module: " + (Storage.ModNum + 1);
                 DisplayModuleStory();
                 DisplayModuleOptions();
             }
@@ -90,20 +89,20 @@ namespace TAS_Campagin_Creator
 
         void FindModule(string Name)
         {
-            ModNum = 0;
-            foreach (Module Mod in Campaign.Modules)
+            Storage.ModNum = 0;
+            foreach (Module Mod in Storage.Campaign.Modules)
             {
                 if (Name == Mod.Name)
                     break;
-                ModNum += 1;
+                Storage.ModNum += 1;
             }
         }
 
         void DisplayModuleStory()
         {
             StoryBox.Clear();
-            int Count = Campaign.Modules[ModNum].Story.Count;
-            foreach (string Text in Campaign.Modules[ModNum].Story)
+            int Count = Storage.Campaign.Modules[Storage.ModNum].Story.Count;
+            foreach (string Text in Storage.Campaign.Modules[Storage.ModNum].Story)
             {
                 StoryBox.Text += Text;
                 Count--;
@@ -116,8 +115,8 @@ namespace TAS_Campagin_Creator
         {
             OptionsBox.Clear();
             OptionsBox2.Items.Clear();
-            int Count = Campaign.Modules[ModNum].Story.Count;
-            foreach (string Option in Campaign.Modules[ModNum].Options.OptionsList)
+            int Count = Storage.Campaign.Modules[Storage.ModNum].Story.Count;
+            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
             {
                 OptionsBox.Text += Option;
                 Count--;
@@ -141,13 +140,13 @@ namespace TAS_Campagin_Creator
         void UpdateModuleStory()
         {
             List<string> StoryText = SplitIntoStrings(StoryBox.Text);
-            Campaign.Modules[ModNum].Story = StoryText;
+            Storage.Campaign.Modules[Storage.ModNum].Story = StoryText;
         }
 
         void UpdateModuleOptions()
         {
             List<string> Options = SplitIntoStrings(OptionsBox.Text);
-            Campaign.Modules[ModNum].Options.OptionsList = Options;
+            Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList = Options;
         }
 
         List<string> SplitIntoStrings(string StoryText)
@@ -213,14 +212,16 @@ namespace TAS_Campagin_Creator
 
         void UpdateOptionBox2()
         {
-            foreach (string Option in Campaign.Modules[ModNum].Options.OptionsList)
+            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
                 OptionsBox2.Items.Add(Option);
         }
 
         private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OptionsWindow OptWin = new OptionsWindow();
+            string CurItem = OptionsBox2.SelectedItem.ToString();
+            OptWin.OptionNumber = OptionsBox2.FindString(CurItem);
             OptWin.Show();
+            
         }
 
         #endregion

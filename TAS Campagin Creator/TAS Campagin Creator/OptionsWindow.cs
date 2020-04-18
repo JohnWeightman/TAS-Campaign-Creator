@@ -12,12 +12,34 @@ namespace TAS_Campagin_Creator
 {
     public partial class OptionsWindow : Form
     {
+        public int OptionNumber;
+        public byte OptionType = 0;
+
         public OptionsWindow()
         {
             InitializeComponent();
         }
 
-        private void OptionsWindow_Load(object sender, EventArgs e)
+        #region RadioButtons
+
+        private void StoryRButton_Click(object sender, EventArgs e)
+        {
+            SetOptionType(0);
+        }
+
+        private void EncounterRButton_Click(object sender, EventArgs e)
+        {
+            SetOptionType(1);
+        }
+
+        void SetOptionType(byte OptionTypeArg)
+        {
+            OptionType = OptionTypeArg;
+        }
+
+        #endregion
+
+        private void UpdateOptionButton_Click(object sender, EventArgs e)
         {
 
         }

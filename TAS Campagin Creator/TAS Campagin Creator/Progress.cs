@@ -19,6 +19,8 @@ namespace TAS_Campagin_Creator
 
         public void InitiliaseProgressBar(int JobCount)
         {
+            ProLabel.Text = "Progress: 0% - Job 0 of 0";
+            ProBar.Value = 0;
             ProBar.Maximum = JobCount;
         }
 
