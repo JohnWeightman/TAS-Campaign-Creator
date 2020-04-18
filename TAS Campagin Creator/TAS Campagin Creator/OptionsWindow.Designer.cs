@@ -77,6 +77,7 @@
             this.Controls.Add(this.label1);
             this.Name = "OptionsWindow";
             this.Text = "OptionsWindow";
+            this.Load += new System.EventHandler(this.OptionsWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

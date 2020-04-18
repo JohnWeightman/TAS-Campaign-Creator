@@ -12,7 +12,6 @@ namespace TAS_Campagin_Creator
 {
     public partial class MainForm : Form
     {
-        OptionsWindow OptWin = new OptionsWindow();
 
         public MainForm()
         {
@@ -227,10 +226,10 @@ namespace TAS_Campagin_Creator
 
         private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            OptionsWindow OptWin = new OptionsWindow();
             string CurItem = OptionsBox2.SelectedItem.ToString();
             OptWin.OptionNumber = OptionsBox2.FindString(CurItem);
-            OptWin.Show();
-            
+            OptWin.Show();         
         }
 
         #endregion

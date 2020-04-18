@@ -14,10 +14,35 @@ namespace TAS_Campagin_Creator
     {
         public int OptionNumber;
 
+        #region Form Load
+
         public OptionsWindow()
         {
             InitializeComponent();
         }
+
+        private void OptionsWindow_Load(object sender, EventArgs e)
+        {
+            CheckRadioButton();
+        }
+
+        public void CheckRadioButton()
+        {
+            switch (Storage.Campaign.Modules[Storage.ModNum].Options.OptionType[OptionNumber])
+            {
+                case 0:
+                    StoryRButton.Checked = true;
+                    break;
+                case 1:
+                    EncounterRButton.Checked = true;
+                    break;
+                default:
+                    StoryRButton.Checked = true;
+                    break;
+            }
+        }
+
+        #endregion
 
         #region RadioButtons
 
