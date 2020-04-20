@@ -10,6 +10,7 @@ namespace TAS_Campagin_Creator
     {
         public static Campaign Campaign = new Campaign();
         public static int ModNum = 0;
+        static Random Ran = new Random();
 
         public static void AddTempData()
         {
@@ -19,7 +20,8 @@ namespace TAS_Campagin_Creator
             {
                 AddStory(x);
                 AddOptions(x);
-                AddOptionTypes(x);
+                AddOptionDirections(x);
+                AddModuleType(x);
             }
         }
 
@@ -38,10 +40,15 @@ namespace TAS_Campagin_Creator
             Campaign.Modules[Mod].Options.OptionsList.Add("Fight");
         }
 
-        static void AddOptionTypes(int Mod)
+        static void AddOptionDirections(int Mod)
         {
-            Campaign.Modules[Mod].Options.OptionDirections.Add(0);
-            Campaign.Modules[Mod].Options.OptionDirections.Add(1);
+            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, 10));
+            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, 10));
+        }
+
+        static void AddModuleType(int Mod)
+        {
+            Campaign.Modules[Mod].ModType = Convert.ToByte(Ran.Next(0, 2));
         }
     }
 }

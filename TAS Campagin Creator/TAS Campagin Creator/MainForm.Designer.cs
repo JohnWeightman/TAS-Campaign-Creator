@@ -33,6 +33,7 @@ namespace TAS_Campagin_Creator
             this.NewCampaignButton = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveCampaignButton = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadCampaignButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.QuitButton = new System.Windows.Forms.ToolStripMenuItem();
             this.modulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,9 @@ namespace TAS_Campagin_Creator
             this.UpdateModuleButton = new System.Windows.Forms.Button();
             this.OptionsBox = new System.Windows.Forms.RichTextBox();
             this.OptionsBox2 = new System.Windows.Forms.ListBox();
-            this.exportCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ModuleTypeLabel = new System.Windows.Forms.Label();
+            this.StoryRButton = new System.Windows.Forms.RadioButton();
+            this.EncounterRButton = new System.Windows.Forms.RadioButton();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +82,7 @@ namespace TAS_Campagin_Creator
             // 
             this.NewCampaignButton.Name = "NewCampaignButton";
             this.NewCampaignButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.NewCampaignButton.Size = new System.Drawing.Size(239, 26);
+            this.NewCampaignButton.Size = new System.Drawing.Size(249, 26);
             this.NewCampaignButton.Text = "&New Campaign";
             this.NewCampaignButton.Click += new System.EventHandler(this.NewCampaignButton_Click);
             // 
@@ -87,7 +90,7 @@ namespace TAS_Campagin_Creator
             // 
             this.SaveCampaignButton.Name = "SaveCampaignButton";
             this.SaveCampaignButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SaveCampaignButton.Size = new System.Drawing.Size(239, 26);
+            this.SaveCampaignButton.Size = new System.Drawing.Size(249, 26);
             this.SaveCampaignButton.Text = "&Save Campaign";
             this.SaveCampaignButton.Click += new System.EventHandler(this.SaveCampaignButton_Click);
             // 
@@ -95,21 +98,29 @@ namespace TAS_Campagin_Creator
             // 
             this.LoadCampaignButton.Name = "LoadCampaignButton";
             this.LoadCampaignButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.LoadCampaignButton.Size = new System.Drawing.Size(239, 26);
+            this.LoadCampaignButton.Size = new System.Drawing.Size(249, 26);
             this.LoadCampaignButton.Text = "&Load Campaign";
             this.LoadCampaignButton.Click += new System.EventHandler(this.LoadCampaignButton_Click);
+            // 
+            // exportCampaignToolStripMenuItem
+            // 
+            this.exportCampaignToolStripMenuItem.Name = "exportCampaignToolStripMenuItem";
+            this.exportCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.exportCampaignToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
+            this.exportCampaignToolStripMenuItem.Text = "Export Campaign";
+            this.exportCampaignToolStripMenuItem.Click += new System.EventHandler(this.exportCampaignToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(236, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(246, 6);
             // 
             // QuitButton
             // 
             this.QuitButton.Name = "QuitButton";
             this.QuitButton.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Q)));
-            this.QuitButton.Size = new System.Drawing.Size(239, 26);
+            this.QuitButton.Size = new System.Drawing.Size(249, 26);
             this.QuitButton.Text = "&Quit";
             this.QuitButton.Click += new System.EventHandler(this.QuitButton_Click);
             // 
@@ -216,19 +227,46 @@ namespace TAS_Campagin_Creator
             this.OptionsBox2.TabIndex = 11;
             this.OptionsBox2.SelectedIndexChanged += new System.EventHandler(this.OptionsBox2_SelectedIndexChanged);
             // 
-            // exportCampaignToolStripMenuItem
+            // ModuleTypeLabel
             // 
-            this.exportCampaignToolStripMenuItem.Name = "exportCampaignToolStripMenuItem";
-            this.exportCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.exportCampaignToolStripMenuItem.Size = new System.Drawing.Size(249, 26);
-            this.exportCampaignToolStripMenuItem.Text = "Export Campaign";
-            this.exportCampaignToolStripMenuItem.Click += new System.EventHandler(this.exportCampaignToolStripMenuItem_Click);
+            this.ModuleTypeLabel.AutoSize = true;
+            this.ModuleTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModuleTypeLabel.Location = new System.Drawing.Point(720, 185);
+            this.ModuleTypeLabel.Name = "ModuleTypeLabel";
+            this.ModuleTypeLabel.Size = new System.Drawing.Size(190, 32);
+            this.ModuleTypeLabel.TabIndex = 12;
+            this.ModuleTypeLabel.Text = "Module Type";
+            // 
+            // StoryRButton
+            // 
+            this.StoryRButton.AutoSize = true;
+            this.StoryRButton.Location = new System.Drawing.Point(725, 220);
+            this.StoryRButton.Name = "StoryRButton";
+            this.StoryRButton.Size = new System.Drawing.Size(112, 21);
+            this.StoryRButton.TabIndex = 13;
+            this.StoryRButton.TabStop = true;
+            this.StoryRButton.Text = "Story Module";
+            this.StoryRButton.UseVisualStyleBackColor = true;
+            // 
+            // EncounterRButton
+            // 
+            this.EncounterRButton.AutoSize = true;
+            this.EncounterRButton.Location = new System.Drawing.Point(725, 250);
+            this.EncounterRButton.Name = "EncounterRButton";
+            this.EncounterRButton.Size = new System.Drawing.Size(144, 21);
+            this.EncounterRButton.TabIndex = 14;
+            this.EncounterRButton.TabStop = true;
+            this.EncounterRButton.Text = "Encounter Module";
+            this.EncounterRButton.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.EncounterRButton);
+            this.Controls.Add(this.StoryRButton);
+            this.Controls.Add(this.ModuleTypeLabel);
             this.Controls.Add(this.OptionsBox2);
             this.Controls.Add(this.OptionsBox);
             this.Controls.Add(this.UpdateModuleButton);
@@ -271,6 +309,9 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.RichTextBox OptionsBox;
         private System.Windows.Forms.ListBox OptionsBox2;
         private System.Windows.Forms.ToolStripMenuItem exportCampaignToolStripMenuItem;
+        private System.Windows.Forms.Label ModuleTypeLabel;
+        private System.Windows.Forms.RadioButton StoryRButton;
+        private System.Windows.Forms.RadioButton EncounterRButton;
     }
 }
 

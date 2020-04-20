@@ -84,6 +84,7 @@ namespace TAS_Campagin_Creator
                 ModuleLabel.Text = "Module: " + (Storage.ModNum + 1);
                 DisplayModuleStory();
                 DisplayModuleOptions();
+                DisplayModuleType();
             }
         }
 
@@ -104,26 +105,38 @@ namespace TAS_Campagin_Creator
             int Count = Storage.Campaign.Modules[Storage.ModNum].Story.Count;
             foreach (string Text in Storage.Campaign.Modules[Storage.ModNum].Story)
             {
-                StoryBox.Text += Text;
-                Count--;
-                if (Count > 0)
-                    StoryBox.Text += "//";
+                StoryBox.Text += Text + "//";
             }
+            int Length = StoryBox.Text.Length;
+            StoryBox.Text = StoryBox.Text.Remove((Length - 2), 2);
         }
 
         void DisplayModuleOptions()
         {
             OptionsBox.Clear();
             OptionsBox2.Items.Clear();
-            int Count = Storage.Campaign.Modules[Storage.ModNum].Story.Count;
             foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
             {
-                OptionsBox.Text += Option;
-                Count--;
-                if (Count > 0)
-                    OptionsBox.Text += "//";
+                OptionsBox.Text += Option + "//";
             }
+            int Length = OptionsBox.Text.Length;
+            OptionsBox.Text = OptionsBox.Text.Remove((Length - 2), 2);
             UpdateOptionBox2();
+        }
+
+        void DisplayModuleType()
+        {
+            switch (Storage.Campaign.Modules[Storage.ModNum].ModType)
+            {
+                case 0:
+                    StoryRButton.Checked = true;
+                    break;
+                case 1:
+                    EncounterRButton.Checked = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion
@@ -132,10 +145,19 @@ namespace TAS_Campagin_Creator
 
         private void UpdateModuleButton_Click(object sender, EventArgs e)
         {
+            UpdateModuleType();
             UpdateModuleStory();
             UpdateModuleOptions();
-            UpdateModuleOptionTypes();
+            UpdateModuleOptionDirections();
             UpdateOptionBox2();
+        }
+
+        void UpdateModuleType()
+        {
+            if (StoryRButton.Checked)
+                Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
+            else
+                Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
         }
 
         void UpdateModuleStory()
@@ -150,7 +172,14 @@ namespace TAS_Campagin_Creator
             Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList = Options;
         }
 
-        void UpdateModuleOptionTypes()
+        void UpdateOptionBox2()
+        {
+            OptionsBox2.Items.Clear();
+            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
+                OptionsBox2.Items.Add(Option);
+        }
+
+        void UpdateModuleOptionDirections()
         {
             Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections.Clear();
             foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
@@ -217,12 +246,6 @@ namespace TAS_Campagin_Creator
         #endregion
 
         #region Other Functions
-
-        void UpdateOptionBox2()
-        {
-            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
-                OptionsBox2.Items.Add(Option);
-        }
 
         private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
         {

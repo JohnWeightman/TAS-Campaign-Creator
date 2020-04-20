@@ -25,6 +25,7 @@ namespace TAS_Campagin_Creator
     {
         public Options Options = new Options();
         public string Name = "Module1";
+        public byte ModType = 0;
         public List<string> Story = new List<string>();
     }
 
