@@ -24,6 +24,7 @@ namespace TAS_Campagin_Creator
     class Module
     {
         public Options Options = new Options();
+        public Encounters Encounter = new Encounters();
         public string Name = "Module1";
         public byte ModType = 0;
         public List<string> Story = new List<string>();
@@ -33,5 +34,11 @@ namespace TAS_Campagin_Creator
     {
         public List<string> OptionsList = new List<string>();
         public List<int> OptionDirections = new List<int>();
+    }
+
+    class Encounters
+    {
+        public List<string> EnemyTypes = new List<string>();
+        public List<int> EnemyNumber = new List<int>();
     }
 }

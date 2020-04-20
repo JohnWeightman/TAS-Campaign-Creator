@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Campaign.cs" />
     <Compile Include="Export.cs" />
+    <Compile Include="GameObjects.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

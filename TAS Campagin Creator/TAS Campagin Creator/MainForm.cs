@@ -17,6 +17,7 @@ namespace TAS_Campagin_Creator
         {
             InitializeComponent();
             //Storage.Campaign.NewModule();
+            GameObjects.LoadEnemyNPCs();
             Storage.AddTempData();
             UpdateModuleBox();
             CampaignNameLabel.Text = Storage.Campaign.Name;

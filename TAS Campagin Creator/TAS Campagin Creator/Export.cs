@@ -15,6 +15,7 @@ namespace TAS_Campagin_Creator
         static int CampaignJobs = 1;
         static int ModuleJobs = 0;
         static int OptionJobs = 0;
+        static int EncounterJobs;
         static int Progress = 0;
 
         public static void ExportCampaign()
@@ -50,6 +51,8 @@ namespace TAS_Campagin_Creator
             XML.WriteAttributeString("ModType", Convert.ToString(Storage.Campaign.Modules[ModNum].ModType));
             WriteModuleStoryData(XML, ModNum);
             WriteModuleOptionData(XML, ModNum);
+            if(Storage.Campaign.Modules[ModNum].ModType == 1)
+                WriteModuleEncounterData(XML, ModNum);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
@@ -77,9 +80,7 @@ namespace TAS_Campagin_Creator
         {
             XML.WriteStartElement("OptionsList");
             for (int x = 0; x < Storage.Campaign.Modules[ModNum].Options.OptionsList.Count; x++)
-            {
                 XML.WriteAttributeString("Option" + (x + 1), Storage.Campaign.Modules[ModNum].Options.OptionsList[x]);
-            }
             XML.WriteEndElement();
         }
 
@@ -87,18 +88,46 @@ namespace TAS_Campagin_Creator
         {
             XML.WriteStartElement("OptionDirections");
             for (int x = 0; x < Storage.Campaign.Modules[ModNum].Options.OptionDirections.Count; x++)
-            {
                 XML.WriteAttributeString("OptionDirection" + (x + 1), Convert.ToString(Storage.Campaign.Modules[ModNum].Options.OptionDirections[x]));
-            }
+            XML.WriteEndElement();
+        }
+
+        static void WriteModuleEncounterData(XmlWriter XML, int ModNum)
+        {
+            XML.WriteStartElement("Encounter");
+            WriteModuleEncounterEnemyTypeData(XML, ModNum);
+            WriteModuleEncounterEnemyNumberData(XML, ModNum);
+            XML.WriteEndElement();
+            Progress += 1;
+            Pro.UpdateProgress(Progress);
+        }
+
+        static void WriteModuleEncounterEnemyTypeData(XmlWriter XML, int ModNum)
+        {
+            XML.WriteStartElement("EncounterEnemyType");
+            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Encounter.EnemyTypes.Count; x++)
+                XML.WriteAttributeString("EnemyType" + (x + 1), Storage.Campaign.Modules[ModNum].Encounter.EnemyTypes[x]);
+            XML.WriteEndElement();
+        }
+
+        static void WriteModuleEncounterEnemyNumberData(XmlWriter XML, int ModNum)
+        {
+            XML.WriteStartElement("EncounterEnemyNumber");
+            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Encounter.EnemyNumber.Count; x++)
+                XML.WriteAttributeString("EnemyNumber" + (x + 1), Convert.ToString(Storage.Campaign.Modules[ModNum].Encounter.EnemyNumber[x]));
             XML.WriteEndElement();
         }
 
         static void CalculateJobs()
         {
             ModuleJobs = Storage.Campaign.Modules.Count;
-            foreach (Module Mod in Storage.Campaign.Modules)
-                OptionJobs += Mod.Options.OptionsList.Count + Mod.Options.OptionDirections.Count;
-            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs;
+            OptionJobs = Storage.Campaign.Modules.Count;
+            foreach(Module Mod in Storage.Campaign.Modules)
+            {
+                if (Mod.ModType == 1)
+                    EncounterJobs += 1;
+            }
+            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs;
         }
 
         static void ResetExport()
@@ -107,57 +136,8 @@ namespace TAS_Campagin_Creator
             CampaignJobs = 1;
             ModuleJobs = 0;
             OptionJobs = 0;
+            EncounterJobs = 0;
             Progress = 0;
         }
-
-        //public static void ExportCampaign(Campaign Campaign)
-        //{
-        //    CalculateJobs(Campaign);
-        //    Pro.Show();
-        //    Pro.InitiliaseProgressBar(TotalJobs);
-        //    XmlWriter XML = XmlWriter.Create("Campaigns\\" + Campaign.Name + ".xml");
-        //    XML.WriteStartDocument();
-        //    XML.WriteStartElement(Campaign.Name);
-        //    Progress += 1;
-        //    Pro.UpdateProgress(Progress);
-        //    for (int x = 0; x < Campaign.Modules.Count; x++)
-        //    {
-        //        XML.WriteStartElement("Module");
-        //        XML.WriteAttributeString("Name", Campaign.Modules[x].Name);
-        //        XML.WriteAttributeString("ModType", Convert.ToString(Campaign.Modules[x].ModType));
-        //        XML.WriteStartElement("Story");
-        //        for (int y = 0; y < Campaign.Modules[x].Story.Count; y++)
-        //        {
-        //            XML.WriteAttributeString("Part" + (y + 1), Campaign.Modules[x].Story[y]);
-        //        }
-        //        XML.WriteEndElement();
-        //        XML.WriteStartElement("Options");
-        //        XML.WriteStartElement("OptionsList");
-        //        for (int y = 0; y < Campaign.Modules[x].Options.OptionsList.Count; y++)
-        //        {
-        //            XML.WriteAttributeString("Option" + (y + 1), Campaign.Modules[x].Options.OptionsList[y]);
-        //        }
-        //        XML.WriteEndElement();
-        //        Progress += 1;
-        //        Pro.UpdateProgress(Progress);
-        //        XML.WriteStartElement("OptionDirections");
-        //        for (int y = 0; y < Campaign.Modules[x].Options.OptionDirections.Count; y++)
-        //        {
-        //            XML.WriteAttributeString("OptionDirection" + (y + 1), Convert.ToString(Campaign.Modules[x].Options.OptionDirections[y]));
-        //        }
-        //        XML.WriteEndElement();
-        //        Progress += 1;
-        //        Pro.UpdateProgress(Progress);
-        //        XML.WriteEndElement();
-        //        XML.WriteEndElement();
-        //        Progress += 1;
-        //        Pro.UpdateProgress(Progress);
-        //    }
-        //    XML.WriteEndElement();
-        //    XML.WriteEndDocument();
-        //    XML.Close();
-        //    Pro.Close();
-        //    ResetExport();
-        //}
     }
 }

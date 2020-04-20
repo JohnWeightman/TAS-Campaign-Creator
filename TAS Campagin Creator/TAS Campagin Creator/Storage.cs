@@ -24,6 +24,8 @@ namespace TAS_Campagin_Creator
                 AddOptions(x);
                 AddOptionDirections(x);
                 AddModuleType(x);
+                if (Campaign.Modules[x].ModType == 1)
+                    AddModuleEncounter(x);
             }
         }
 
@@ -51,6 +53,12 @@ namespace TAS_Campagin_Creator
         static void AddModuleType(int Mod)
         {
             Campaign.Modules[Mod].ModType = Convert.ToByte(Ran.Next(0, 2));
+        }
+
+        static void AddModuleEncounter(int Mod)
+        {
+            Campaign.Modules[Mod].Encounter.EnemyTypes.Add("Bandit");
+            Campaign.Modules[Mod].Encounter.EnemyNumber.Add(Ran.Next(1, 6));
         }
     }
 }
