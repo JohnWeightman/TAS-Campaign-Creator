@@ -50,6 +50,7 @@ namespace TAS_Campagin_Creator
             this.ModuleTypeLabel = new System.Windows.Forms.Label();
             this.StoryRButton = new System.Windows.Forms.RadioButton();
             this.EncounterRButton = new System.Windows.Forms.RadioButton();
+            this.EncounterGBox = new System.Windows.Forms.GroupBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -247,6 +248,7 @@ namespace TAS_Campagin_Creator
             this.StoryRButton.TabStop = true;
             this.StoryRButton.Text = "Story Module";
             this.StoryRButton.UseVisualStyleBackColor = true;
+            this.StoryRButton.CheckedChanged += new System.EventHandler(this.StoryRButton_CheckedChanged);
             // 
             // EncounterRButton
             // 
@@ -258,12 +260,23 @@ namespace TAS_Campagin_Creator
             this.EncounterRButton.TabStop = true;
             this.EncounterRButton.Text = "Encounter Module";
             this.EncounterRButton.UseVisualStyleBackColor = true;
+            this.EncounterRButton.CheckedChanged += new System.EventHandler(this.EncounterRButton_CheckedChanged);
+            // 
+            // EncounterGBox
+            // 
+            this.EncounterGBox.Location = new System.Drawing.Point(920, 185);
+            this.EncounterGBox.Name = "EncounterGBox";
+            this.EncounterGBox.Size = new System.Drawing.Size(650, 655);
+            this.EncounterGBox.TabIndex = 15;
+            this.EncounterGBox.TabStop = false;
+            this.EncounterGBox.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.EncounterGBox);
             this.Controls.Add(this.EncounterRButton);
             this.Controls.Add(this.StoryRButton);
             this.Controls.Add(this.ModuleTypeLabel);
@@ -312,6 +325,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.Label ModuleTypeLabel;
         private System.Windows.Forms.RadioButton StoryRButton;
         private System.Windows.Forms.RadioButton EncounterRButton;
+        private System.Windows.Forms.GroupBox EncounterGBox;
     }
 }
 

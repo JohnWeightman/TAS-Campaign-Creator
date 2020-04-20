@@ -43,7 +43,7 @@ namespace TAS_Campagin_Creator
 
         private void exportCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Export.ExportCampaign(Storage.Campaign);
+            Export.ExportCampaign();
         }
 
         private void QuitButton_Click(object sender, EventArgs e)
@@ -85,6 +85,7 @@ namespace TAS_Campagin_Creator
                 DisplayModuleStory();
                 DisplayModuleOptions();
                 DisplayModuleType();
+                DisplayModuleGroupBox();
             }
         }
 
@@ -137,6 +138,13 @@ namespace TAS_Campagin_Creator
                 default:
                     break;
             }
+        }
+
+       void DisplayModuleGroupBox()
+        {
+            EncounterGBox.Visible = false;
+            if (Storage.Campaign.Modules[Storage.ModNum].ModType == 1)
+                EncounterGBox.Visible = true;
         }
 
         #endregion
@@ -256,7 +264,18 @@ namespace TAS_Campagin_Creator
             OptDir.Show();
         }
 
-        #endregion
+        private void StoryRButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
+            DisplayModuleGroupBox();
+        }
 
+        private void EncounterRButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
+            DisplayModuleGroupBox();
+        }
+
+        #endregion
     }
 }

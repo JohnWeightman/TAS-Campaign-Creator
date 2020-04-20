@@ -10,13 +10,15 @@ namespace TAS_Campagin_Creator
     {
         public static Campaign Campaign = new Campaign();
         public static int ModNum = 0;
+
         static Random Ran = new Random();
+        static int ModCount = 100;
 
         public static void AddTempData()
         {
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < ModCount; x++)
                 Campaign.NewModule();
-            for(int x = 0; x < 10; x++)
+            for(int x = 0; x < ModCount; x++)
             {
                 AddStory(x);
                 AddOptions(x);
@@ -42,8 +44,8 @@ namespace TAS_Campagin_Creator
 
         static void AddOptionDirections(int Mod)
         {
-            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, 10));
-            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, 10));
+            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, ModCount));
+            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, ModCount));
         }
 
         static void AddModuleType(int Mod)
