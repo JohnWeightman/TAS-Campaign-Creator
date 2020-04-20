@@ -46,10 +46,10 @@ namespace TAS_Campagin_Creator
                 XML.WriteEndElement();
                 Progress += 1;
                 Pro.UpdateProgress(Progress);
-                XML.WriteStartElement("OptionsType");
-                for(int y = 0; y < Campaign.Modules[x].Options.OptionType.Count; y++)
+                XML.WriteStartElement("OptionDirections");
+                for(int y = 0; y < Campaign.Modules[x].Options.OptionDirections.Count; y++)
                 {
-                    XML.WriteAttributeString("OptionType" + (y + 1), Convert.ToString(Campaign.Modules[x].Options.OptionType[y]));
+                    XML.WriteAttributeString("OptionType" + (y + 1), Convert.ToString(Campaign.Modules[x].Options.OptionDirections[y]));
                 }
                 XML.WriteEndElement();
                 Progress += 1;

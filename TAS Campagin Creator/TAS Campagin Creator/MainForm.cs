@@ -152,9 +152,9 @@ namespace TAS_Campagin_Creator
 
         void UpdateModuleOptionTypes()
         {
-            Storage.Campaign.Modules[Storage.ModNum].Options.OptionType.Clear();
+            Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections.Clear();
             foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
-                Storage.Campaign.Modules[Storage.ModNum].Options.OptionType.Add(0);
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections.Add(0);
         }
 
         List<string> SplitIntoStrings(string StoryText)
@@ -226,10 +226,11 @@ namespace TAS_Campagin_Creator
 
         private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OptionsWindow OptWin = new OptionsWindow();
             string CurItem = OptionsBox2.SelectedItem.ToString();
-            OptWin.OptionNumber = OptionsBox2.FindString(CurItem);
-            OptWin.Show();         
+            int Index = OptionsBox2.FindString(CurItem);
+            OptionDirection OptDir = new OptionDirection();
+            OptDir.OptionNumber = Index;
+            OptDir.Show();
         }
 
         #endregion

@@ -40,8 +40,8 @@ namespace TAS_Campagin_Creator
 
         static void AddOptionTypes(int Mod)
         {
-            Campaign.Modules[Mod].Options.OptionType.Add(0);
-            Campaign.Modules[Mod].Options.OptionType.Add(1);
+            Campaign.Modules[Mod].Options.OptionDirections.Add(0);
+            Campaign.Modules[Mod].Options.OptionDirections.Add(1);
         }
     }
 }
