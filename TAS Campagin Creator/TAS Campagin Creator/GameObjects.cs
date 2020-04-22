@@ -14,10 +14,18 @@ namespace TAS_Campagin_Creator
 
         public static void LoadEnemyNPCs()
         {
-            XmlReader XML = XmlReader.Create("GameObjects.xml");
-            while (XML.Read())
+            XmlDocument Doc = new XmlDocument();
+            Doc.Load("GameObjects.xml");
+            foreach(XmlNode Node in Doc.DocumentElement)
             {
-
+                if(Node.Name == "Enemies")
+                {
+                    foreach(XmlNode Child in Node.ChildNodes)
+                    {
+                        EnemyNPCs.Add(Child.Name);
+                        DifBonus.Add(Convert.ToInt32(Child.Attributes[10].Value));
+                    }
+                }
             }
         }
     }

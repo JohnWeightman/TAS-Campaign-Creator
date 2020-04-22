@@ -17,9 +17,10 @@ namespace TAS_Campagin_Creator
         {
             InitializeComponent();
             //Storage.Campaign.NewModule();
-            GameObjects.LoadEnemyNPCs();
             Storage.AddTempData();
+            GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
+            FillEnemyListBox();
             CampaignNameLabel.Text = Storage.Campaign.Name;
         }
 
@@ -87,6 +88,7 @@ namespace TAS_Campagin_Creator
                 DisplayModuleOptions();
                 DisplayModuleType();
                 DisplayModuleGroupBox();
+                ClearRandomControls();
             }
         }
 
@@ -254,6 +256,96 @@ namespace TAS_Campagin_Creator
 
         #endregion
 
+        #region Module Type Control Functions
+
+        #region Encounter Modules
+
+        private void ClearEnemiesButton_Click(object sender, EventArgs e)
+        {
+            ModuleEnemiesBox.Text = "";
+            Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes.Clear();
+            Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber.Clear();
+        }
+
+        private void EnemyListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(EnemyListBox.SelectedItem != null)
+            {
+                UpdateModuleEncounter(GetNPCString(EnemyListBox.SelectedItem.ToString()));
+                UpdateModuleEnemyListBox();
+            }
+        }
+
+        void FillEnemyListBox()
+        {
+            for (int x = 0; x < GameObjects.EnemyNPCs.Count; x++)
+                EnemyListBox.Items.Add("DB: " + GameObjects.DifBonus[x] + " - " + GameObjects.EnemyNPCs[x]);
+        }
+
+        string GetNPCString(string SelectedItem)
+        {
+            char[] Arr = SelectedItem.ToCharArray();
+            int Loc = 0;
+            bool Found = false;
+            while (!Found)
+            {
+                if(Arr[Loc] == '-')
+                    Found = !Found;
+                else
+                    Loc += 1;
+            }
+            string NPC = SelectedItem.Remove(0, Loc + 2);
+            return NPC;
+        }
+
+        void UpdateModuleEncounter(string NewNPC)
+        {
+            int EnemyCount = Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber.Sum(x => Convert.ToInt32(x));
+            if(EnemyCount < 7)
+            {
+                if (Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes.Count > 0)
+                {
+                    bool Exists = false;
+                    int Loc = 0;
+                    foreach (string NPC in Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes)
+                    {
+                        if (NewNPC == NPC)
+                            Exists = !Exists;
+                        else if (NewNPC != NPC && !Exists)
+                            Loc += 1;
+                    }
+                    if (Exists)
+                    {
+                        Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber[Loc] += 1;
+                    }
+                    else
+                    {
+                        Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes.Add(NewNPC);
+                        Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber.Add(1);
+                    }
+                }
+                else
+                {
+                    Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes.Add(NewNPC);
+                    Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber.Add(1);
+                }
+            }
+        }
+
+        void UpdateModuleEnemyListBox()
+        {
+            ModuleEnemiesBox.Clear();
+            for(int x = 0; x < Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes.Count; x++)
+            {
+                ModuleEnemiesBox.Text += Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes[x] + " x" +
+                    Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber[x] + "\n";
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         #region Other Functions
 
         private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -275,6 +367,11 @@ namespace TAS_Campagin_Creator
         {
             Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
             DisplayModuleGroupBox();
+        }
+
+        void ClearRandomControls()
+        {
+            ModuleEnemiesBox.Text = "";
         }
 
         #endregion

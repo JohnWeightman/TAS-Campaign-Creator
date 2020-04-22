@@ -51,7 +51,14 @@ namespace TAS_Campagin_Creator
             this.StoryRButton = new System.Windows.Forms.RadioButton();
             this.EncounterRButton = new System.Windows.Forms.RadioButton();
             this.EncounterGBox = new System.Windows.Forms.GroupBox();
+            this.EnemyListBox = new System.Windows.Forms.ListBox();
+            this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
+            this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.ClearEnemiesButton = new System.Windows.Forms.Button();
+            this.ModuleEnemiesBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
+            this.EncounterGBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -264,12 +271,69 @@ namespace TAS_Campagin_Creator
             // 
             // EncounterGBox
             // 
+            this.EncounterGBox.Controls.Add(this.ModuleEnemiesBox);
+            this.EncounterGBox.Controls.Add(this.ClearEnemiesButton);
+            this.EncounterGBox.Controls.Add(this.SearchButton);
+            this.EncounterGBox.Controls.Add(this.DifBonusSearchBox);
+            this.EncounterGBox.Controls.Add(this.EnemyNameSearchBox);
+            this.EncounterGBox.Controls.Add(this.EnemyListBox);
             this.EncounterGBox.Location = new System.Drawing.Point(920, 185);
             this.EncounterGBox.Name = "EncounterGBox";
             this.EncounterGBox.Size = new System.Drawing.Size(650, 655);
             this.EncounterGBox.TabIndex = 15;
             this.EncounterGBox.TabStop = false;
             this.EncounterGBox.Visible = false;
+            // 
+            // EnemyListBox
+            // 
+            this.EnemyListBox.FormattingEnabled = true;
+            this.EnemyListBox.ItemHeight = 16;
+            this.EnemyListBox.Location = new System.Drawing.Point(5, 10);
+            this.EnemyListBox.Name = "EnemyListBox";
+            this.EnemyListBox.Size = new System.Drawing.Size(200, 644);
+            this.EnemyListBox.TabIndex = 0;
+            this.EnemyListBox.SelectedIndexChanged += new System.EventHandler(this.EnemyListBox_SelectedIndexChanged);
+            // 
+            // EnemyNameSearchBox
+            // 
+            this.EnemyNameSearchBox.Location = new System.Drawing.Point(210, 10);
+            this.EnemyNameSearchBox.Name = "EnemyNameSearchBox";
+            this.EnemyNameSearchBox.Size = new System.Drawing.Size(200, 22);
+            this.EnemyNameSearchBox.TabIndex = 1;
+            // 
+            // DifBonusSearchBox
+            // 
+            this.DifBonusSearchBox.Location = new System.Drawing.Point(210, 40);
+            this.DifBonusSearchBox.Name = "DifBonusSearchBox";
+            this.DifBonusSearchBox.Size = new System.Drawing.Size(200, 22);
+            this.DifBonusSearchBox.TabIndex = 2;
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.Location = new System.Drawing.Point(420, 10);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(75, 23);
+            this.SearchButton.TabIndex = 3;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            // 
+            // ClearEnemiesButton
+            // 
+            this.ClearEnemiesButton.Location = new System.Drawing.Point(420, 40);
+            this.ClearEnemiesButton.Name = "ClearEnemiesButton";
+            this.ClearEnemiesButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearEnemiesButton.TabIndex = 4;
+            this.ClearEnemiesButton.Text = "Clear";
+            this.ClearEnemiesButton.UseVisualStyleBackColor = true;
+            this.ClearEnemiesButton.Click += new System.EventHandler(this.ClearEnemiesButton_Click);
+            // 
+            // ModuleEnemiesBox
+            // 
+            this.ModuleEnemiesBox.Location = new System.Drawing.Point(210, 70);
+            this.ModuleEnemiesBox.Name = "ModuleEnemiesBox";
+            this.ModuleEnemiesBox.Size = new System.Drawing.Size(285, 585);
+            this.ModuleEnemiesBox.TabIndex = 5;
+            this.ModuleEnemiesBox.Text = "";
             // 
             // MainForm
             // 
@@ -296,6 +360,8 @@ namespace TAS_Campagin_Creator
             this.Text = "TAS Campaign Creator";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.EncounterGBox.ResumeLayout(false);
+            this.EncounterGBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,6 +392,12 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.RadioButton StoryRButton;
         private System.Windows.Forms.RadioButton EncounterRButton;
         private System.Windows.Forms.GroupBox EncounterGBox;
+        private System.Windows.Forms.ListBox EnemyListBox;
+        private System.Windows.Forms.RichTextBox ModuleEnemiesBox;
+        private System.Windows.Forms.Button ClearEnemiesButton;
+        private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.TextBox DifBonusSearchBox;
+        private System.Windows.Forms.TextBox EnemyNameSearchBox;
     }
 }
 
