@@ -16,8 +16,8 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            //Storage.Campaign.NewModule();
-            Storage.AddTempData();
+            Storage.Campaign.NewModule();
+            //Storage.AddTempData();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
@@ -88,6 +88,7 @@ namespace TAS_Campagin_Creator
                 DisplayModuleOptions();
                 DisplayModuleType();
                 DisplayModuleGroupBox();
+                UpdateModuleEnemyListBox();
                 ClearRandomControls();
             }
         }
@@ -107,25 +108,32 @@ namespace TAS_Campagin_Creator
         {
             StoryBox.Clear();
             int Count = Storage.Campaign.Modules[Storage.ModNum].Story.Count;
-            foreach (string Text in Storage.Campaign.Modules[Storage.ModNum].Story)
+            if(Count > 0)
             {
-                StoryBox.Text += Text + "//";
+                foreach (string Text in Storage.Campaign.Modules[Storage.ModNum].Story)
+                {
+                    StoryBox.Text += Text + "//";
+                }
+                int Length = StoryBox.Text.Length;
+                StoryBox.Text = StoryBox.Text.Remove((Length - 2), 2);
             }
-            int Length = StoryBox.Text.Length;
-            StoryBox.Text = StoryBox.Text.Remove((Length - 2), 2);
         }
 
         void DisplayModuleOptions()
         {
             OptionsBox.Clear();
             OptionsBox2.Items.Clear();
-            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
+            int Count = Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList.Count;
+            if(Count > 0)
             {
-                OptionsBox.Text += Option + "//";
+                foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
+                {
+                    OptionsBox.Text += Option + "//";
+                }
+                int Length = OptionsBox.Text.Length;
+                OptionsBox.Text = OptionsBox.Text.Remove((Length - 2), 2);
+                UpdateOptionBox2();
             }
-            int Length = OptionsBox.Text.Length;
-            OptionsBox.Text = OptionsBox.Text.Remove((Length - 2), 2);
-            UpdateOptionBox2();
         }
 
         void DisplayModuleType()
@@ -148,6 +156,18 @@ namespace TAS_Campagin_Creator
             EncounterGBox.Visible = false;
             if (Storage.Campaign.Modules[Storage.ModNum].ModType == 1)
                 EncounterGBox.Visible = true;
+        }
+
+        private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (OptionsBox2.SelectedItem != null)
+            {
+                string CurItem = OptionsBox2.SelectedItem.ToString();
+                int Index = OptionsBox2.FindString(CurItem);
+                OptionDirection OptDir = new OptionDirection();
+                OptDir.OptionNumber = Index;
+                OptDir.Show();
+            }
         }
 
         #endregion
@@ -258,6 +278,22 @@ namespace TAS_Campagin_Creator
 
         #region Module Type Control Functions
 
+        #region Radio Buttons
+
+        private void StoryRButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
+            DisplayModuleGroupBox();
+        }
+
+        private void EncounterRButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
+            DisplayModuleGroupBox();
+        }
+
+        #endregion
+
         #region Encounter Modules
 
         private void ClearEnemiesButton_Click(object sender, EventArgs e)
@@ -348,25 +384,14 @@ namespace TAS_Campagin_Creator
 
         #region Other Functions
 
-        private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void OptionsBox_KeyDown(object sender, KeyEventArgs e)
         {
-            string CurItem = OptionsBox2.SelectedItem.ToString();
-            int Index = OptionsBox2.FindString(CurItem);
-            OptionDirection OptDir = new OptionDirection();
-            OptDir.OptionNumber = Index;
-            OptDir.Show();
-        }
-
-        private void StoryRButton_CheckedChanged(object sender, EventArgs e)
-        {
-            Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
-            DisplayModuleGroupBox();
-        }
-
-        private void EncounterRButton_CheckedChanged(object sender, EventArgs e)
-        {
-            Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
-            DisplayModuleGroupBox();
+            if(e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                UpdateModuleOptions();
+                UpdateOptionBox2();
+            }
         }
 
         void ClearRandomControls()

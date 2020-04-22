@@ -85,6 +85,7 @@
             this.Controls.Add(this.label1);
             this.Name = "OptionDirection";
             this.Text = "OptionDirection";
+            this.Load += new System.EventHandler(this.OptionDirection_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

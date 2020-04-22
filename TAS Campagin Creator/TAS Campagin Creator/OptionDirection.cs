@@ -19,6 +19,12 @@ namespace TAS_Campagin_Creator
             InitializeComponent();
         }
 
+        private void OptionDirection_Load(object sender, EventArgs e)
+        {
+            if (Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] != 0)
+                textBox1.Text = Convert.ToString(Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] + 1);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int Check = Convert.ToInt32(textBox1.Text);

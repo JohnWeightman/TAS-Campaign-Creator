@@ -51,12 +51,12 @@ namespace TAS_Campagin_Creator
             this.StoryRButton = new System.Windows.Forms.RadioButton();
             this.EncounterRButton = new System.Windows.Forms.RadioButton();
             this.EncounterGBox = new System.Windows.Forms.GroupBox();
-            this.EnemyListBox = new System.Windows.Forms.ListBox();
-            this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
-            this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
-            this.SearchButton = new System.Windows.Forms.Button();
-            this.ClearEnemiesButton = new System.Windows.Forms.Button();
             this.ModuleEnemiesBox = new System.Windows.Forms.RichTextBox();
+            this.ClearEnemiesButton = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
+            this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
+            this.EnemyListBox = new System.Windows.Forms.ListBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.SuspendLayout();
@@ -224,6 +224,7 @@ namespace TAS_Campagin_Creator
             this.OptionsBox.Size = new System.Drawing.Size(200, 280);
             this.OptionsBox.TabIndex = 10;
             this.OptionsBox.Text = "";
+            this.OptionsBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OptionsBox_KeyDown);
             // 
             // OptionsBox2
             // 
@@ -284,38 +285,13 @@ namespace TAS_Campagin_Creator
             this.EncounterGBox.TabStop = false;
             this.EncounterGBox.Visible = false;
             // 
-            // EnemyListBox
+            // ModuleEnemiesBox
             // 
-            this.EnemyListBox.FormattingEnabled = true;
-            this.EnemyListBox.ItemHeight = 16;
-            this.EnemyListBox.Location = new System.Drawing.Point(5, 10);
-            this.EnemyListBox.Name = "EnemyListBox";
-            this.EnemyListBox.Size = new System.Drawing.Size(200, 644);
-            this.EnemyListBox.TabIndex = 0;
-            this.EnemyListBox.SelectedIndexChanged += new System.EventHandler(this.EnemyListBox_SelectedIndexChanged);
-            // 
-            // EnemyNameSearchBox
-            // 
-            this.EnemyNameSearchBox.Location = new System.Drawing.Point(210, 10);
-            this.EnemyNameSearchBox.Name = "EnemyNameSearchBox";
-            this.EnemyNameSearchBox.Size = new System.Drawing.Size(200, 22);
-            this.EnemyNameSearchBox.TabIndex = 1;
-            // 
-            // DifBonusSearchBox
-            // 
-            this.DifBonusSearchBox.Location = new System.Drawing.Point(210, 40);
-            this.DifBonusSearchBox.Name = "DifBonusSearchBox";
-            this.DifBonusSearchBox.Size = new System.Drawing.Size(200, 22);
-            this.DifBonusSearchBox.TabIndex = 2;
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Location = new System.Drawing.Point(420, 10);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(75, 23);
-            this.SearchButton.TabIndex = 3;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = true;
+            this.ModuleEnemiesBox.Location = new System.Drawing.Point(210, 70);
+            this.ModuleEnemiesBox.Name = "ModuleEnemiesBox";
+            this.ModuleEnemiesBox.Size = new System.Drawing.Size(285, 585);
+            this.ModuleEnemiesBox.TabIndex = 5;
+            this.ModuleEnemiesBox.Text = "";
             // 
             // ClearEnemiesButton
             // 
@@ -327,13 +303,38 @@ namespace TAS_Campagin_Creator
             this.ClearEnemiesButton.UseVisualStyleBackColor = true;
             this.ClearEnemiesButton.Click += new System.EventHandler(this.ClearEnemiesButton_Click);
             // 
-            // ModuleEnemiesBox
+            // SearchButton
             // 
-            this.ModuleEnemiesBox.Location = new System.Drawing.Point(210, 70);
-            this.ModuleEnemiesBox.Name = "ModuleEnemiesBox";
-            this.ModuleEnemiesBox.Size = new System.Drawing.Size(285, 585);
-            this.ModuleEnemiesBox.TabIndex = 5;
-            this.ModuleEnemiesBox.Text = "";
+            this.SearchButton.Location = new System.Drawing.Point(420, 10);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(75, 23);
+            this.SearchButton.TabIndex = 3;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            // 
+            // DifBonusSearchBox
+            // 
+            this.DifBonusSearchBox.Location = new System.Drawing.Point(210, 40);
+            this.DifBonusSearchBox.Name = "DifBonusSearchBox";
+            this.DifBonusSearchBox.Size = new System.Drawing.Size(200, 22);
+            this.DifBonusSearchBox.TabIndex = 2;
+            // 
+            // EnemyNameSearchBox
+            // 
+            this.EnemyNameSearchBox.Location = new System.Drawing.Point(210, 10);
+            this.EnemyNameSearchBox.Name = "EnemyNameSearchBox";
+            this.EnemyNameSearchBox.Size = new System.Drawing.Size(200, 22);
+            this.EnemyNameSearchBox.TabIndex = 1;
+            // 
+            // EnemyListBox
+            // 
+            this.EnemyListBox.FormattingEnabled = true;
+            this.EnemyListBox.ItemHeight = 16;
+            this.EnemyListBox.Location = new System.Drawing.Point(5, 10);
+            this.EnemyListBox.Name = "EnemyListBox";
+            this.EnemyListBox.Size = new System.Drawing.Size(200, 644);
+            this.EnemyListBox.TabIndex = 0;
+            this.EnemyListBox.SelectedIndexChanged += new System.EventHandler(this.EnemyListBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
