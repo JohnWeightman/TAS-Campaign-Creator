@@ -21,7 +21,6 @@ namespace TAS_Campagin_Creator
 
         private void OptionDirection_Load(object sender, EventArgs e)
         {
-            //if (Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] != 0)
             textBox1.Text = Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber].Remove(0, 6);
         }
 

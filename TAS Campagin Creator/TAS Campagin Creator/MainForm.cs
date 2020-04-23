@@ -16,8 +16,8 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            //Storage.Campaign.NewModule();
-            Storage.AddTempData();
+            Storage.Campaign.NewModule();
+            //Storage.AddTempData();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
@@ -56,7 +56,15 @@ namespace TAS_Campagin_Creator
 
         #endregion
 
-        #region Modules
+        #region Campaign
+
+        private void renameCampaignToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetTextInput GTI = new GetTextInput();
+            GTI.Text = "Campaign Name";
+            GTI.Text = Storage.Campaign.Name;
+            GTI.Show();
+        }
 
         private void addModuleToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -190,6 +198,7 @@ namespace TAS_Campagin_Creator
             UpdateModuleOptions();
             UpdateModuleOptionDirections();
             UpdateOptionBox2();
+            CampaignNameLabel.Text = Storage.Campaign.Name;
         }
 
         void UpdateModuleType()

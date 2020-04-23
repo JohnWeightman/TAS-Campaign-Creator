@@ -36,7 +36,7 @@ namespace TAS_Campagin_Creator
             this.exportCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.QuitButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.modulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignNameLabel = new System.Windows.Forms.Label();
             this.ModuleBox = new System.Windows.Forms.ListBox();
@@ -57,6 +57,7 @@ namespace TAS_Campagin_Creator
             this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyListBox = new System.Windows.Forms.ListBox();
+            this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +67,7 @@ namespace TAS_Campagin_Creator
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.modulesToolStripMenuItem});
+            this.CampaignToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1582, 28);
@@ -132,13 +133,14 @@ namespace TAS_Campagin_Creator
             this.QuitButton.Text = "&Quit";
             this.QuitButton.Click += new System.EventHandler(this.QuitButton_Click);
             // 
-            // modulesToolStripMenuItem
+            // CampaignToolStripMenuItem
             // 
-            this.modulesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CampaignToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renameCampaignToolStripMenuItem,
             this.addModuleToolStripMenuItem});
-            this.modulesToolStripMenuItem.Name = "modulesToolStripMenuItem";
-            this.modulesToolStripMenuItem.Size = new System.Drawing.Size(78, 24);
-            this.modulesToolStripMenuItem.Text = "Modules";
+            this.CampaignToolStripMenuItem.Name = "CampaignToolStripMenuItem";
+            this.CampaignToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
+            this.CampaignToolStripMenuItem.Text = "Campaign";
             // 
             // addModuleToolStripMenuItem
             // 
@@ -337,6 +339,14 @@ namespace TAS_Campagin_Creator
             this.EnemyListBox.TabIndex = 0;
             this.EnemyListBox.SelectedIndexChanged += new System.EventHandler(this.EnemyListBox_SelectedIndexChanged);
             // 
+            // renameCampaignToolStripMenuItem
+            // 
+            this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
+            this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
+            this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -381,7 +391,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.Label CampaignNameLabel;
         private System.Windows.Forms.ListBox ModuleBox;
         private System.Windows.Forms.RichTextBox StoryBox;
-        private System.Windows.Forms.ToolStripMenuItem modulesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CampaignToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addModuleToolStripMenuItem;
         private System.Windows.Forms.Label StoryLabel;
         private System.Windows.Forms.Label label1;
@@ -400,6 +410,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.TextBox DifBonusSearchBox;
         private System.Windows.Forms.TextBox EnemyNameSearchBox;
+        private System.Windows.Forms.ToolStripMenuItem renameCampaignToolStripMenuItem;
     }
 }
 

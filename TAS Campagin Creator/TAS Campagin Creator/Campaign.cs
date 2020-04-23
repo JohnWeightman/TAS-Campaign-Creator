@@ -27,13 +27,6 @@ namespace TAS_Campagin_Creator
 
         void SetOptionDirections()
         {
-            //foreach(Module Mod in Modules)
-            //{
-            //    for(int x = 0; x < Mod.Options.OptionDirectionStrings.Count; x++)
-            //    {
-            //        Mod.Options.OptionDirections.Add(Convert.ToInt32(Mod.Options.OptionDirectionStrings[x].Remove(0, 6)));
-            //    }
-            //}
             foreach(Module Mod in Modules)
             {
                 for(int x = 0; x < Mod.Options.OptionDirectionStrings.Count; x++)

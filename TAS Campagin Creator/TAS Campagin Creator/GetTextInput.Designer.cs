@@ -1,6 +1,6 @@
 ﻿namespace TAS_Campagin_Creator
 {
-    partial class Progress
+    partial class GetTextInput
     {
         /// <summary>
         /// Required designer variable.
@@ -28,36 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ProBar = new System.Windows.Forms.ProgressBar();
-            this.ProLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // ProBar
+            // textBox1
             // 
-            this.ProBar.ForeColor = System.Drawing.Color.Lime;
-            this.ProBar.Location = new System.Drawing.Point(12, 75);
-            this.ProBar.Name = "ProBar";
-            this.ProBar.Size = new System.Drawing.Size(458, 25);
-            this.ProBar.TabIndex = 0;
+            this.textBox1.Location = new System.Drawing.Point(10, 10);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(200, 22);
+            this.textBox1.TabIndex = 0;
             // 
-            // ProLabel
+            // button1
             // 
-            this.ProLabel.AutoSize = true;
-            this.ProLabel.Location = new System.Drawing.Point(13, 52);
-            this.ProLabel.Name = "ProLabel";
-            this.ProLabel.Size = new System.Drawing.Size(125, 17);
-            this.ProLabel.TabIndex = 1;
-            this.ProLabel.Text = "Initiliasing Export...";
+            this.button1.Location = new System.Drawing.Point(215, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 25);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Apply";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Progress
+            // GetTextInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 113);
-            this.Controls.Add(this.ProLabel);
-            this.Controls.Add(this.ProBar);
-            this.Name = "Progress";
-            this.Text = "Progress";
+            this.ClientSize = new System.Drawing.Size(296, 43);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Name = "GetTextInput";
+            this.Text = "GetTextInput";
+            this.Load += new System.EventHandler(this.GetTextInput_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -65,7 +66,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar ProBar;
-        private System.Windows.Forms.Label ProLabel;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
