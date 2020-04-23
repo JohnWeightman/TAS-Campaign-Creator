@@ -19,6 +19,35 @@ namespace TAS_Campagin_Creator
             NewMod.Name = "Module" + ModCount;
             Modules.Add(NewMod);
         }
+
+        public void InitiliaseDataForExport()
+        {
+            SetOptionDirections();
+        }
+
+        void SetOptionDirections()
+        {
+            //foreach(Module Mod in Modules)
+            //{
+            //    for(int x = 0; x < Mod.Options.OptionDirectionStrings.Count; x++)
+            //    {
+            //        Mod.Options.OptionDirections.Add(Convert.ToInt32(Mod.Options.OptionDirectionStrings[x].Remove(0, 6)));
+            //    }
+            //}
+            foreach(Module Mod in Modules)
+            {
+                for(int x = 0; x < Mod.Options.OptionDirectionStrings.Count; x++)
+                {
+                    for(int y = 0; y < Modules.Count; y++)
+                    {
+                        if(Modules[y].Name == Mod.Options.OptionDirectionStrings[x])
+                        {
+                            Mod.Options.OptionDirections.Add(y);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     class Module
@@ -34,6 +63,7 @@ namespace TAS_Campagin_Creator
     {
         public List<string> OptionsList = new List<string>();
         public List<int> OptionDirections = new List<int>();
+        public List<string> OptionDirectionStrings = new List<string>();
     }
 
     class Encounters

@@ -23,6 +23,7 @@ namespace TAS_Campagin_Creator
             CalculateJobs();
             Pro.Show();
             Pro.InitiliaseProgressBar(TotalJobs);
+            Storage.Campaign.InitiliaseDataForExport();
             XmlWriter XML = XmlWriter.Create("Campaigns\\" + Storage.Campaign.Name + ".xml");
             XML.WriteStartDocument();
             WriteCampaignData(XML);

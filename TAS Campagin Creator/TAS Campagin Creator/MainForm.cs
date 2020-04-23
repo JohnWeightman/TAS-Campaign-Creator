@@ -16,8 +16,8 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            Storage.Campaign.NewModule();
-            //Storage.AddTempData();
+            //Storage.Campaign.NewModule();
+            Storage.AddTempData();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
@@ -170,6 +170,15 @@ namespace TAS_Campagin_Creator
             }
         }
 
+        private void ModuleBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(ModuleBox.SelectedItem != null && e.KeyCode == Keys.Delete)
+            {
+                Storage.Campaign.Modules.Remove(Storage.Campaign.Modules[ModuleBox.SelectedIndex]);
+                UpdateModuleBox();
+            }
+        }
+
         #endregion
 
         #region Update Module Data
@@ -212,9 +221,9 @@ namespace TAS_Campagin_Creator
 
         void UpdateModuleOptionDirections()
         {
-            Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections.Clear();
+            Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Clear();
             foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
-                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections.Add(0);
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Add("Module1");
         }
 
         List<string> SplitIntoStrings(string StoryText)
@@ -391,6 +400,7 @@ namespace TAS_Campagin_Creator
                 e.SuppressKeyPress = true;
                 UpdateModuleOptions();
                 UpdateOptionBox2();
+                UpdateModuleOptionDirections();
             }
         }
 

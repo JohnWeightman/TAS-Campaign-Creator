@@ -167,6 +167,7 @@ namespace TAS_Campagin_Creator
             this.ModuleBox.Size = new System.Drawing.Size(200, 756);
             this.ModuleBox.TabIndex = 3;
             this.ModuleBox.SelectedIndexChanged += new System.EventHandler(this.ModuleBox_SelectedIndexChanged);
+            this.ModuleBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ModuleBox_KeyDown);
             // 
             // StoryBox
             // 

@@ -21,8 +21,8 @@ namespace TAS_Campagin_Creator
 
         private void OptionDirection_Load(object sender, EventArgs e)
         {
-            if (Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] != 0)
-                textBox1.Text = Convert.ToString(Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] + 1);
+            //if (Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] != 0)
+            textBox1.Text = Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber].Remove(0, 6);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,7 +30,7 @@ namespace TAS_Campagin_Creator
             int Check = Convert.ToInt32(textBox1.Text);
             if(Check > 0 && Check <= Storage.Campaign.Modules.Count)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirections[OptionNumber] = Check - 1;
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber] = "Module" + textBox1.Text;
                 this.Close();
             }
             else

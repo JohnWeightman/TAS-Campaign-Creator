@@ -46,8 +46,8 @@ namespace TAS_Campagin_Creator
 
         static void AddOptionDirections(int Mod)
         {
-            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, ModCount));
-            Campaign.Modules[Mod].Options.OptionDirections.Add(Ran.Next(1, ModCount));
+            Campaign.Modules[Mod].Options.OptionDirectionStrings.Add("Module" + Ran.Next(1, ModCount));
+            Campaign.Modules[Mod].Options.OptionDirectionStrings.Add("Module" + Ran.Next(1, ModCount));
         }
 
         static void AddModuleType(int Mod)
