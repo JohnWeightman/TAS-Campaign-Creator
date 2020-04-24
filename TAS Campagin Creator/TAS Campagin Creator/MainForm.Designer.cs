@@ -37,6 +37,7 @@ namespace TAS_Campagin_Creator
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.QuitButton = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignNameLabel = new System.Windows.Forms.Label();
             this.ModuleBox = new System.Windows.Forms.ListBox();
@@ -57,7 +58,6 @@ namespace TAS_Campagin_Creator
             this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyListBox = new System.Windows.Forms.ListBox();
-            this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.SuspendLayout();
@@ -142,11 +142,19 @@ namespace TAS_Campagin_Creator
             this.CampaignToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
             this.CampaignToolStripMenuItem.Text = "Campaign";
             // 
+            // renameCampaignToolStripMenuItem
+            // 
+            this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
+            this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
+            this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
+            // 
             // addModuleToolStripMenuItem
             // 
             this.addModuleToolStripMenuItem.Name = "addModuleToolStripMenuItem";
             this.addModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
             this.addModuleToolStripMenuItem.Text = "&Add Module";
             this.addModuleToolStripMenuItem.Click += new System.EventHandler(this.addModuleToolStripMenuItem_Click);
             // 
@@ -339,18 +347,11 @@ namespace TAS_Campagin_Creator
             this.EnemyListBox.TabIndex = 0;
             this.EnemyListBox.SelectedIndexChanged += new System.EventHandler(this.EnemyListBox_SelectedIndexChanged);
             // 
-            // renameCampaignToolStripMenuItem
-            // 
-            this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
-            this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
-            this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
-            this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1582, 853);
             this.Controls.Add(this.EncounterGBox);
             this.Controls.Add(this.EncounterRButton);
