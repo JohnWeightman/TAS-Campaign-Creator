@@ -50,6 +50,7 @@ namespace TAS_Campagin_Creator
             XML.WriteStartElement("Module");
             XML.WriteAttributeString("Name", Storage.Campaign.Modules[ModNum].Name);
             XML.WriteAttributeString("ModType", Convert.ToString(Storage.Campaign.Modules[ModNum].ModType));
+            XML.WriteAttributeString("ID", Storage.Campaign.Modules[ModNum].ID);
             WriteModuleStoryData(XML, ModNum);
             WriteModuleOptionData(XML, ModNum);
             if(Storage.Campaign.Modules[ModNum].ModType == 1)

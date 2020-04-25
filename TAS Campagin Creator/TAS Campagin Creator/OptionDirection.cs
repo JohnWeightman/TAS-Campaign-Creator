@@ -21,18 +21,33 @@ namespace TAS_Campagin_Creator
 
         private void OptionDirection_Load(object sender, EventArgs e)
         {
-            textBox1.Text = Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber].Remove(0, 6);
+            //textBox1.Text = Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber].Remove(0, 6);
+            foreach(Module Mod in Storage.Campaign.Modules)
+            {
+                if(Mod.ID == Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber])
+                {
+                    textBox1.Text = Mod.Name;
+                    break;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int Check = Convert.ToInt32(textBox1.Text);
-            if(Check > 0 && Check <= Storage.Campaign.Modules.Count)
+            //int Check = Convert.ToInt32(textBox1.Text);
+            //if(Check > 0 && Check <= Storage.Campaign.Modules.Count)
+            string Check = textBox1.Text;
+            bool Found = false;
+            foreach(Module Mod in Storage.Campaign.Modules)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber] = "Module" + textBox1.Text;
-                this.Close();
+                if(Check == Mod.Name)
+                {
+                    Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber] = Mod.ID;
+                    Found = true;
+                    this.Close();
+                }
             }
-            else
+            if(!Found)
             {
                 MessageBox.Show("Module: " + Check + " Doesn't exist! Please enter a module number that exists {Modules 1-" + Storage.Campaign.Modules.Count +
                     "}", "Module Error");
@@ -42,7 +57,7 @@ namespace TAS_Campagin_Creator
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            //e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }
