@@ -32,32 +32,38 @@ namespace TAS_Campagin_Creator
             }
         }
 
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CheckInput();
+        }
+
         private void button1_Click(object sender, EventArgs e)
+        {
+            CheckInput();
+        }
+
+        void CheckInput()
         {
             //int Check = Convert.ToInt32(textBox1.Text);
             //if(Check > 0 && Check <= Storage.Campaign.Modules.Count)
             string Check = textBox1.Text;
             bool Found = false;
-            foreach(Module Mod in Storage.Campaign.Modules)
+            foreach (Module Mod in Storage.Campaign.Modules)
             {
-                if(Check == Mod.Name)
+                if (Check == Mod.Name)
                 {
                     Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber] = Mod.ID;
                     Found = true;
                     this.Close();
                 }
             }
-            if(!Found)
+            if (!Found)
             {
                 MessageBox.Show("Module: " + Check + " Doesn't exist! Please enter a module number that exists {Modules 1-" + Storage.Campaign.Modules.Count +
                     "}", "Module Error");
                 textBox1.Text = "";
             }
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }

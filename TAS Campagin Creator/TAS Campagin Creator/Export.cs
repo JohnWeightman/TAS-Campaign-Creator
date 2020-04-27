@@ -21,15 +21,15 @@ namespace TAS_Campagin_Creator
         public static void ExportCampaign()
         {
             CalculateJobs();
-            Pro.Show();
-            Pro.InitiliaseProgressBar(TotalJobs);
+            //Pro.Show();
+            //Pro.InitiliaseProgressBar(TotalJobs);
             Storage.Campaign.InitiliaseDataForExport();
             XmlWriter XML = XmlWriter.Create("Campaigns\\" + Storage.Campaign.Name + ".xml");
             XML.WriteStartDocument();
             WriteCampaignData(XML);
             XML.WriteEndDocument();
             XML.Close();
-            Pro.Close();
+            //Pro.Close();
             ResetExport();
         }
 

@@ -16,8 +16,9 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            Storage.Campaign.NewModule();
+            //Storage.Campaign.NewModule();
             //Storage.AddTempData();
+            Storage.PlayableCampaign();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
@@ -89,6 +90,7 @@ namespace TAS_Campagin_Creator
         {
             if(ModuleBox.SelectedItem != null)
             {
+                UpdateModuleData();
                 string Name = ModuleBox.SelectedItem.ToString();
                 FindModule(Name);
                 ModuleLabel.Text = "Module: " + (Storage.ModNum + 1);
@@ -192,6 +194,11 @@ namespace TAS_Campagin_Creator
         #region Update Module Data
 
         private void UpdateModuleButton_Click(object sender, EventArgs e)
+        {
+            UpdateModuleData();
+        }
+
+        void UpdateModuleData()
         {
             UpdateModuleType();
             UpdateModuleStory();
