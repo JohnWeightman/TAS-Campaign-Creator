@@ -140,6 +140,8 @@ namespace TAS_Campagin_Creator
             OptionJobs = 0;
             EncounterJobs = 0;
             Progress = 0;
+            foreach (Module Mod in Storage.Campaign.Modules)
+                Mod.Options.OptionDirections.Clear();
         }
     }
 }

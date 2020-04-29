@@ -16,9 +16,9 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            //Storage.Campaign.NewModule();
+            Storage.Campaign.NewModule();
             //Storage.AddTempData();
-            Storage.PlayableCampaign();
+            //Storage.PlayableCampaign();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
