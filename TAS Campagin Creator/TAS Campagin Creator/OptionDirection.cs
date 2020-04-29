@@ -45,8 +45,6 @@ namespace TAS_Campagin_Creator
 
         void CheckInput()
         {
-            //int Check = Convert.ToInt32(textBox1.Text);
-            //if(Check > 0 && Check <= Storage.Campaign.Modules.Count)
             string Check = textBox1.Text;
             bool Found = false;
             foreach (Module Mod in Storage.Campaign.Modules)
@@ -60,8 +58,7 @@ namespace TAS_Campagin_Creator
             }
             if (!Found)
             {
-                MessageBox.Show("Module: " + Check + " Doesn't exist! Please enter a module number that exists {Modules 1-" + Storage.Campaign.Modules.Count +
-                    "}", "Module Error");
+                MessageBox.Show(Check + " Doesn't exist! Please enter a valid module name!", "Module Error");
                 textBox1.Text = "";
             }
         }

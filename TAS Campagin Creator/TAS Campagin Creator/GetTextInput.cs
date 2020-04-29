@@ -12,7 +12,9 @@ namespace TAS_Campagin_Creator
 {
     public partial class GetTextInput : Form
     {
+        public MainForm MyParent { get; set; }
         public string Text;
+        public int Arg;
 
         public GetTextInput()
         {
@@ -26,7 +28,33 @@ namespace TAS_Campagin_Creator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Storage.Campaign.Name = textBox1.Text;
+            UpdateDisplay();
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                UpdateDisplay();
+        }
+
+        void UpdateDisplay()
+        {
+            switch (Arg)
+            {
+                case 0:
+                    UpdateCampaignName();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void UpdateCampaignName()
+        {
+            Storage.Campaign.Name = textBox1.Text;
+            this.MyParent.UpdateCampaignLabel();
+            this.Close();
+        }
+
     }
 }

@@ -62,7 +62,8 @@ namespace TAS_Campagin_Creator
         private void renameCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GetTextInput GTI = new GetTextInput();
-            GTI.Text = "Campaign Name";
+            GTI.MyParent = this;
+            GTI.Arg = 0;
             GTI.Text = Storage.Campaign.Name;
             GTI.Show();
         }
@@ -88,12 +89,12 @@ namespace TAS_Campagin_Creator
 
         private void ModuleBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ModuleBox.SelectedItem != null)
+            if (ModuleBox.SelectedItem != null)
             {
                 UpdateModuleData();
                 string Name = ModuleBox.SelectedItem.ToString();
                 FindModule(Name);
-                ModuleLabel.Text = "Module: " + (Storage.ModNum + 1);
+                ModNameTBox.Text = Storage.Campaign.Modules[Storage.ModNum].Name;
                 DisplayModuleStory();
                 DisplayModuleOptions();
                 DisplayModuleType();
@@ -101,6 +102,7 @@ namespace TAS_Campagin_Creator
                 UpdateModuleEnemyListBox();
                 ClearRandomControls();
             }
+            UpdateModuleBox();
         }
 
         void FindModule(string Name)
@@ -151,10 +153,10 @@ namespace TAS_Campagin_Creator
             switch (Storage.Campaign.Modules[Storage.ModNum].ModType)
             {
                 case 0:
-                    StoryRButton.Checked = true;
+                    ModTypeCBox.SelectedItem = "Story Module";
                     break;
                 case 1:
-                    EncounterRButton.Checked = true;
+                    ModTypeCBox.SelectedItem = "Encounter Module";
                     break;
                 default:
                     break;
@@ -193,27 +195,14 @@ namespace TAS_Campagin_Creator
 
         #region Update Module Data
 
-        private void UpdateModuleButton_Click(object sender, EventArgs e)
-        {
-            UpdateModuleData();
-        }
-
         void UpdateModuleData()
         {
-            UpdateModuleType();
             UpdateModuleStory();
             UpdateModuleOptions();
             UpdateModuleOptionDirections();
             UpdateOptionBox2();
-            CampaignNameLabel.Text = Storage.Campaign.Name;
-        }
-
-        void UpdateModuleType()
-        {
-            if (StoryRButton.Checked)
-                Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
-            else
-                Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
+            if(ModNameTBox.Text != "")
+                Storage.Campaign.Modules[Storage.ModNum].Name = ModNameTBox.Text;
         }
 
         void UpdateModuleStory()
@@ -303,23 +292,30 @@ namespace TAS_Campagin_Creator
 
         #region Module Type Control Functions
 
-        #region Radio Buttons
+        #region Module Type Controls
 
-        private void StoryRButton_CheckedChanged(object sender, EventArgs e)
+        private void ModTypeCBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
-            DisplayModuleGroupBox();
-        }
-
-        private void EncounterRButton_CheckedChanged(object sender, EventArgs e)
-        {
-            Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
-            DisplayModuleGroupBox();
+            if (ModTypeCBox.SelectedItem != null)
+            {
+                switch (ModTypeCBox.SelectedIndex)
+                {
+                    case 0:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
+                        break;
+                    case 1:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
+                        break;
+                    default:
+                        break;
+                }
+                DisplayModuleGroupBox();
+            }
         }
 
         #endregion
 
-        #region Encounter Modules
+        #region Encounter Module
 
         private void ClearEnemiesButton_Click(object sender, EventArgs e)
         {
@@ -418,6 +414,11 @@ namespace TAS_Campagin_Creator
                 UpdateOptionBox2();
                 UpdateModuleOptionDirections();
             }
+        }
+
+        public void UpdateCampaignLabel()
+        {
+            CampaignNameLabel.Text = Storage.Campaign.Name;
         }
 
         void ClearRandomControls()

@@ -38,6 +38,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(200, 22);
             this.textBox1.TabIndex = 0;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // button1
             // 
@@ -57,7 +58,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Name = "GetTextInput";
-            this.Text = "GetTextInput";
             this.Load += new System.EventHandler(this.GetTextInput_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

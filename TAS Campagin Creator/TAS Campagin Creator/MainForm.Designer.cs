@@ -37,6 +37,7 @@ namespace TAS_Campagin_Creator
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.QuitButton = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignNameLabel = new System.Windows.Forms.Label();
             this.ModuleBox = new System.Windows.Forms.ListBox();
@@ -44,12 +45,9 @@ namespace TAS_Campagin_Creator
             this.StoryLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ModuleLabel = new System.Windows.Forms.Label();
-            this.UpdateModuleButton = new System.Windows.Forms.Button();
             this.OptionsBox = new System.Windows.Forms.RichTextBox();
             this.OptionsBox2 = new System.Windows.Forms.ListBox();
             this.ModuleTypeLabel = new System.Windows.Forms.Label();
-            this.StoryRButton = new System.Windows.Forms.RadioButton();
-            this.EncounterRButton = new System.Windows.Forms.RadioButton();
             this.EncounterGBox = new System.Windows.Forms.GroupBox();
             this.ModuleEnemiesBox = new System.Windows.Forms.RichTextBox();
             this.ClearEnemiesButton = new System.Windows.Forms.Button();
@@ -57,7 +55,8 @@ namespace TAS_Campagin_Creator
             this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyListBox = new System.Windows.Forms.ListBox();
-            this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ModTypeCBox = new System.Windows.Forms.ComboBox();
+            this.ModNameTBox = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.SuspendLayout();
@@ -142,11 +141,19 @@ namespace TAS_Campagin_Creator
             this.CampaignToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
             this.CampaignToolStripMenuItem.Text = "Campaign";
             // 
+            // renameCampaignToolStripMenuItem
+            // 
+            this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
+            this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
+            this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
+            // 
             // addModuleToolStripMenuItem
             // 
             this.addModuleToolStripMenuItem.Name = "addModuleToolStripMenuItem";
             this.addModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
+            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
             this.addModuleToolStripMenuItem.Text = "&Add Module";
             this.addModuleToolStripMenuItem.Click += new System.EventHandler(this.addModuleToolStripMenuItem_Click);
             // 
@@ -173,7 +180,7 @@ namespace TAS_Campagin_Creator
             // 
             // StoryBox
             // 
-            this.StoryBox.Location = new System.Drawing.Point(220, 220);
+            this.StoryBox.Location = new System.Drawing.Point(220, 205);
             this.StoryBox.Name = "StoryBox";
             this.StoryBox.Size = new System.Drawing.Size(500, 300);
             this.StoryBox.TabIndex = 4;
@@ -183,7 +190,7 @@ namespace TAS_Campagin_Creator
             // 
             this.StoryLabel.AutoSize = true;
             this.StoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StoryLabel.Location = new System.Drawing.Point(220, 185);
+            this.StoryLabel.Location = new System.Drawing.Point(220, 170);
             this.StoryLabel.Name = "StoryLabel";
             this.StoryLabel.Size = new System.Drawing.Size(261, 32);
             this.StoryLabel.TabIndex = 5;
@@ -193,7 +200,7 @@ namespace TAS_Campagin_Creator
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(220, 525);
+            this.label1.Location = new System.Drawing.Point(220, 510);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(324, 32);
             this.label1.TabIndex = 6;
@@ -205,26 +212,15 @@ namespace TAS_Campagin_Creator
             this.ModuleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ModuleLabel.Location = new System.Drawing.Point(220, 85);
             this.ModuleLabel.Name = "ModuleLabel";
-            this.ModuleLabel.Size = new System.Drawing.Size(326, 32);
+            this.ModuleLabel.Size = new System.Drawing.Size(124, 32);
             this.ModuleLabel.TabIndex = 8;
-            this.ModuleLabel.Text = "Module: Select Module";
-            // 
-            // UpdateModuleButton
-            // 
-            this.UpdateModuleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdateModuleButton.Location = new System.Drawing.Point(220, 120);
-            this.UpdateModuleButton.Name = "UpdateModuleButton";
-            this.UpdateModuleButton.Size = new System.Drawing.Size(140, 62);
-            this.UpdateModuleButton.TabIndex = 9;
-            this.UpdateModuleButton.Text = "Update Module";
-            this.UpdateModuleButton.UseVisualStyleBackColor = true;
-            this.UpdateModuleButton.Click += new System.EventHandler(this.UpdateModuleButton_Click);
+            this.ModuleLabel.Text = "Module:";
             // 
             // OptionsBox
             // 
-            this.OptionsBox.Location = new System.Drawing.Point(220, 560);
+            this.OptionsBox.Location = new System.Drawing.Point(220, 545);
             this.OptionsBox.Name = "OptionsBox";
-            this.OptionsBox.Size = new System.Drawing.Size(200, 280);
+            this.OptionsBox.Size = new System.Drawing.Size(200, 296);
             this.OptionsBox.TabIndex = 10;
             this.OptionsBox.Text = "";
             this.OptionsBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OptionsBox_KeyDown);
@@ -233,9 +229,9 @@ namespace TAS_Campagin_Creator
             // 
             this.OptionsBox2.FormattingEnabled = true;
             this.OptionsBox2.ItemHeight = 16;
-            this.OptionsBox2.Location = new System.Drawing.Point(430, 560);
+            this.OptionsBox2.Location = new System.Drawing.Point(430, 545);
             this.OptionsBox2.Name = "OptionsBox2";
-            this.OptionsBox2.Size = new System.Drawing.Size(200, 276);
+            this.OptionsBox2.Size = new System.Drawing.Size(200, 292);
             this.OptionsBox2.TabIndex = 11;
             this.OptionsBox2.SelectedIndexChanged += new System.EventHandler(this.OptionsBox2_SelectedIndexChanged);
             // 
@@ -243,35 +239,11 @@ namespace TAS_Campagin_Creator
             // 
             this.ModuleTypeLabel.AutoSize = true;
             this.ModuleTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ModuleTypeLabel.Location = new System.Drawing.Point(720, 185);
+            this.ModuleTypeLabel.Location = new System.Drawing.Point(720, 170);
             this.ModuleTypeLabel.Name = "ModuleTypeLabel";
             this.ModuleTypeLabel.Size = new System.Drawing.Size(190, 32);
             this.ModuleTypeLabel.TabIndex = 12;
             this.ModuleTypeLabel.Text = "Module Type";
-            // 
-            // StoryRButton
-            // 
-            this.StoryRButton.AutoSize = true;
-            this.StoryRButton.Location = new System.Drawing.Point(725, 220);
-            this.StoryRButton.Name = "StoryRButton";
-            this.StoryRButton.Size = new System.Drawing.Size(112, 21);
-            this.StoryRButton.TabIndex = 13;
-            this.StoryRButton.TabStop = true;
-            this.StoryRButton.Text = "Story Module";
-            this.StoryRButton.UseVisualStyleBackColor = true;
-            this.StoryRButton.CheckedChanged += new System.EventHandler(this.StoryRButton_CheckedChanged);
-            // 
-            // EncounterRButton
-            // 
-            this.EncounterRButton.AutoSize = true;
-            this.EncounterRButton.Location = new System.Drawing.Point(725, 250);
-            this.EncounterRButton.Name = "EncounterRButton";
-            this.EncounterRButton.Size = new System.Drawing.Size(144, 21);
-            this.EncounterRButton.TabIndex = 14;
-            this.EncounterRButton.TabStop = true;
-            this.EncounterRButton.Text = "Encounter Module";
-            this.EncounterRButton.UseVisualStyleBackColor = true;
-            this.EncounterRButton.CheckedChanged += new System.EventHandler(this.EncounterRButton_CheckedChanged);
             // 
             // EncounterGBox
             // 
@@ -281,9 +253,9 @@ namespace TAS_Campagin_Creator
             this.EncounterGBox.Controls.Add(this.DifBonusSearchBox);
             this.EncounterGBox.Controls.Add(this.EnemyNameSearchBox);
             this.EncounterGBox.Controls.Add(this.EnemyListBox);
-            this.EncounterGBox.Location = new System.Drawing.Point(920, 185);
+            this.EncounterGBox.Location = new System.Drawing.Point(920, 170);
             this.EncounterGBox.Name = "EncounterGBox";
-            this.EncounterGBox.Size = new System.Drawing.Size(650, 655);
+            this.EncounterGBox.Size = new System.Drawing.Size(650, 671);
             this.EncounterGBox.TabIndex = 15;
             this.EncounterGBox.TabStop = false;
             this.EncounterGBox.Visible = false;
@@ -339,26 +311,37 @@ namespace TAS_Campagin_Creator
             this.EnemyListBox.TabIndex = 0;
             this.EnemyListBox.SelectedIndexChanged += new System.EventHandler(this.EnemyListBox_SelectedIndexChanged);
             // 
-            // renameCampaignToolStripMenuItem
+            // ModTypeCBox
             // 
-            this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
-            this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
-            this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
-            this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
+            this.ModTypeCBox.FormattingEnabled = true;
+            this.ModTypeCBox.Items.AddRange(new object[] {
+            "Story Module",
+            "Encounter Module"});
+            this.ModTypeCBox.Location = new System.Drawing.Point(725, 205);
+            this.ModTypeCBox.Name = "ModTypeCBox";
+            this.ModTypeCBox.Size = new System.Drawing.Size(185, 24);
+            this.ModTypeCBox.TabIndex = 16;
+            this.ModTypeCBox.SelectedValueChanged += new System.EventHandler(this.ModTypeCBox_SelectedValueChanged);
+            // 
+            // ModNameTBox
+            // 
+            this.ModNameTBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModNameTBox.Location = new System.Drawing.Point(345, 80);
+            this.ModNameTBox.Name = "ModNameTBox";
+            this.ModNameTBox.Size = new System.Drawing.Size(200, 38);
+            this.ModNameTBox.TabIndex = 17;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.ModNameTBox);
+            this.Controls.Add(this.ModTypeCBox);
             this.Controls.Add(this.EncounterGBox);
-            this.Controls.Add(this.EncounterRButton);
-            this.Controls.Add(this.StoryRButton);
             this.Controls.Add(this.ModuleTypeLabel);
             this.Controls.Add(this.OptionsBox2);
             this.Controls.Add(this.OptionsBox);
-            this.Controls.Add(this.UpdateModuleButton);
             this.Controls.Add(this.ModuleLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.StoryLabel);
@@ -396,13 +379,10 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.Label StoryLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label ModuleLabel;
-        private System.Windows.Forms.Button UpdateModuleButton;
         private System.Windows.Forms.RichTextBox OptionsBox;
         private System.Windows.Forms.ListBox OptionsBox2;
         private System.Windows.Forms.ToolStripMenuItem exportCampaignToolStripMenuItem;
         private System.Windows.Forms.Label ModuleTypeLabel;
-        private System.Windows.Forms.RadioButton StoryRButton;
-        private System.Windows.Forms.RadioButton EncounterRButton;
         private System.Windows.Forms.GroupBox EncounterGBox;
         private System.Windows.Forms.ListBox EnemyListBox;
         private System.Windows.Forms.RichTextBox ModuleEnemiesBox;
@@ -411,6 +391,8 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.TextBox DifBonusSearchBox;
         private System.Windows.Forms.TextBox EnemyNameSearchBox;
         private System.Windows.Forms.ToolStripMenuItem renameCampaignToolStripMenuItem;
+        private System.Windows.Forms.ComboBox ModTypeCBox;
+        private System.Windows.Forms.TextBox ModNameTBox;
     }
 }
 

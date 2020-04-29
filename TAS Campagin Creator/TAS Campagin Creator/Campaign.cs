@@ -24,9 +24,9 @@ namespace TAS_Campagin_Creator
 
         string AssignRandomID()
         {
-            List<char> Char = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H',
-                'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y',
-                'Y', 'z', 'Z' };
+            List<char> Char = new List<char>() { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g',
+                'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v',
+                'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z' };
             char[] IDArr = new char[16];
             bool Unique = false;
             string ID = "";
@@ -75,7 +75,7 @@ namespace TAS_Campagin_Creator
         public Encounters Encounter = new Encounters();
         public string Name = "Module1";
         public byte ModType = 0;
-        public string ID = "N/A";
+        public string ID = "";
         public List<string> Story = new List<string>();
     }
 
