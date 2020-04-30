@@ -57,6 +57,7 @@ namespace TAS_Campagin_Creator
             this.EnemyListBox = new System.Windows.Forms.ListBox();
             this.ModTypeCBox = new System.Windows.Forms.ComboBox();
             this.ModNameTBox = new System.Windows.Forms.TextBox();
+            this.removeModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.SuspendLayout();
@@ -136,7 +137,8 @@ namespace TAS_Campagin_Creator
             // 
             this.CampaignToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.renameCampaignToolStripMenuItem,
-            this.addModuleToolStripMenuItem});
+            this.addModuleToolStripMenuItem,
+            this.removeModuleToolStripMenuItem});
             this.CampaignToolStripMenuItem.Name = "CampaignToolStripMenuItem";
             this.CampaignToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
             this.CampaignToolStripMenuItem.Text = "Campaign";
@@ -145,7 +147,7 @@ namespace TAS_Campagin_Creator
             // 
             this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
             this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
             this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
             this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
             // 
@@ -153,7 +155,7 @@ namespace TAS_Campagin_Creator
             // 
             this.addModuleToolStripMenuItem.Name = "addModuleToolStripMenuItem";
             this.addModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(261, 26);
+            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
             this.addModuleToolStripMenuItem.Text = "&Add Module";
             this.addModuleToolStripMenuItem.Click += new System.EventHandler(this.addModuleToolStripMenuItem_Click);
             // 
@@ -176,7 +178,6 @@ namespace TAS_Campagin_Creator
             this.ModuleBox.Size = new System.Drawing.Size(200, 756);
             this.ModuleBox.TabIndex = 3;
             this.ModuleBox.SelectedIndexChanged += new System.EventHandler(this.ModuleBox_SelectedIndexChanged);
-            this.ModuleBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ModuleBox_KeyDown);
             // 
             // StoryBox
             // 
@@ -331,6 +332,15 @@ namespace TAS_Campagin_Creator
             this.ModNameTBox.Size = new System.Drawing.Size(200, 38);
             this.ModNameTBox.TabIndex = 17;
             // 
+            // removeModuleToolStripMenuItem
+            // 
+            this.removeModuleToolStripMenuItem.Name = "removeModuleToolStripMenuItem";
+            this.removeModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.R)));
+            this.removeModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
+            this.removeModuleToolStripMenuItem.Text = "Remove Module";
+            this.removeModuleToolStripMenuItem.Click += new System.EventHandler(this.removeModuleToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -393,6 +403,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.ToolStripMenuItem renameCampaignToolStripMenuItem;
         private System.Windows.Forms.ComboBox ModTypeCBox;
         private System.Windows.Forms.TextBox ModNameTBox;
+        private System.Windows.Forms.ToolStripMenuItem removeModuleToolStripMenuItem;
     }
 }
 

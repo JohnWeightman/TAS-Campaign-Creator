@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TAS_Campagin_Creator
 {
-    //[Serializable]
+    [Serializable]
     class Campaign
     {
         public string Name = "Campaign1";
@@ -70,7 +70,7 @@ namespace TAS_Campagin_Creator
         }
     }
 
-    //[Serializable]
+    [Serializable]
     class Module
     {
         public Options Options = new Options();
@@ -81,7 +81,7 @@ namespace TAS_Campagin_Creator
         public List<string> Story = new List<string>();
     }
 
-    //[Serializable]
+    [Serializable]
     class Options
     {
         public List<string> OptionsList = new List<string>();
@@ -89,7 +89,7 @@ namespace TAS_Campagin_Creator
         public List<string> OptionDirectionStrings = new List<string>();
     }
 
-    //[Serializable]
+    [Serializable]
     class Encounters
     {
         public List<string> EnemyTypes = new List<string>();

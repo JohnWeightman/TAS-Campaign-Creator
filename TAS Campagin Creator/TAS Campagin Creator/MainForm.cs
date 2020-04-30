@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TAS_Campagin_Creator
 {
@@ -16,9 +17,9 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            Storage.Campaign.NewModule();
+            //Storage.Campaign.NewModule();
             //Storage.AddTempData();
-            //Storage.PlayableCampaign();
+            Storage.PlayableCampaign();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
@@ -39,13 +40,17 @@ namespace TAS_Campagin_Creator
             SaveFileDialog Save = new SaveFileDialog();
             if(Save.ShowDialog() == DialogResult.OK)
             {
-
+                SerializeData.SaveToBinary(Save.FileName);
             }
         }
 
         private void LoadCampaignButton_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog Open = new OpenFileDialog();
+            if(Open.ShowDialog() == DialogResult.OK)
+            {
+                SerializeData.LoadFromBinary(Open.FileName);
+            }
         }
 
         private void exportCampaignToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,6 +83,13 @@ namespace TAS_Campagin_Creator
             UpdateModuleBox();
         }
 
+        private void removeModuleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules.Remove(Storage.Campaign.Modules[Storage.ModNum + 1]);
+            Storage.ModNum -= 1;
+            UpdateDisplay(Storage.Campaign.Modules[0].Name);
+        }
+
         #endregion
 
         #endregion
@@ -95,17 +107,21 @@ namespace TAS_Campagin_Creator
         {
             if (ModuleBox.SelectedItem != null)
             {
-                UpdateModuleData();
-                string Name = ModuleBox.SelectedItem.ToString();
-                FindModule(Name);
-                ModNameTBox.Text = Storage.Campaign.Modules[Storage.ModNum].Name;
-                DisplayModuleStory();
-                DisplayModuleOptions();
-                DisplayModuleType();
-                DisplayModuleGroupBox();
-                UpdateModuleEnemyListBox();
-                ClearRandomControls();
+                UpdateDisplay(ModuleBox.SelectedItem.ToString());
             }
+        }
+
+        void UpdateDisplay(string Name)
+        {
+            UpdateModuleData();
+            FindModule(Name);
+            ModNameTBox.Text = Storage.Campaign.Modules[Storage.ModNum].Name;
+            DisplayModuleStory();
+            DisplayModuleOptions();
+            DisplayModuleType();
+            DisplayModuleGroupBox();
+            UpdateModuleEnemyListBox();
+            ClearRandomControls();
             UpdateModuleBox();
         }
 
@@ -183,15 +199,6 @@ namespace TAS_Campagin_Creator
                 OptionDirection OptDir = new OptionDirection();
                 OptDir.OptionNumber = Index;
                 OptDir.Show();
-            }
-        }
-
-        private void ModuleBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(ModuleBox.SelectedItem != null && e.KeyCode == Keys.Delete)
-            {
-                Storage.Campaign.Modules.Remove(Storage.Campaign.Modules[ModuleBox.SelectedIndex]);
-                UpdateModuleBox();
             }
         }
 
@@ -410,7 +417,6 @@ namespace TAS_Campagin_Creator
                 e.SuppressKeyPress = true;
                 UpdateModuleOptions();
                 UpdateOptionBox2();
-                //UpdateModuleOptionDirections();
             }
         }
 
