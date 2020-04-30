@@ -21,7 +21,6 @@ namespace TAS_Campagin_Creator
 
         private void OptionDirection_Load(object sender, EventArgs e)
         {
-            //textBox1.Text = Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber].Remove(0, 6);
             foreach(Module Mod in Storage.Campaign.Modules)
             {
                 if(Mod.ID == Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings[OptionNumber])

@@ -36,7 +36,11 @@ namespace TAS_Campagin_Creator
 
         private void SaveCampaignButton_Click(object sender, EventArgs e)
         {
+            SaveFileDialog Save = new SaveFileDialog();
+            if(Save.ShowDialog() == DialogResult.OK)
+            {
 
+            }
         }
 
         private void LoadCampaignButton_Click(object sender, EventArgs e)
@@ -199,7 +203,6 @@ namespace TAS_Campagin_Creator
         {
             UpdateModuleStory();
             UpdateModuleOptions();
-            UpdateModuleOptionDirections();
             UpdateOptionBox2();
             if(ModNameTBox.Text != "")
                 Storage.Campaign.Modules[Storage.ModNum].Name = ModNameTBox.Text;
@@ -222,13 +225,8 @@ namespace TAS_Campagin_Creator
             OptionsBox2.Items.Clear();
             foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
                 OptionsBox2.Items.Add(Option);
-        }
-
-        void UpdateModuleOptionDirections()
-        {
-            Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Clear();
-            foreach (string Option in Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList)
-                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Add("Module1");
+            while (Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Count < Storage.Campaign.Modules[Storage.ModNum].Options.OptionsList.Count)
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Add("");
         }
 
         List<string> SplitIntoStrings(string StoryText)
@@ -412,7 +410,7 @@ namespace TAS_Campagin_Creator
                 e.SuppressKeyPress = true;
                 UpdateModuleOptions();
                 UpdateOptionBox2();
-                UpdateModuleOptionDirections();
+                //UpdateModuleOptionDirections();
             }
         }
 
