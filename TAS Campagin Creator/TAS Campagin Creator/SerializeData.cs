@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 
 namespace TAS_Campagin_Creator
 {
@@ -33,7 +34,7 @@ namespace TAS_Campagin_Creator
             }
             catch
             {
-
+                MessageBox.Show("Deserialization Error!");
             }
             ObjStream.Close();
         }

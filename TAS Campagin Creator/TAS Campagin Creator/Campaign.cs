@@ -11,16 +11,36 @@ namespace TAS_Campagin_Creator
     {
         public string Name = "Campaign1";
         public List<Module> Modules = new List<Module>();
-        int ModCount = 0;
         Random Ran = new Random();
 
         public void NewModule()
         {
             Module NewMod = new Module();
-            ModCount += 1;
-            NewMod.Name = "Module" + ModCount;
+            NewMod.Name = SetModName();
             NewMod.ID = AssignRandomID();
             Modules.Add(NewMod);
+        }
+
+        string SetModName()
+        {
+            int Count = 0;
+            string Name = "";
+            bool Unique = false;
+            while (!Unique)
+            {
+                Unique = !Unique;
+                Count++;
+                Name = "Module" + Count;
+                foreach(Module Mod in Modules)
+                {
+                    if(Name == Mod.Name)
+                    {
+                        Unique = !Unique;
+                        break;
+                    }
+                }
+            }
+            return Name;
         }
 
         string AssignRandomID()

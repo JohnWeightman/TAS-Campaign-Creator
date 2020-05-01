@@ -49,7 +49,9 @@ namespace TAS_Campagin_Creator
             OpenFileDialog Open = new OpenFileDialog();
             if(Open.ShowDialog() == DialogResult.OK)
             {
+                Storage.Campaign.Modules.Clear();
                 SerializeData.LoadFromBinary(Open.FileName);
+                UpdateDisplay(Storage.Campaign.Modules[0].Name, false);
             }
         }
 
@@ -85,9 +87,16 @@ namespace TAS_Campagin_Creator
 
         private void removeModuleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Storage.Campaign.Modules.Remove(Storage.Campaign.Modules[Storage.ModNum + 1]);
-            Storage.ModNum -= 1;
-            UpdateDisplay(Storage.Campaign.Modules[0].Name);
+            Storage.Campaign.Modules.Remove(Storage.Campaign.Modules[Storage.ModNum]);
+            if (Storage.ModNum < Storage.Campaign.Modules.Count && Storage.ModNum >= 1 && Storage.Campaign.Modules.Count > 0)
+                UpdateDisplay(Storage.Campaign.Modules[Storage.ModNum - 1].Name, false);
+            else if (Storage.Campaign.Modules.Count > 0)
+                UpdateDisplay(Storage.Campaign.Modules[0].Name, false);
+            else
+            {
+                Storage.Campaign.NewModule();
+                UpdateDisplay(Storage.Campaign.Modules[0].Name, false);
+            }
         }
 
         #endregion
@@ -107,13 +116,14 @@ namespace TAS_Campagin_Creator
         {
             if (ModuleBox.SelectedItem != null)
             {
-                UpdateDisplay(ModuleBox.SelectedItem.ToString());
+                UpdateDisplay(ModuleBox.SelectedItem.ToString(), true);
             }
         }
 
-        void UpdateDisplay(string Name)
+        void UpdateDisplay(string Name, bool UpMod)
         {
-            UpdateModuleData();
+            if(UpMod)
+                UpdateModuleData();
             FindModule(Name);
             ModNameTBox.Text = Storage.Campaign.Modules[Storage.ModNum].Name;
             DisplayModuleStory();
@@ -131,7 +141,10 @@ namespace TAS_Campagin_Creator
             foreach (Module Mod in Storage.Campaign.Modules)
             {
                 if (Name == Mod.Name)
+                {
+                    Storage.SelMod = Mod.ID;
                     break;
+                }
                 Storage.ModNum += 1;
             }
         }
