@@ -39,6 +39,7 @@ namespace TAS_Campagin_Creator
             this.CampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignNameLabel = new System.Windows.Forms.Label();
             this.ModuleBox = new System.Windows.Forms.ListBox();
             this.StoryBox = new System.Windows.Forms.RichTextBox();
@@ -57,9 +58,16 @@ namespace TAS_Campagin_Creator
             this.EnemyListBox = new System.Windows.Forms.ListBox();
             this.ModTypeCBox = new System.Windows.Forms.ComboBox();
             this.ModNameTBox = new System.Windows.Forms.TextBox();
-            this.removeModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShopGBox = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ItemListBox = new System.Windows.Forms.ListBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
+            this.ShopGBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -158,6 +166,15 @@ namespace TAS_Campagin_Creator
             this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
             this.addModuleToolStripMenuItem.Text = "&Add Module";
             this.addModuleToolStripMenuItem.Click += new System.EventHandler(this.addModuleToolStripMenuItem_Click);
+            // 
+            // removeModuleToolStripMenuItem
+            // 
+            this.removeModuleToolStripMenuItem.Name = "removeModuleToolStripMenuItem";
+            this.removeModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.R)));
+            this.removeModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
+            this.removeModuleToolStripMenuItem.Text = "Remove Module";
+            this.removeModuleToolStripMenuItem.Click += new System.EventHandler(this.removeModuleToolStripMenuItem_Click);
             // 
             // CampaignNameLabel
             // 
@@ -317,7 +334,8 @@ namespace TAS_Campagin_Creator
             this.ModTypeCBox.FormattingEnabled = true;
             this.ModTypeCBox.Items.AddRange(new object[] {
             "Story Module",
-            "Encounter Module"});
+            "Encounter Module",
+            "Shop Module"});
             this.ModTypeCBox.Location = new System.Drawing.Point(725, 205);
             this.ModTypeCBox.Name = "ModTypeCBox";
             this.ModTypeCBox.Size = new System.Drawing.Size(185, 24);
@@ -332,14 +350,69 @@ namespace TAS_Campagin_Creator
             this.ModNameTBox.Size = new System.Drawing.Size(200, 38);
             this.ModNameTBox.TabIndex = 17;
             // 
-            // removeModuleToolStripMenuItem
+            // ShopGBox
             // 
-            this.removeModuleToolStripMenuItem.Name = "removeModuleToolStripMenuItem";
-            this.removeModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.R)));
-            this.removeModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
-            this.removeModuleToolStripMenuItem.Text = "Remove Module";
-            this.removeModuleToolStripMenuItem.Click += new System.EventHandler(this.removeModuleToolStripMenuItem_Click);
+            this.ShopGBox.Controls.Add(this.richTextBox1);
+            this.ShopGBox.Controls.Add(this.button1);
+            this.ShopGBox.Controls.Add(this.button2);
+            this.ShopGBox.Controls.Add(this.textBox1);
+            this.ShopGBox.Controls.Add(this.textBox2);
+            this.ShopGBox.Controls.Add(this.ItemListBox);
+            this.ShopGBox.Location = new System.Drawing.Point(920, 170);
+            this.ShopGBox.Name = "ShopGBox";
+            this.ShopGBox.Size = new System.Drawing.Size(650, 671);
+            this.ShopGBox.TabIndex = 16;
+            this.ShopGBox.TabStop = false;
+            this.ShopGBox.Visible = false;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(210, 70);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(285, 585);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(420, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(420, 10);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Search";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(210, 40);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(200, 22);
+            this.textBox1.TabIndex = 2;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(210, 10);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(200, 22);
+            this.textBox2.TabIndex = 1;
+            // 
+            // ItemListBox
+            // 
+            this.ItemListBox.FormattingEnabled = true;
+            this.ItemListBox.ItemHeight = 16;
+            this.ItemListBox.Location = new System.Drawing.Point(5, 10);
+            this.ItemListBox.Name = "ItemListBox";
+            this.ItemListBox.Size = new System.Drawing.Size(200, 644);
+            this.ItemListBox.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -348,7 +421,6 @@ namespace TAS_Campagin_Creator
             this.ClientSize = new System.Drawing.Size(1582, 853);
             this.Controls.Add(this.ModNameTBox);
             this.Controls.Add(this.ModTypeCBox);
-            this.Controls.Add(this.EncounterGBox);
             this.Controls.Add(this.ModuleTypeLabel);
             this.Controls.Add(this.OptionsBox2);
             this.Controls.Add(this.OptionsBox);
@@ -359,6 +431,8 @@ namespace TAS_Campagin_Creator
             this.Controls.Add(this.ModuleBox);
             this.Controls.Add(this.CampaignNameLabel);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.ShopGBox);
+            this.Controls.Add(this.EncounterGBox);
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
@@ -367,6 +441,8 @@ namespace TAS_Campagin_Creator
             this.menuStrip.PerformLayout();
             this.EncounterGBox.ResumeLayout(false);
             this.EncounterGBox.PerformLayout();
+            this.ShopGBox.ResumeLayout(false);
+            this.ShopGBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -404,6 +480,13 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.ComboBox ModTypeCBox;
         private System.Windows.Forms.TextBox ModNameTBox;
         private System.Windows.Forms.ToolStripMenuItem removeModuleToolStripMenuItem;
+        private System.Windows.Forms.GroupBox ShopGBox;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ListBox ItemListBox;
     }
 }
 

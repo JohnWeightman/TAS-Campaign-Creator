@@ -22,7 +22,7 @@ namespace TAS_Campagin_Creator
             //Storage.PlayableCampaign();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
-            FillEnemyListBox();
+            FillModuleTypeControls();
             CampaignNameLabel.Text = Storage.Campaign.Name;
         }
 
@@ -200,6 +200,9 @@ namespace TAS_Campagin_Creator
                 case 1:
                     ModTypeCBox.SelectedItem = "Encounter Module";
                     break;
+                case 2:
+                    ModTypeCBox.SelectedItem = "Shop Module";
+                    break;
                 default:
                     break;
             }
@@ -208,8 +211,18 @@ namespace TAS_Campagin_Creator
        void DisplayModuleGroupBox()
         {
             EncounterGBox.Visible = false;
-            if (Storage.Campaign.Modules[Storage.ModNum].ModType == 1)
-                EncounterGBox.Visible = true;
+            ShopGBox.Visible = false;
+            switch (Storage.Campaign.Modules[Storage.ModNum].ModType)
+            {
+                case 1:
+                    EncounterGBox.Visible = true;
+                    break;
+                case 2:
+                    ShopGBox.Visible = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OptionsBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -333,11 +346,19 @@ namespace TAS_Campagin_Creator
                     case 1:
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
                         break;
+                    case 2:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 2;
+                        break;
                     default:
                         break;
                 }
                 DisplayModuleGroupBox();
             }
+        }
+
+        void FillModuleTypeControls()
+        {
+            FillEnemyListBox();
         }
 
         #endregion
@@ -362,8 +383,8 @@ namespace TAS_Campagin_Creator
 
         void FillEnemyListBox()
         {
-            for (int x = 0; x < GameObjects.EnemyNPCs.Count; x++)
-                EnemyListBox.Items.Add("DB: " + GameObjects.DifBonus[x] + " - " + GameObjects.EnemyNPCs[x]);
+            for (int x = 0; x < GameObjects.NPC.EnemyNPCs.Count; x++)
+                EnemyListBox.Items.Add("DB: " + GameObjects.NPC.DifBonus[x] + " - " + GameObjects.NPC.EnemyNPCs[x]);
         }
 
         string GetNPCString(string SelectedItem)
@@ -424,6 +445,15 @@ namespace TAS_Campagin_Creator
                 ModuleEnemiesBox.Text += Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyTypes[x] + " x" +
                     Storage.Campaign.Modules[Storage.ModNum].Encounter.EnemyNumber[x] + "\n";
             }
+        }
+
+        #endregion
+
+        #region Shop Module
+
+        void FillItemsListBox()
+        {
+
         }
 
         #endregion

@@ -94,6 +94,7 @@ namespace TAS_Campagin_Creator
     {
         public Options Options = new Options();
         public Encounters Encounter = new Encounters();
+        public Shops Shop = new Shops();
         public string Name = "Module1";
         public byte ModType = 0;
         public string ID = "";
@@ -113,5 +114,11 @@ namespace TAS_Campagin_Creator
     {
         public List<string> EnemyTypes = new List<string>();
         public List<int> EnemyNumber = new List<int>();
+    }
+
+    [Serializable]
+    class Shops
+    {
+
     }
 }
