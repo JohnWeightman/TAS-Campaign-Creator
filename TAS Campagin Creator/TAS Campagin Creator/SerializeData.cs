@@ -22,8 +22,9 @@ namespace TAS_Campagin_Creator
             ObjStream.Close();
         }
 
-        public static void LoadFromBinary(string FileName)
+        public static void LoadFromBinary(string FileName)  //Still throws errors! Needs coming back to!
         {
+            BForm = new BinaryFormatter();
             ObjStream = File.Open(FileName, FileMode.Open);
             try
             {
@@ -34,7 +35,7 @@ namespace TAS_Campagin_Creator
             }
             catch
             {
-                MessageBox.Show("Deserialization Error!");
+                //MessageBox.Show("Deserialization Error!");
             }
             ObjStream.Close();
         }

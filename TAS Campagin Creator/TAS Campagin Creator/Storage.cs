@@ -12,7 +12,7 @@ namespace TAS_Campagin_Creator
         public static int ModNum = 0;
         public static string SelMod = "";
 
-        static Random Ran = new Random();
+        public static Random Ran = new Random();
         static int ModCount = 100;
 
         #region Random Data

@@ -11,7 +11,6 @@ namespace TAS_Campagin_Creator
     {
         public string Name = "Campaign1";
         public List<Module> Modules = new List<Module>();
-        Random Ran = new Random();
 
         public void NewModule()
         {
@@ -56,7 +55,7 @@ namespace TAS_Campagin_Creator
                 Unique = true;
                 for (int x = 0; x < IDArr.Length; x++)
                 {
-                    IDArr[x] = Char[Ran.Next(0, Char.Count - 1)];
+                    IDArr[x] = Char[Storage.Ran.Next(0, Char.Count - 1)];
                 }
                 string Temp = new string(IDArr);
                 ID = Temp;

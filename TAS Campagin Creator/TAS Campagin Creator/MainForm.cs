@@ -17,9 +17,9 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            //Storage.Campaign.NewModule();
+            Storage.Campaign.NewModule();
             //Storage.AddTempData();
-            Storage.PlayableCampaign();
+            //Storage.PlayableCampaign();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
             FillEnemyListBox();
@@ -32,7 +32,16 @@ namespace TAS_Campagin_Creator
 
         private void NewCampaignButton_Click(object sender, EventArgs e)
         {
-
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+            result = MessageBox.Show("Are you sure you want to start a new campaign?", "New Campaign", buttons);
+            if (result == DialogResult.Yes)
+            {
+                Storage.Campaign.Name = "Campaign1";
+                Storage.Campaign.Modules.Clear();
+                Storage.Campaign.NewModule();
+                UpdateDisplay(Storage.Campaign.Modules[0].Name, false);
+            }
         }
 
         private void SaveCampaignButton_Click(object sender, EventArgs e)
