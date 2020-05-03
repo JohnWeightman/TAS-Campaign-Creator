@@ -10,7 +10,7 @@ namespace TAS_Campagin_Creator
     static class GameObjects
     {
         public static Enemies NPC = new Enemies();
-        public static Weapons Weapon = new Weapons();
+        public static Weapons Weapons = new Weapons();
         public static Armour Armour = new Armour();
 
         public static void LoadEnemyNPCs()
@@ -31,10 +31,10 @@ namespace TAS_Campagin_Creator
                 {
                     foreach(XmlNode Child in Node.ChildNodes)
                     {
-                        Weapon.WeaponsList.Add(Child.Name);
-                        Weapon.Damage.Add(Convert.ToInt32(Child.Attributes[1].Value));
-                        Weapon.TwoHanded.Add(Convert.ToBoolean(Child.Attributes[2].Value));
-                        Weapon.Versatile.Add(Convert.ToBoolean(Child.Attributes[3].Value));
+                        Weapons.WeaponsList.Add(Child.Name);
+                        Weapons.Damage.Add(Convert.ToInt32(Child.Attributes[1].Value));
+                        Weapons.TwoHanded.Add(Convert.ToBoolean(Child.Attributes[2].Value));
+                        Weapons.Versatile.Add(Convert.ToBoolean(Child.Attributes[3].Value));
                     }
                 }
                 else if(Node.Name == "Armour")

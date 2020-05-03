@@ -359,6 +359,7 @@ namespace TAS_Campagin_Creator
         void FillModuleTypeControls()
         {
             FillEnemyListBox();
+            FillItemsListBox(0);
         }
 
         #endregion
@@ -451,9 +452,99 @@ namespace TAS_Campagin_Creator
 
         #region Shop Module
 
-        void FillItemsListBox()
+        private void ItemTypeCBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FillItemsListBox(ItemTypeCBox.SelectedIndex);
+        }
 
+        void FillItemsListBox(int Option)
+        {
+            ItemListBox.Items.Clear();
+            switch (Option)
+            {
+                case 1:
+                    ItemsAddWeapons(false);
+                    break;
+                case 2:
+                    ItemsAddArmour(false);
+                    break;
+                default:
+                    ItemsAddWeapons(true);
+                    ItemsAddArmour(true);
+                    break;
+            }
+        }
+
+        void ItemsAddWeapons(bool Type)
+        {
+            if (Type)
+            {
+                ItemListBox.Items.Add("Weapons");
+                ItemListBox.Items.Add("");
+            }
+            for(int x = 0; x < GameObjects.Weapons.WeaponsList.Count; x++)
+            {
+
+                if (!GameObjects.Weapons.TwoHanded[x] && !GameObjects.Weapons.Versatile[x])
+                    ItemListBox.Items.Add(GameObjects.Weapons.WeaponsList[x] + " - DMG: " + GameObjects.Weapons.Damage[x]);
+                else if (!GameObjects.Weapons.TwoHanded[x] && GameObjects.Weapons.Versatile[x])
+                    ItemListBox.Items.Add(GameObjects.Weapons.WeaponsList[x] + " - DMG: " + GameObjects.Weapons.Damage[x] + ", V");
+                else if(GameObjects.Weapons.TwoHanded[x] && !GameObjects.Weapons.Versatile[x])
+                    ItemListBox.Items.Add(GameObjects.Weapons.WeaponsList[x] + " - DMG: " + GameObjects.Weapons.Damage[x] + ", TH");
+            }
+            ItemListBox.Items.Add("");
+        }
+
+        void ItemsAddArmour(bool Type)
+        {
+            if (Type)
+            {
+                ItemListBox.Items.Add("Armour");
+                ItemListBox.Items.Add("");
+            }
+            for(int x = 0; x < GameObjects.Armour.ArmourList.Count; x++)
+            {
+                if(GameObjects.Armour.Weight[x] == "Light")
+                    ItemListBox.Items.Add(GameObjects.Armour.ArmourList[x] + " - AC: " + GameObjects.Armour.AC[x] + ", L");
+                else
+                    ItemListBox.Items.Add(GameObjects.Armour.ArmourList[x] + " - AC: " + GameObjects.Armour.AC[x] + ", H");
+            }
+        }
+
+        private void ItemListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string CurItem = ItemListBox.SelectedItem.ToString();
+            if (ItemListBox.SelectedItem != null && CurItem != "" && CurItem != "Weapons" && CurItem != "Armour")
+            {
+                CurItem = ReturnItemName(CurItem);
+                int ItemNum = FindItem(CurItem);
+            }
+        }
+
+        string ReturnItemName(string Text)
+        {
+            char[] CharArr = Text.ToCharArray();
+            int Count = 0;
+            foreach(char Cha in CharArr)
+            {
+                if (Cha == ' ')
+                    break;
+                else
+                    Count++;
+            }
+            Text = Text.Remove(Count, CharArr.Length - Count);
+            return Text;
+        }
+
+        int FindItem(string Item)
+        {
+            for(int x = 0; x < GameObjects.Weapons.WeaponsList.Count; x++)
+                if(GameObjects.Weapons.WeaponsList[x] == Item)
+                    return x;
+            for(int x = 0; x < GameObjects.Armour.ArmourList.Count; x++) 
+                if (GameObjects.Armour.ArmourList[x] == Item)
+                    return x;
+            return 9999;
         }
 
         #endregion

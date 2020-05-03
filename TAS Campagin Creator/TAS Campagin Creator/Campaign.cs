@@ -119,6 +119,6 @@ namespace TAS_Campagin_Creator
     [Serializable]
     class Shops
     {
-
+        public List<string> Stock = new List<string>();
     }
 }
