@@ -9,9 +9,9 @@ namespace TAS_Campagin_Creator
 {
     static class GameObjects
     {
-        public static Enemies NPC = new Enemies();
-        public static Weapons Weapons = new Weapons();
-        public static Armour Armour = new Armour();
+        public static List<NPC> Enemies = new List<NPC>();
+        public static List<Weapon> Weapons = new List<Weapon>();
+        public static List<Armour> Armour = new List<Armour>();
 
         public static void LoadEnemyNPCs()
         {
@@ -21,53 +21,74 @@ namespace TAS_Campagin_Creator
             {
                 if(Node.Name == "Enemies")
                 {
-                    foreach(XmlNode Child in Node.ChildNodes)
+                    int ChildCount = Convert.ToInt32(Node.Attributes[0].Value);
+                    int Count = 0;
+                    NPC[] NPCTemp = new NPC[ChildCount];
+                    foreach (XmlNode Child in Node.ChildNodes)
                     {
-                        NPC.EnemyNPCs.Add(Child.Name);
-                        NPC.DifBonus.Add(Convert.ToInt32(Child.Attributes[10].Value));
+                        NPCTemp[Count] = new NPC();
+                        NPCTemp[Count].Name = Child.Name;
+                        NPCTemp[Count].DifBonus = Convert.ToInt32(Child.Attributes[10].Value);
+                        Count += 1;
                     }
+                    foreach (NPC NPC in NPCTemp)
+                        Enemies.Add(NPC);
                 }
                 else if(Node.Name == "Weapons")
                 {
-                    foreach(XmlNode Child in Node.ChildNodes)
+                    int ChildCount = Convert.ToInt32(Node.Attributes[0].Value);
+                    int Count = 0;
+                    Weapon[] WeapTemp = new Weapon[ChildCount];
+                    foreach (XmlNode Child in Node.ChildNodes)
                     {
-                        Weapons.WeaponsList.Add(Child.Name);
-                        Weapons.Damage.Add(Convert.ToInt32(Child.Attributes[1].Value));
-                        Weapons.TwoHanded.Add(Convert.ToBoolean(Child.Attributes[2].Value));
-                        Weapons.Versatile.Add(Convert.ToBoolean(Child.Attributes[3].Value));
+                        WeapTemp[Count] = new Weapon();
+                        WeapTemp[Count].Name = Child.Name;
+                        WeapTemp[Count].Damage = Convert.ToInt32(Child.Attributes[1].Value);
+                        WeapTemp[Count].TwoHanded = Convert.ToBoolean(Child.Attributes[2].Value);
+                        WeapTemp[Count].Versatile = Convert.ToBoolean(Child.Attributes[3].Value);
+                        Count += 1;
                     }
+                    foreach (Weapon Weapon in WeapTemp)
+                        Weapons.Add(Weapon);
                 }
                 else if(Node.Name == "Armour")
                 {
+                    int ChildCount = Convert.ToInt32(Node.Attributes[0].Value);
+                    int Count = 0;
+                    Armour[] ArmTemp = new Armour[ChildCount];
                     foreach(XmlNode Child in Node.ChildNodes)
                     {
-                        Armour.ArmourList.Add(Child.Name);
-                        Armour.AC.Add(Convert.ToInt32(Child.Attributes[1].Value));
-                        Armour.Weight.Add(Child.Attributes[2].Value);
+                        ArmTemp[Count] = new Armour();
+                        ArmTemp[Count].Name = Child.Name;
+                        ArmTemp[Count].AC = Convert.ToInt32(Child.Attributes[1].Value);
+                        ArmTemp[Count].Weight = Child.Attributes[2].Value;
+                        Count += 1;
                     }
+                    foreach (Armour Arm in ArmTemp)
+                        Armour.Add(Arm);
                 }
             }
         }
     }
 
-    class Enemies
+    class NPC
     {
-        public List<string> EnemyNPCs = new List<string>();
-        public List<int> DifBonus = new List<int>();
+        public string Name = "";
+        public int DifBonus = 0;
     }
 
-    class Weapons
+    class Weapon
     {
-        public List<string> WeaponsList = new List<string>();
-        public List<int> Damage = new List<int>();
-        public List<bool> TwoHanded = new List<bool>();
-        public List<bool> Versatile = new List<bool>();
+        public string Name = "";
+        public int Damage = 0;
+        public bool TwoHanded = false;
+        public bool Versatile = false;
     }
 
     class Armour
     {
-        public List<string> ArmourList = new List<string>();
-        public List<int> AC = new List<int>();
-        public List<string> Weight = new List<string>();
+        public string Name = "";
+        public int AC = 0;
+        public string Weight = "";
     }
 }

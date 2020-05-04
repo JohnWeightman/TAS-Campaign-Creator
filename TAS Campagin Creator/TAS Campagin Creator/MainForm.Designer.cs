@@ -59,12 +59,12 @@ namespace TAS_Campagin_Creator
             this.ModTypeCBox = new System.Windows.Forms.ComboBox();
             this.ModNameTBox = new System.Windows.Forms.TextBox();
             this.ShopGBox = new System.Windows.Forms.GroupBox();
+            this.ItemTypeCBox = new System.Windows.Forms.ComboBox();
             this.ShopTBox = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ClearStockButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.ItemListBox = new System.Windows.Forms.ListBox();
-            this.ItemTypeCBox = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.ShopGBox.SuspendLayout();
@@ -354,7 +354,7 @@ namespace TAS_Campagin_Creator
             // 
             this.ShopGBox.Controls.Add(this.ItemTypeCBox);
             this.ShopGBox.Controls.Add(this.ShopTBox);
-            this.ShopGBox.Controls.Add(this.button1);
+            this.ShopGBox.Controls.Add(this.ClearStockButton);
             this.ShopGBox.Controls.Add(this.button2);
             this.ShopGBox.Controls.Add(this.textBox2);
             this.ShopGBox.Controls.Add(this.ItemListBox);
@@ -365,6 +365,19 @@ namespace TAS_Campagin_Creator
             this.ShopGBox.TabStop = false;
             this.ShopGBox.Visible = false;
             // 
+            // ItemTypeCBox
+            // 
+            this.ItemTypeCBox.FormattingEnabled = true;
+            this.ItemTypeCBox.Items.AddRange(new object[] {
+            "All Items",
+            "Weapons",
+            "Armour"});
+            this.ItemTypeCBox.Location = new System.Drawing.Point(210, 35);
+            this.ItemTypeCBox.Name = "ItemTypeCBox";
+            this.ItemTypeCBox.Size = new System.Drawing.Size(200, 24);
+            this.ItemTypeCBox.TabIndex = 18;
+            this.ItemTypeCBox.SelectedIndexChanged += new System.EventHandler(this.ItemTypeCBox_SelectedIndexChanged);
+            // 
             // ShopTBox
             // 
             this.ShopTBox.Location = new System.Drawing.Point(210, 70);
@@ -373,14 +386,15 @@ namespace TAS_Campagin_Creator
             this.ShopTBox.TabIndex = 5;
             this.ShopTBox.Text = "";
             // 
-            // button1
+            // ClearStockButton
             // 
-            this.button1.Location = new System.Drawing.Point(420, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ClearStockButton.Location = new System.Drawing.Point(420, 40);
+            this.ClearStockButton.Name = "ClearStockButton";
+            this.ClearStockButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearStockButton.TabIndex = 4;
+            this.ClearStockButton.Text = "Clear";
+            this.ClearStockButton.UseVisualStyleBackColor = true;
+            this.ClearStockButton.Click += new System.EventHandler(this.ClearStockButton_Click);
             // 
             // button2
             // 
@@ -407,19 +421,6 @@ namespace TAS_Campagin_Creator
             this.ItemListBox.Size = new System.Drawing.Size(200, 644);
             this.ItemListBox.TabIndex = 0;
             this.ItemListBox.SelectedIndexChanged += new System.EventHandler(this.ItemListBox_SelectedIndexChanged);
-            // 
-            // ItemTypeCBox
-            // 
-            this.ItemTypeCBox.FormattingEnabled = true;
-            this.ItemTypeCBox.Items.AddRange(new object[] {
-            "All Items",
-            "Weapons",
-            "Armour"});
-            this.ItemTypeCBox.Location = new System.Drawing.Point(210, 35);
-            this.ItemTypeCBox.Name = "ItemTypeCBox";
-            this.ItemTypeCBox.Size = new System.Drawing.Size(200, 24);
-            this.ItemTypeCBox.TabIndex = 18;
-            this.ItemTypeCBox.SelectedIndexChanged += new System.EventHandler(this.ItemTypeCBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -489,7 +490,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.ToolStripMenuItem removeModuleToolStripMenuItem;
         private System.Windows.Forms.GroupBox ShopGBox;
         private System.Windows.Forms.RichTextBox ShopTBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ClearStockButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox ItemListBox;

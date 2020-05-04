@@ -15,7 +15,8 @@ namespace TAS_Campagin_Creator
         static int CampaignJobs = 1;
         static int ModuleJobs = 0;
         static int OptionJobs = 0;
-        static int EncounterJobs;
+        static int EncounterJobs = 0;
+        static int ShopJobs = 0;
         static int Progress = 0;
 
         public static void ExportCampaign()
@@ -53,8 +54,10 @@ namespace TAS_Campagin_Creator
             XML.WriteAttributeString("ID", Storage.Campaign.Modules[ModNum].ID);
             WriteModuleStoryData(XML, ModNum);
             WriteModuleOptionData(XML, ModNum);
-            if(Storage.Campaign.Modules[ModNum].ModType == 1)
+            if (Storage.Campaign.Modules[ModNum].ModType == 1)
                 WriteModuleEncounterData(XML, ModNum);
+            else if (Storage.Campaign.Modules[ModNum].ModType == 2)
+                WriteModuleShopData(XML, ModNum);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
@@ -120,6 +123,23 @@ namespace TAS_Campagin_Creator
             XML.WriteEndElement();
         }
 
+        static void WriteModuleShopData(XmlWriter XML, int ModNum)
+        {
+            XML.WriteStartElement("Shop");
+            WriteModuleShopStockData(XML, ModNum);
+            XML.WriteEndElement();
+            Progress += 1;
+            Pro.UpdateProgress(Progress);
+        }
+
+        static void WriteModuleShopStockData(XmlWriter XML, int ModNum)
+        {
+            XML.WriteStartElement("Stock");
+            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Shop.Stock.Count; x++)
+                XML.WriteAttributeString("Item" + (x + 1), Storage.Campaign.Modules[ModNum].Shop.Stock[x]);
+            XML.WriteEndElement();
+        }
+
         static void CalculateJobs()
         {
             ModuleJobs = Storage.Campaign.Modules.Count;
@@ -128,8 +148,10 @@ namespace TAS_Campagin_Creator
             {
                 if (Mod.ModType == 1)
                     EncounterJobs += 1;
+                else if (Mod.ModType == 2)
+                    ShopJobs += 1;
             }
-            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs;
+            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs + ShopJobs;
         }
 
         static void ResetExport()
@@ -139,6 +161,7 @@ namespace TAS_Campagin_Creator
             ModuleJobs = 0;
             OptionJobs = 0;
             EncounterJobs = 0;
+            ShopJobs = 0;
             Progress = 0;
             foreach (Module Mod in Storage.Campaign.Modules)
                 Mod.Options.OptionDirections.Clear();

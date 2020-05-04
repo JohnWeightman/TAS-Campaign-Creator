@@ -17,8 +17,8 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
-            Storage.Campaign.NewModule();
-            //Storage.AddTempData();
+            //Storage.Campaign.NewModule();
+            Storage.AddTempData();
             //Storage.PlayableCampaign();
             GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
@@ -384,8 +384,8 @@ namespace TAS_Campagin_Creator
 
         void FillEnemyListBox()
         {
-            for (int x = 0; x < GameObjects.NPC.EnemyNPCs.Count; x++)
-                EnemyListBox.Items.Add("DB: " + GameObjects.NPC.DifBonus[x] + " - " + GameObjects.NPC.EnemyNPCs[x]);
+            for (int x = 0; x < GameObjects.Enemies.Count; x++)
+                EnemyListBox.Items.Add("DB: " + GameObjects.Enemies[x].DifBonus + " - " + GameObjects.Enemies[x].Name);
         }
 
         string GetNPCString(string SelectedItem)
@@ -457,6 +457,23 @@ namespace TAS_Campagin_Creator
             FillItemsListBox(ItemTypeCBox.SelectedIndex);
         }
 
+        private void ItemListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string CurItem = ItemListBox.SelectedItem.ToString();
+            if (ItemListBox.SelectedItem != null && CurItem != "" && CurItem != "Weapons" && CurItem != "Armour")
+            {
+                CurItem = ReturnItemName(CurItem);
+                Tuple<int, int> ItemTup = FindItem(CurItem);
+                UpdateShopStock(ItemTup);
+            }
+        }
+
+        private void ClearStockButton_Click(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Shop.Stock.Clear();
+            ShopTBox.Text = "";
+        }
+
         void FillItemsListBox(int Option)
         {
             ItemListBox.Items.Clear();
@@ -482,15 +499,15 @@ namespace TAS_Campagin_Creator
                 ItemListBox.Items.Add("Weapons");
                 ItemListBox.Items.Add("");
             }
-            for(int x = 0; x < GameObjects.Weapons.WeaponsList.Count; x++)
+            for(int x = 0; x < GameObjects.Weapons.Count; x++)
             {
 
-                if (!GameObjects.Weapons.TwoHanded[x] && !GameObjects.Weapons.Versatile[x])
-                    ItemListBox.Items.Add(GameObjects.Weapons.WeaponsList[x] + " - DMG: " + GameObjects.Weapons.Damage[x]);
-                else if (!GameObjects.Weapons.TwoHanded[x] && GameObjects.Weapons.Versatile[x])
-                    ItemListBox.Items.Add(GameObjects.Weapons.WeaponsList[x] + " - DMG: " + GameObjects.Weapons.Damage[x] + ", V");
-                else if(GameObjects.Weapons.TwoHanded[x] && !GameObjects.Weapons.Versatile[x])
-                    ItemListBox.Items.Add(GameObjects.Weapons.WeaponsList[x] + " - DMG: " + GameObjects.Weapons.Damage[x] + ", TH");
+                if (!GameObjects.Weapons[x].TwoHanded && !GameObjects.Weapons[x].Versatile)
+                    ItemListBox.Items.Add(GameObjects.Weapons[x].Name + " - DMG: " + GameObjects.Weapons[x].Damage);
+                else if (!GameObjects.Weapons[x].TwoHanded && GameObjects.Weapons[x].Versatile)
+                    ItemListBox.Items.Add(GameObjects.Weapons[x].Name + " - DMG: " + GameObjects.Weapons[x].Damage + ", V");
+                else if(GameObjects.Weapons[x].TwoHanded && !GameObjects.Weapons[x].Versatile)
+                    ItemListBox.Items.Add(GameObjects.Weapons[x].Name + " - DMG: " + GameObjects.Weapons[x].Damage + ", TH");
             }
             ItemListBox.Items.Add("");
         }
@@ -502,23 +519,33 @@ namespace TAS_Campagin_Creator
                 ItemListBox.Items.Add("Armour");
                 ItemListBox.Items.Add("");
             }
-            for(int x = 0; x < GameObjects.Armour.ArmourList.Count; x++)
+            for(int x = 0; x < GameObjects.Armour.Count; x++)
             {
-                if(GameObjects.Armour.Weight[x] == "Light")
-                    ItemListBox.Items.Add(GameObjects.Armour.ArmourList[x] + " - AC: " + GameObjects.Armour.AC[x] + ", L");
+                if(GameObjects.Armour[x].Weight == "Light")
+                    ItemListBox.Items.Add(GameObjects.Armour[x].Name + " - AC: " + GameObjects.Armour[x].AC + ", L");
                 else
-                    ItemListBox.Items.Add(GameObjects.Armour.ArmourList[x] + " - AC: " + GameObjects.Armour.AC[x] + ", H");
+                    ItemListBox.Items.Add(GameObjects.Armour[x].Name + " - AC: " + GameObjects.Armour[x].AC + ", H");
             }
         }
 
-        private void ItemListBox_SelectedIndexChanged(object sender, EventArgs e)
+        void UpdateShopStock(Tuple<int, int> ItemTup)
         {
-            string CurItem = ItemListBox.SelectedItem.ToString();
-            if (ItemListBox.SelectedItem != null && CurItem != "" && CurItem != "Weapons" && CurItem != "Armour")
+            if (ItemTup.Item1 == 1)
             {
-                CurItem = ReturnItemName(CurItem);
-                int ItemNum = FindItem(CurItem);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.Stock.Add(GameObjects.Weapons[ItemTup.Item2].Name);
+                ShopTBox.Text += GameObjects.Weapons[ItemTup.Item2].Name + "\nDMG: " + GameObjects.Weapons[ItemTup.Item2].Damage;
+                if (GameObjects.Weapons[ItemTup.Item2].TwoHanded)
+                    ShopTBox.Text += ", Two Handed";
+                else if (GameObjects.Weapons[ItemTup.Item2].Versatile)
+                    ShopTBox.Text += ", Versatile";
             }
+            else if (ItemTup.Item1 == 2)
+            {
+                Storage.Campaign.Modules[Storage.ModNum].Shop.Stock.Add(GameObjects.Armour[ItemTup.Item2].Name);
+                ShopTBox.Text += GameObjects.Armour[ItemTup.Item2].Name + "\nAC: " + GameObjects.Armour[ItemTup.Item2].AC + ", Weight: " +
+                    GameObjects.Armour[ItemTup.Item2].Weight;
+            }
+            ShopTBox.Text += "\n\n";
         }
 
         string ReturnItemName(string Text)
@@ -536,15 +563,15 @@ namespace TAS_Campagin_Creator
             return Text;
         }
 
-        int FindItem(string Item)
+        Tuple<int, int> FindItem(string Item)
         {
-            for(int x = 0; x < GameObjects.Weapons.WeaponsList.Count; x++)
-                if(GameObjects.Weapons.WeaponsList[x] == Item)
-                    return x;
-            for(int x = 0; x < GameObjects.Armour.ArmourList.Count; x++) 
-                if (GameObjects.Armour.ArmourList[x] == Item)
-                    return x;
-            return 9999;
+            for(int x = 0; x < GameObjects.Weapons.Count; x++)
+                if(GameObjects.Weapons[x].Name == Item)
+                    return new Tuple<int, int>(1, x); ;
+            for(int x = 0; x < GameObjects.Armour.Count; x++) 
+                if (GameObjects.Armour[x].Name == Item)
+                    return new Tuple<int, int>(2, x);
+            return new Tuple<int, int>(0, 0); ;
         }
 
         #endregion
