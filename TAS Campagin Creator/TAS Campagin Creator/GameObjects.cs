@@ -13,7 +13,7 @@ namespace TAS_Campagin_Creator
         public static List<Weapon> Weapons = new List<Weapon>();
         public static List<Armour> Armour = new List<Armour>();
 
-        public static void LoadEnemyNPCs()
+        public static void LoadGameObjects()
         {
             XmlDocument Doc = new XmlDocument();
             Doc.Load("GameObjects.xml");
@@ -83,6 +83,7 @@ namespace TAS_Campagin_Creator
         public int Damage = 0;
         public bool TwoHanded = false;
         public bool Versatile = false;
+        public int Cost = 0;
     }
 
     class Armour
@@ -90,5 +91,6 @@ namespace TAS_Campagin_Creator
         public string Name = "";
         public int AC = 0;
         public string Weight = "";
+        public int Cost = 0;
     }
 }

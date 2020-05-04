@@ -17,13 +17,13 @@ namespace TAS_Campagin_Creator
         public MainForm()
         {
             InitializeComponent();
+            GameObjects.LoadGameObjects();
+            FillModuleTypeControls();
+            CampaignNameLabel.Text = Storage.Campaign.Name;
             //Storage.Campaign.NewModule();
             Storage.AddTempData();
             //Storage.PlayableCampaign();
-            GameObjects.LoadEnemyNPCs();
             UpdateModuleBox();
-            FillModuleTypeControls();
-            CampaignNameLabel.Text = Storage.Campaign.Name;
         }
 
         #region Menu Bar
@@ -470,7 +470,8 @@ namespace TAS_Campagin_Creator
 
         private void ClearStockButton_Click(object sender, EventArgs e)
         {
-            Storage.Campaign.Modules[Storage.ModNum].Shop.Stock.Clear();
+            Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Clear();
+            Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Clear();
             ShopTBox.Text = "";
         }
 
@@ -532,7 +533,7 @@ namespace TAS_Campagin_Creator
         {
             if (ItemTup.Item1 == 1)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Shop.Stock.Add(GameObjects.Weapons[ItemTup.Item2].Name);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Add(GameObjects.Weapons[ItemTup.Item2]);
                 ShopTBox.Text += GameObjects.Weapons[ItemTup.Item2].Name + "\nDMG: " + GameObjects.Weapons[ItemTup.Item2].Damage;
                 if (GameObjects.Weapons[ItemTup.Item2].TwoHanded)
                     ShopTBox.Text += ", Two Handed";
@@ -541,7 +542,7 @@ namespace TAS_Campagin_Creator
             }
             else if (ItemTup.Item1 == 2)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Shop.Stock.Add(GameObjects.Armour[ItemTup.Item2].Name);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Add(GameObjects.Armour[ItemTup.Item2]);
                 ShopTBox.Text += GameObjects.Armour[ItemTup.Item2].Name + "\nAC: " + GameObjects.Armour[ItemTup.Item2].AC + ", Weight: " +
                     GameObjects.Armour[ItemTup.Item2].Weight;
             }

@@ -68,9 +68,9 @@ namespace TAS_Campagin_Creator
 
         static void AddModuleShop(int Mod)
         {
-            Campaign.Modules[Mod].Shop.Stock.Add("Dagger");
-            Campaign.Modules[Mod].Shop.Stock.Add("Shortsword");
-            Campaign.Modules[Mod].Shop.Stock.Add("Leather");
+            Campaign.Modules[Mod].Shop.WeaponStock.Add(GameObjects.Weapons[0]);
+            Campaign.Modules[Mod].Shop.WeaponStock.Add(GameObjects.Weapons[1]);
+            Campaign.Modules[Mod].Shop.ArmourStock.Add(GameObjects.Armour[0]);
         }
 
         #endregion

@@ -119,6 +119,7 @@ namespace TAS_Campagin_Creator
     [Serializable]
     class Shops
     {
-        public List<string> Stock = new List<string>();
+        public List<Weapon> WeaponStock = new List<Weapon>();
+        public List<Armour> ArmourStock = new List<Armour>();
     }
 }

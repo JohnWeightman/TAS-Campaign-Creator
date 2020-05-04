@@ -10,7 +10,6 @@ namespace TAS_Campagin_Creator
     static class Export
     {
         static Progress Pro = new Progress();
-
         static int TotalJobs = 0;
         static int CampaignJobs = 1;
         static int ModuleJobs = 0;
@@ -22,15 +21,15 @@ namespace TAS_Campagin_Creator
         public static void ExportCampaign()
         {
             CalculateJobs();
-            //Pro.Show();
-            //Pro.InitiliaseProgressBar(TotalJobs);
+            Pro.Show();
+            Pro.InitiliaseProgressBar(TotalJobs);
             Storage.Campaign.InitiliaseDataForExport();
             XmlWriter XML = XmlWriter.Create("Campaigns\\" + Storage.Campaign.Name + ".xml");
             XML.WriteStartDocument();
             WriteCampaignData(XML);
             XML.WriteEndDocument();
             XML.Close();
-            //Pro.Close();
+            Pro.Hide();
             ResetExport();
         }
 
@@ -126,17 +125,36 @@ namespace TAS_Campagin_Creator
         static void WriteModuleShopData(XmlWriter XML, int ModNum)
         {
             XML.WriteStartElement("Shop");
-            WriteModuleShopStockData(XML, ModNum);
+            if (Storage.Campaign.Modules[ModNum].Shop.WeaponStock.Count > 0)
+                WriteModuleShopWeaponStockData(XML, ModNum);
+            if (Storage.Campaign.Modules[ModNum].Shop.ArmourStock.Count > 0)
+                WriteModuleShopArmourStockData(XML, ModNum);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
         }
 
-        static void WriteModuleShopStockData(XmlWriter XML, int ModNum)
+        static void WriteModuleShopWeaponStockData(XmlWriter XML, int ModNum)
         {
-            XML.WriteStartElement("Stock");
-            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Shop.Stock.Count; x++)
-                XML.WriteAttributeString("Item" + (x + 1), Storage.Campaign.Modules[ModNum].Shop.Stock[x]);
+            XML.WriteStartElement("WeaponStock");
+            for(int x = 0; x < Storage.Campaign.Modules[ModNum].Shop.WeaponStock.Count; x++)
+            {
+                XML.WriteStartElement(Storage.Campaign.Modules[ModNum].Shop.WeaponStock[x].Name);
+                XML.WriteAttributeString("Cost", Convert.ToString(Storage.Campaign.Modules[ModNum].Shop.WeaponStock[x].Cost));
+                XML.WriteEndElement();
+            }
+            XML.WriteEndElement();
+        }
+
+        static void WriteModuleShopArmourStockData(XmlWriter XML, int ModNum)
+        {
+            XML.WriteStartElement("ArmourStock");
+            for(int x = 0; x < Storage.Campaign.Modules[ModNum].Shop.ArmourStock.Count; x++)
+            {
+                XML.WriteStartElement(Storage.Campaign.Modules[ModNum].Shop.ArmourStock[x].Name);
+                XML.WriteAttributeString("Cost", Convert.ToString(Storage.Campaign.Modules[ModNum].Shop.ArmourStock[x].Cost));
+                XML.WriteEndElement();
+            }
             XML.WriteEndElement();
         }
 
