@@ -20,8 +20,8 @@ namespace TAS_Campagin_Creator
             GameObjects.LoadGameObjects();
             FillModuleTypeControls();
             CampaignNameLabel.Text = Storage.Campaign.Name;
-            //Storage.Campaign.NewModule();
-            Storage.AddTempData();
+            Storage.Campaign.NewModule();
+            //Storage.AddTempData();
             //Storage.PlayableCampaign();
             UpdateModuleBox();
         }
@@ -464,7 +464,7 @@ namespace TAS_Campagin_Creator
             {
                 CurItem = ReturnItemName(CurItem);
                 Tuple<int, int> ItemTup = FindItem(CurItem);
-                UpdateShopStock(ItemTup);
+                UpdateShopStockObject(ItemTup);
             }
         }
 
@@ -529,22 +529,47 @@ namespace TAS_Campagin_Creator
             }
         }
 
-        void UpdateShopStock(Tuple<int, int> ItemTup)
+        void UpdateShopStockObject(Tuple<int, int> ItemTup)
         {
             if (ItemTup.Item1 == 1)
             {
                 Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Add(GameObjects.Weapons[ItemTup.Item2]);
-                ShopTBox.Text += GameObjects.Weapons[ItemTup.Item2].Name + "\nDMG: " + GameObjects.Weapons[ItemTup.Item2].Damage;
-                if (GameObjects.Weapons[ItemTup.Item2].TwoHanded)
-                    ShopTBox.Text += ", Two Handed";
-                else if (GameObjects.Weapons[ItemTup.Item2].Versatile)
-                    ShopTBox.Text += ", Versatile";
+                Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 0;
             }
             else if (ItemTup.Item1 == 2)
             {
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Add(GameObjects.Armour[ItemTup.Item2]);
-                ShopTBox.Text += GameObjects.Armour[ItemTup.Item2].Name + "\nAC: " + GameObjects.Armour[ItemTup.Item2].AC + ", Weight: " +
-                    GameObjects.Armour[ItemTup.Item2].Weight;
+                Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 1;
+            }
+            GetTextInput GTI = new GetTextInput();
+            GTI.MyParent = this;
+            GTI.Arg = 1;
+            GTI.NumOnly = true;
+            GTI.Show();
+        }
+
+        public void UpdateShopStockDisplay(int Cost)
+        {
+            if (Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType == 0)
+            {
+                int Count = Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Count - 1;
+                Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock[Count].Cost = Cost;
+                ShopTBox.Text += Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock[Count].Name + "\nDMG: " + 
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock[Count].Damage;
+                if (Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock[Count].TwoHanded)
+                    ShopTBox.Text += ", Two Handed";
+                else if (Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock[Count].Versatile)
+                    ShopTBox.Text += ", Versatile";
+                ShopTBox.Text += "\nCost: " + Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock[Count].Cost + "GP";
+            }
+            else if (Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType == 1)
+            {
+                int Count = Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Count - 1;
+                Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].Cost = Cost;
+                ShopTBox.Text += Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].Name + "\nAC: " + 
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].AC + ", Weight: " +
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].Weight + "\nCost: " + 
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].Cost + "GP";
             }
             ShopTBox.Text += "\n\n";
         }

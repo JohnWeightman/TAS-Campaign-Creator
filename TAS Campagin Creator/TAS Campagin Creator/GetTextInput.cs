@@ -15,6 +15,7 @@ namespace TAS_Campagin_Creator
         public MainForm MyParent { get; set; }
         public string Text;
         public int Arg;
+        public bool NumOnly = false;
 
         public GetTextInput()
         {
@@ -35,6 +36,13 @@ namespace TAS_Campagin_Creator
         {
             if (e.KeyCode == Keys.Enter)
                 UpdateDisplay();
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (NumOnly)
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         void UpdateDisplay()
@@ -43,6 +51,9 @@ namespace TAS_Campagin_Creator
             {
                 case 0:
                     UpdateCampaignName();
+                    break;
+                case 1:
+                    UpdateItemCost();
                     break;
                 default:
                     break;
@@ -56,5 +67,10 @@ namespace TAS_Campagin_Creator
             this.Close();
         }
 
+        void UpdateItemCost()
+        {
+            this.MyParent.UpdateShopStockDisplay(Convert.ToInt32(textBox1.Text));
+            this.Close();
+        }
     }
 }
