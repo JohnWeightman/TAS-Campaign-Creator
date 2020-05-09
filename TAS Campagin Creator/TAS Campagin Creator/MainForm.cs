@@ -203,6 +203,9 @@ namespace TAS_Campagin_Creator
                 case 2:
                     ModTypeCBox.SelectedItem = "Shop Module";
                     break;
+                case 3:
+                    ModTypeCBox.SelectedItem = "End Campaign Module";
+                    break;
                 default:
                     break;
             }
@@ -350,6 +353,8 @@ namespace TAS_Campagin_Creator
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 2;
                         break;
                     default:
+                    case 3:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 3;
                         break;
                 }
                 DisplayModuleGroupBox();

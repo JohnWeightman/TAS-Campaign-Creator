@@ -335,7 +335,8 @@ namespace TAS_Campagin_Creator
             this.ModTypeCBox.Items.AddRange(new object[] {
             "Story Module",
             "Encounter Module",
-            "Shop Module"});
+            "Shop Module",
+            "End Campaign Module"});
             this.ModTypeCBox.Location = new System.Drawing.Point(725, 205);
             this.ModTypeCBox.Name = "ModTypeCBox";
             this.ModTypeCBox.Size = new System.Drawing.Size(185, 24);
