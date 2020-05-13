@@ -24,6 +24,7 @@ namespace TAS_Campagin_Creator
             //Storage.AddTempData();
             //Storage.PlayableCampaign();
             UpdateModuleBox();
+            ModuleBox.SelectedIndex = 0;
         }
 
         #region Menu Bar
@@ -465,7 +466,7 @@ namespace TAS_Campagin_Creator
         private void ItemListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string CurItem = ItemListBox.SelectedItem.ToString();
-            if (ItemListBox.SelectedItem != null && CurItem != "" && CurItem != "Weapons" && CurItem != "Armour")
+            if (ItemListBox.SelectedItem != null && CurItem != "" && CurItem != "Weapons" && CurItem != "Armour" && CurItem != "Potions")
             {
                 CurItem = ReturnItemName(CurItem);
                 Tuple<int, int> ItemTup = FindItem(CurItem);
@@ -477,6 +478,7 @@ namespace TAS_Campagin_Creator
         {
             Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Clear();
             Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Clear();
+            Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock.Clear();
             ShopTBox.Text = "";
         }
 
@@ -491,9 +493,13 @@ namespace TAS_Campagin_Creator
                 case 2:
                     ItemsAddArmour(false);
                     break;
+                case 3:
+                    ItemsAddPotions(false);
+                    break;
                 default:
                     ItemsAddWeapons(true);
                     ItemsAddArmour(true);
+                    ItemsAddPotions(true);
                     break;
             }
         }
@@ -532,22 +538,45 @@ namespace TAS_Campagin_Creator
                 else
                     ItemListBox.Items.Add(GameObjects.Armour[x].Name + " - AC: " + GameObjects.Armour[x].AC + ", H");
             }
+            ItemListBox.Items.Add("");
+        }
+
+        void ItemsAddPotions(bool Type)
+        {
+            if (Type)
+            {
+                ItemListBox.Items.Add("Potions");
+                ItemListBox.Items.Add("");
+            }
+            for (int x = 0; x < GameObjects.Potions.Count; x++)
+                ItemListBox.Items.Add(GameObjects.Potions[x].Name + " - " + GameObjects.Potions[x].DiceNum + "D" + GameObjects.Potions[x].DiceSize + "+" +
+                    GameObjects.Potions[x].Modifier);
         }
 
         void UpdateShopStockObject(Tuple<int, int> ItemTup)
         {
+            string Cost = "";
             if (ItemTup.Item1 == 1)
             {
                 Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Add(GameObjects.Weapons[ItemTup.Item2]);
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 0;
+                Cost = Convert.ToString(GameObjects.Weapons[ItemTup.Item2].Cost);
             }
             else if (ItemTup.Item1 == 2)
             {
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Add(GameObjects.Armour[ItemTup.Item2]);
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 1;
+                Cost = Convert.ToString(GameObjects.Armour[ItemTup.Item2].Cost);
+            }
+            else if(ItemTup.Item1 == 3)
+            {
+                Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock.Add(GameObjects.Potions[ItemTup.Item2]);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 2;
+                Cost = Convert.ToString(GameObjects.Potions[ItemTup.Item2].Cost);
             }
             GetTextInput GTI = new GetTextInput();
             GTI.MyParent = this;
+            GTI.Text = Cost;
             GTI.Arg = 1;
             GTI.NumOnly = true;
             GTI.Show();
@@ -576,6 +605,16 @@ namespace TAS_Campagin_Creator
                     Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].Weight + "\nCost: " + 
                     Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock[Count].Cost + "GP";
             }
+            else if(Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType == 2)
+            {
+                int Count = Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock.Count - 1;
+                Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock[Count].Cost = Cost;
+                ShopTBox.Text += Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock[Count].Name + "\nRegen: " +
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock[Count].DiceNum + "D" +
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock[Count].DiceSize + "+" +
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock[Count].Modifier + "\nCost: " +
+                    Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock[Count].Cost + "GP";
+            }
             ShopTBox.Text += "\n\n";
         }
 
@@ -583,10 +622,13 @@ namespace TAS_Campagin_Creator
         {
             char[] CharArr = Text.ToCharArray();
             int Count = 0;
-            foreach(char Cha in CharArr)
+            foreach (char Cha in CharArr)
             {
-                if (Cha == ' ')
+                if (Cha == '-')
+                {
+                    Count--;
                     break;
+                }
                 else
                     Count++;
             }
@@ -602,6 +644,9 @@ namespace TAS_Campagin_Creator
             for(int x = 0; x < GameObjects.Armour.Count; x++) 
                 if (GameObjects.Armour[x].Name == Item)
                     return new Tuple<int, int>(2, x);
+            for (int x = 0; x < GameObjects.Potions.Count; x++)
+                if (GameObjects.Potions[x].Name == Item)
+                    return new Tuple<int, int>(3, x);
             return new Tuple<int, int>(0, 0); ;
         }
 

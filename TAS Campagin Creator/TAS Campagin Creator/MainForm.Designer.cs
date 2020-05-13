@@ -372,7 +372,8 @@ namespace TAS_Campagin_Creator
             this.ItemTypeCBox.Items.AddRange(new object[] {
             "All Items",
             "Weapons",
-            "Armour"});
+            "Armour",
+            "Potions"});
             this.ItemTypeCBox.Location = new System.Drawing.Point(210, 35);
             this.ItemTypeCBox.Name = "ItemTypeCBox";
             this.ItemTypeCBox.Size = new System.Drawing.Size(200, 24);

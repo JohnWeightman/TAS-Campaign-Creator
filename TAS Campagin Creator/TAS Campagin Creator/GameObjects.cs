@@ -12,6 +12,7 @@ namespace TAS_Campagin_Creator
         public static List<NPC> Enemies = new List<NPC>();
         public static List<Weapon> Weapons = new List<Weapon>();
         public static List<Armour> Armour = new List<Armour>();
+        public static List<Potions> Potions = new List<Potions>();
 
         public static void LoadGameObjects()
         {
@@ -46,6 +47,7 @@ namespace TAS_Campagin_Creator
                         WeapTemp[Count].Damage = Convert.ToInt32(Child.Attributes[1].Value);
                         WeapTemp[Count].TwoHanded = Convert.ToBoolean(Child.Attributes[2].Value);
                         WeapTemp[Count].Versatile = Convert.ToBoolean(Child.Attributes[3].Value);
+                        WeapTemp[Count].Cost = Convert.ToInt32(Child.Attributes[4].Value);
                         Count += 1;
                     }
                     foreach (Weapon Weapon in WeapTemp)
@@ -62,10 +64,29 @@ namespace TAS_Campagin_Creator
                         ArmTemp[Count].Name = Child.Name;
                         ArmTemp[Count].AC = Convert.ToInt32(Child.Attributes[1].Value);
                         ArmTemp[Count].Weight = Child.Attributes[2].Value;
+                        ArmTemp[Count].Cost = Convert.ToInt32(Child.Attributes[3].Value);
                         Count += 1;
                     }
                     foreach (Armour Arm in ArmTemp)
                         Armour.Add(Arm);
+                }
+                else if(Node.Name == "Potions")
+                {
+                    int ChildCount = Convert.ToInt32(Node.Attributes[0].Value);
+                    int Count = 0;
+                    Potions[] PotTemp = new Potions[ChildCount];
+                    foreach(XmlNode Child in Node.ChildNodes)
+                    {
+                        PotTemp[Count] = new Potions();
+                        PotTemp[Count].Name = Child.Attributes[0].Value;
+                        PotTemp[Count].DiceNum = Convert.ToInt32(Child.Attributes[1].Value);
+                        PotTemp[Count].DiceSize = Convert.ToInt32(Child.Attributes[2].Value);
+                        PotTemp[Count].Modifier = Convert.ToInt32(Child.Attributes[3].Value);
+                        PotTemp[Count].Cost = Convert.ToInt32(Child.Attributes[4].Value);
+                        Count += 1;
+                    }
+                    foreach (Potions Potion in PotTemp)
+                        Potions.Add(Potion);
                 }
             }
         }
@@ -91,6 +112,15 @@ namespace TAS_Campagin_Creator
         public string Name = "";
         public int AC = 0;
         public string Weight = "";
+        public int Cost = 0;
+    }
+
+    class Potions
+    {
+        public string Name = "";
+        public int DiceNum = 0;
+        public int DiceSize = 0;
+        public int Modifier = 0;
         public int Cost = 0;
     }
 }

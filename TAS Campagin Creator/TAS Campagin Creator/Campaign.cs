@@ -121,6 +121,7 @@ namespace TAS_Campagin_Creator
     {
         public List<Weapon> WeaponStock = new List<Weapon>();
         public List<Armour> ArmourStock = new List<Armour>();
+        public List<Potions> PotionStock = new List<Potions>();
         public sbyte ItemType;
     }
 }
