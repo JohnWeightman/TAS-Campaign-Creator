@@ -85,7 +85,8 @@ namespace TAS_Campagin_Creator
             GetTextInput GTI = new GetTextInput();
             GTI.MyParent = this;
             GTI.Arg = 0;
-            GTI.Text = Storage.Campaign.Name;
+            GTI.Textbox = Storage.Campaign.Name;
+            GTI.LabelText = "Campaign Name";
             GTI.Show();
         }
 
@@ -250,8 +251,6 @@ namespace TAS_Campagin_Creator
             UpdateModuleStory();
             UpdateModuleOptions();
             UpdateOptionBox2();
-            if(ModNameTBox.Text != "")
-                Storage.Campaign.Modules[Storage.ModNum].Name = ModNameTBox.Text;
         }
 
         void UpdateModuleStory()
@@ -388,8 +387,29 @@ namespace TAS_Campagin_Creator
             }
         }
 
+        private void EnemyNameSearchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (EnemyNameSearchBox.Text != "")
+                SearchForNPCs(EnemyNameSearchBox.Text);
+            else
+                FillEnemyListBox();
+        }
+
+        void SearchForNPCs(string Search)
+        {
+            EnemyListBox.Items.Clear();
+            Search = Search.ToLower();
+            foreach(NPC NPC in GameObjects.Enemies)
+            {
+                string Name = NPC.Name.ToLower();
+                if (Name.Contains(Search))
+                    EnemyListBox.Items.Add("DB: " + NPC.DifBonus + " - " + NPC.Name);
+            }
+        }
+
         void FillEnemyListBox()
         {
+            EnemyListBox.Items.Clear();
             for (int x = 0; x < GameObjects.Enemies.Count; x++)
                 EnemyListBox.Items.Add("DB: " + GameObjects.Enemies[x].DifBonus + " - " + GameObjects.Enemies[x].Name);
         }
@@ -480,6 +500,77 @@ namespace TAS_Campagin_Creator
             Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Clear();
             Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock.Clear();
             ShopTBox.Text = "";
+        }
+
+        private void SearchItemsTBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (SearchItemsTBox.Text != "")
+                SearchForItems(SearchItemsTBox.Text);
+            else
+                FillItemsListBox(0);
+        }
+
+        void SearchForItems(string Search)
+        {
+            ItemListBox.Items.Clear();
+            Search = Search.ToLower();
+            bool WeaponBool = false;
+            bool ArmourBool = false;
+            bool PotionBool = false;
+            foreach(Weapon Weapon in GameObjects.Weapons)
+            {
+                string Name = Weapon.Name.ToLower();
+                if (Name.Contains(Search))
+                {
+                    if (!WeaponBool)
+                    {
+                        ItemListBox.Items.Add("Weapons");
+                        ItemListBox.Items.Add("");
+                        WeaponBool = !WeaponBool;
+                    }
+                    if (!Weapon.TwoHanded && !Weapon.Versatile)
+                        ItemListBox.Items.Add(Weapon.Name + " - DMG: " + Weapon.Damage);
+                    else if (Weapon.TwoHanded && !Weapon.Versatile)
+                        ItemListBox.Items.Add(Weapon.Name + " - DMG: " + Weapon.Damage + ", TH");
+                    else if (!Weapon.TwoHanded && Weapon.Versatile)
+                        ItemListBox.Items.Add(Weapon.Name + " - DMG: " + Weapon.Damage + ", V");
+                }
+            }
+            if (WeaponBool)
+                ItemListBox.Items.Add("");
+            foreach(Armour Armour in GameObjects.Armour)
+            {
+                string Name = Armour.Name.ToLower();
+                if (Name.Contains(Search))
+                {
+                    if (!ArmourBool)
+                    {
+                        ItemListBox.Items.Add("Armour");
+                        ItemListBox.Items.Add("");
+                        ArmourBool = !ArmourBool;
+                    }
+                    if (Armour.Weight == "Light")
+                        ItemListBox.Items.Add(Armour.Name + " - AC: " + Armour.AC + ", L");
+                    else
+                        ItemListBox.Items.Add(Armour.Name + " - AC: " + Armour.AC + ", H");
+                }
+            }
+            if (WeaponBool || ArmourBool)
+                ItemListBox.Items.Add("");
+            foreach(Potions Potion in GameObjects.Potions)
+            {
+                string Name = Potion.Name.ToLower();
+                if (Name.Contains(Search))
+                {
+                    if (!PotionBool)
+                    {
+                        ItemListBox.Items.Add("Potions");
+                        ItemListBox.Items.Add("");
+                        PotionBool = !PotionBool;
+                    }
+                    ItemListBox.Items.Add(Potion.Name + " - " + Potion.DiceNum + "D" + Potion.DiceSize + "+" + Potion.Modifier);
+                }
+            }
         }
 
         void FillItemsListBox(int Option)
@@ -576,7 +667,8 @@ namespace TAS_Campagin_Creator
             }
             GetTextInput GTI = new GetTextInput();
             GTI.MyParent = this;
-            GTI.Text = Cost;
+            GTI.Textbox = Cost;
+            GTI.LabelText = "Item Cost";
             GTI.Arg = 1;
             GTI.NumOnly = true;
             GTI.Show();
@@ -676,6 +768,15 @@ namespace TAS_Campagin_Creator
             ModuleEnemiesBox.Text = "";
         }
 
+        private void ModNameTBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                if (ModNameTBox.Text != "")
+                {
+                    Storage.Campaign.Modules[Storage.ModNum].Name = ModNameTBox.Text;
+                    UpdateModuleBox();
+                }
+        }
         #endregion
     }
 }

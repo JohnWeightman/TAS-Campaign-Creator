@@ -13,7 +13,8 @@ namespace TAS_Campagin_Creator
     public partial class GetTextInput : Form
     {
         public MainForm MyParent { get; set; }
-        public string Text;
+        public string Textbox;
+        public string LabelText;
         public int Arg;
         public bool NumOnly = false;
 
@@ -24,7 +25,8 @@ namespace TAS_Campagin_Creator
 
         private void GetTextInput_Load(object sender, EventArgs e)
         {
-            textBox1.Text = Text;
+            textBox1.Text = Textbox;
+            DisplayLabel.Text = LabelText;
         }
 
         private void button1_Click(object sender, EventArgs e)

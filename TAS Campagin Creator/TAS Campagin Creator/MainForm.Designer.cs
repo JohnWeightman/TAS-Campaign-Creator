@@ -52,7 +52,6 @@ namespace TAS_Campagin_Creator
             this.EncounterGBox = new System.Windows.Forms.GroupBox();
             this.ModuleEnemiesBox = new System.Windows.Forms.RichTextBox();
             this.ClearEnemiesButton = new System.Windows.Forms.Button();
-            this.SearchButton = new System.Windows.Forms.Button();
             this.DifBonusSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyNameSearchBox = new System.Windows.Forms.TextBox();
             this.EnemyListBox = new System.Windows.Forms.ListBox();
@@ -62,8 +61,7 @@ namespace TAS_Campagin_Creator
             this.ItemTypeCBox = new System.Windows.Forms.ComboBox();
             this.ShopTBox = new System.Windows.Forms.RichTextBox();
             this.ClearStockButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.SearchItemsTBox = new System.Windows.Forms.TextBox();
             this.ItemListBox = new System.Windows.Forms.ListBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
@@ -267,7 +265,6 @@ namespace TAS_Campagin_Creator
             // 
             this.EncounterGBox.Controls.Add(this.ModuleEnemiesBox);
             this.EncounterGBox.Controls.Add(this.ClearEnemiesButton);
-            this.EncounterGBox.Controls.Add(this.SearchButton);
             this.EncounterGBox.Controls.Add(this.DifBonusSearchBox);
             this.EncounterGBox.Controls.Add(this.EnemyNameSearchBox);
             this.EncounterGBox.Controls.Add(this.EnemyListBox);
@@ -296,15 +293,6 @@ namespace TAS_Campagin_Creator
             this.ClearEnemiesButton.UseVisualStyleBackColor = true;
             this.ClearEnemiesButton.Click += new System.EventHandler(this.ClearEnemiesButton_Click);
             // 
-            // SearchButton
-            // 
-            this.SearchButton.Location = new System.Drawing.Point(420, 10);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(75, 23);
-            this.SearchButton.TabIndex = 3;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = true;
-            // 
             // DifBonusSearchBox
             // 
             this.DifBonusSearchBox.Location = new System.Drawing.Point(210, 40);
@@ -318,6 +306,7 @@ namespace TAS_Campagin_Creator
             this.EnemyNameSearchBox.Name = "EnemyNameSearchBox";
             this.EnemyNameSearchBox.Size = new System.Drawing.Size(200, 22);
             this.EnemyNameSearchBox.TabIndex = 1;
+            this.EnemyNameSearchBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EnemyNameSearchBox_KeyUp);
             // 
             // EnemyListBox
             // 
@@ -350,14 +339,14 @@ namespace TAS_Campagin_Creator
             this.ModNameTBox.Name = "ModNameTBox";
             this.ModNameTBox.Size = new System.Drawing.Size(200, 38);
             this.ModNameTBox.TabIndex = 17;
+            this.ModNameTBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ModNameTBox_KeyDown);
             // 
             // ShopGBox
             // 
             this.ShopGBox.Controls.Add(this.ItemTypeCBox);
             this.ShopGBox.Controls.Add(this.ShopTBox);
             this.ShopGBox.Controls.Add(this.ClearStockButton);
-            this.ShopGBox.Controls.Add(this.button2);
-            this.ShopGBox.Controls.Add(this.textBox2);
+            this.ShopGBox.Controls.Add(this.SearchItemsTBox);
             this.ShopGBox.Controls.Add(this.ItemListBox);
             this.ShopGBox.Location = new System.Drawing.Point(920, 170);
             this.ShopGBox.Name = "ShopGBox";
@@ -398,21 +387,13 @@ namespace TAS_Campagin_Creator
             this.ClearStockButton.UseVisualStyleBackColor = true;
             this.ClearStockButton.Click += new System.EventHandler(this.ClearStockButton_Click);
             // 
-            // button2
+            // SearchItemsTBox
             // 
-            this.button2.Location = new System.Drawing.Point(420, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Search";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(210, 10);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 22);
-            this.textBox2.TabIndex = 1;
+            this.SearchItemsTBox.Location = new System.Drawing.Point(210, 10);
+            this.SearchItemsTBox.Name = "SearchItemsTBox";
+            this.SearchItemsTBox.Size = new System.Drawing.Size(200, 22);
+            this.SearchItemsTBox.TabIndex = 1;
+            this.SearchItemsTBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchItemsTBox_KeyUp);
             // 
             // ItemListBox
             // 
@@ -441,8 +422,8 @@ namespace TAS_Campagin_Creator
             this.Controls.Add(this.ModuleBox);
             this.Controls.Add(this.CampaignNameLabel);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.ShopGBox);
             this.Controls.Add(this.EncounterGBox);
+            this.Controls.Add(this.ShopGBox);
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
@@ -483,7 +464,6 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.ListBox EnemyListBox;
         private System.Windows.Forms.RichTextBox ModuleEnemiesBox;
         private System.Windows.Forms.Button ClearEnemiesButton;
-        private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.TextBox DifBonusSearchBox;
         private System.Windows.Forms.TextBox EnemyNameSearchBox;
         private System.Windows.Forms.ToolStripMenuItem renameCampaignToolStripMenuItem;
@@ -493,8 +473,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.GroupBox ShopGBox;
         private System.Windows.Forms.RichTextBox ShopTBox;
         private System.Windows.Forms.Button ClearStockButton;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox SearchItemsTBox;
         private System.Windows.Forms.ListBox ItemListBox;
         private System.Windows.Forms.ComboBox ItemTypeCBox;
     }
