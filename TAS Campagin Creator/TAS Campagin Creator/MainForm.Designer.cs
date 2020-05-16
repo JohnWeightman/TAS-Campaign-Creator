@@ -63,9 +63,20 @@ namespace TAS_Campagin_Creator
             this.ClearStockButton = new System.Windows.Forms.Button();
             this.SearchItemsTBox = new System.Windows.Forms.TextBox();
             this.ItemListBox = new System.Windows.Forms.ListBox();
+            this.TrapGBox = new System.Windows.Forms.GroupBox();
+            this.TrapStatsBox = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TrapListBox = new System.Windows.Forms.ListBox();
+            this.SaveSuccesTBox = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.SaveFailTBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.ShopGBox.SuspendLayout();
+            this.TrapGBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -325,6 +336,7 @@ namespace TAS_Campagin_Creator
             "Story Module",
             "Encounter Module",
             "Shop Module",
+            "Trap Module",
             "End Campaign Module"});
             this.ModTypeCBox.Location = new System.Drawing.Point(725, 205);
             this.ModTypeCBox.Name = "ModTypeCBox";
@@ -405,11 +417,107 @@ namespace TAS_Campagin_Creator
             this.ItemListBox.TabIndex = 0;
             this.ItemListBox.SelectedIndexChanged += new System.EventHandler(this.ItemListBox_SelectedIndexChanged);
             // 
+            // TrapGBox
+            // 
+            this.TrapGBox.Controls.Add(this.SaveFailTBox);
+            this.TrapGBox.Controls.Add(this.label3);
+            this.TrapGBox.Controls.Add(this.label2);
+            this.TrapGBox.Controls.Add(this.SaveSuccesTBox);
+            this.TrapGBox.Controls.Add(this.TrapStatsBox);
+            this.TrapGBox.Controls.Add(this.button1);
+            this.TrapGBox.Controls.Add(this.textBox1);
+            this.TrapGBox.Controls.Add(this.textBox2);
+            this.TrapGBox.Controls.Add(this.TrapListBox);
+            this.TrapGBox.Location = new System.Drawing.Point(920, 170);
+            this.TrapGBox.Name = "TrapGBox";
+            this.TrapGBox.Size = new System.Drawing.Size(650, 671);
+            this.TrapGBox.TabIndex = 16;
+            this.TrapGBox.TabStop = false;
+            this.TrapGBox.Visible = false;
+            // 
+            // TrapStatsBox
+            // 
+            this.TrapStatsBox.Location = new System.Drawing.Point(210, 70);
+            this.TrapStatsBox.Name = "TrapStatsBox";
+            this.TrapStatsBox.Size = new System.Drawing.Size(435, 300);
+            this.TrapStatsBox.TabIndex = 5;
+            this.TrapStatsBox.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(420, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(210, 40);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(200, 22);
+            this.textBox1.TabIndex = 2;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(210, 10);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(200, 22);
+            this.textBox2.TabIndex = 1;
+            // 
+            // TrapListBox
+            // 
+            this.TrapListBox.FormattingEnabled = true;
+            this.TrapListBox.ItemHeight = 16;
+            this.TrapListBox.Location = new System.Drawing.Point(5, 10);
+            this.TrapListBox.Name = "TrapListBox";
+            this.TrapListBox.Size = new System.Drawing.Size(200, 644);
+            this.TrapListBox.TabIndex = 0;
+            this.TrapListBox.SelectedIndexChanged += new System.EventHandler(this.TrapListBox_SelectedIndexChanged);
+            // 
+            // SaveSuccesTBox
+            // 
+            this.SaveSuccesTBox.Location = new System.Drawing.Point(210, 405);
+            this.SaveSuccesTBox.Name = "SaveSuccesTBox";
+            this.SaveSuccesTBox.Size = new System.Drawing.Size(210, 250);
+            this.SaveSuccesTBox.TabIndex = 6;
+            this.SaveSuccesTBox.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(210, 375);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(200, 25);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Save Success Text";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(430, 375);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(152, 25);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Save Fail Text";
+            // 
+            // SaveFailTBox
+            // 
+            this.SaveFailTBox.Location = new System.Drawing.Point(430, 405);
+            this.SaveFailTBox.Name = "SaveFailTBox";
+            this.SaveFailTBox.Size = new System.Drawing.Size(210, 250);
+            this.SaveFailTBox.TabIndex = 9;
+            this.SaveFailTBox.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.TrapGBox);
             this.Controls.Add(this.ModNameTBox);
             this.Controls.Add(this.ModTypeCBox);
             this.Controls.Add(this.ModuleTypeLabel);
@@ -434,6 +542,8 @@ namespace TAS_Campagin_Creator
             this.EncounterGBox.PerformLayout();
             this.ShopGBox.ResumeLayout(false);
             this.ShopGBox.PerformLayout();
+            this.TrapGBox.ResumeLayout(false);
+            this.TrapGBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,6 +586,16 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.TextBox SearchItemsTBox;
         private System.Windows.Forms.ListBox ItemListBox;
         private System.Windows.Forms.ComboBox ItemTypeCBox;
+        private System.Windows.Forms.GroupBox TrapGBox;
+        private System.Windows.Forms.RichTextBox TrapStatsBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ListBox TrapListBox;
+        private System.Windows.Forms.RichTextBox SaveFailTBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox SaveSuccesTBox;
     }
 }
 

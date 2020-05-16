@@ -13,19 +13,37 @@ namespace TAS_Campagin_Creator
 {
     public partial class MainForm : Form
     {
+        #region Program Start
 
         public MainForm()
         {
-            InitializeComponent();
+            CallOtherClassFunctions();
+            CallThisClassFunctions();
+            UpdateThisControls();
+        }
+
+        void CallOtherClassFunctions()
+        {
             GameObjects.LoadGameObjects();
-            FillModuleTypeControls();
-            CampaignNameLabel.Text = Storage.Campaign.Name;
             Storage.Campaign.NewModule();
             //Storage.AddTempData();
             //Storage.PlayableCampaign();
+        }
+
+        void CallThisClassFunctions()
+        {
+            InitializeComponent();
+            FillModuleTypeControls();
             UpdateModuleBox();
+        }
+
+        void UpdateThisControls()
+        {
+            CampaignNameLabel.Text = Storage.Campaign.Name;
             ModuleBox.SelectedIndex = 0;
         }
+
+        #endregion
 
         #region Menu Bar
 
@@ -206,6 +224,9 @@ namespace TAS_Campagin_Creator
                     ModTypeCBox.SelectedItem = "Shop Module";
                     break;
                 case 3:
+                    ModTypeCBox.SelectedItem = "Trap Module";
+                    break;
+                case 4:
                     ModTypeCBox.SelectedItem = "End Campaign Module";
                     break;
                 default:
@@ -217,6 +238,7 @@ namespace TAS_Campagin_Creator
         {
             EncounterGBox.Visible = false;
             ShopGBox.Visible = false;
+            TrapGBox.Visible = false;
             switch (Storage.Campaign.Modules[Storage.ModNum].ModType)
             {
                 case 1:
@@ -224,6 +246,9 @@ namespace TAS_Campagin_Creator
                     break;
                 case 2:
                     ShopGBox.Visible = true;
+                    break;
+                case 3:
+                    TrapGBox.Visible = true;
                     break;
                 default:
                     break;
@@ -343,18 +368,21 @@ namespace TAS_Campagin_Creator
             {
                 switch (ModTypeCBox.SelectedIndex)
                 {
-                    case 0:
-                        Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
-                        break;
                     case 1:
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 1;
                         break;
                     case 2:
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 2;
                         break;
-                    default:
                     case 3:
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 3;
+                        break;
+                    case 4:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 4;
+                        break;
+                    case 0:
+                    default:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
                         break;
                 }
                 DisplayModuleGroupBox();
@@ -365,6 +393,7 @@ namespace TAS_Campagin_Creator
         {
             FillEnemyListBox();
             FillItemsListBox(0);
+            FillTrapsListBox();
         }
 
         #endregion
@@ -740,6 +769,36 @@ namespace TAS_Campagin_Creator
                 if (GameObjects.Potions[x].Name == Item)
                     return new Tuple<int, int>(3, x);
             return new Tuple<int, int>(0, 0); ;
+        }
+
+        #endregion
+
+        #region Trap Module
+
+        private void TrapListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(TrapListBox.SelectedItem != null && TrapListBox.SelectedItem.ToString() != "Custom")
+            {
+                DisplayTrapProperties(GameObjects.Traps[TrapListBox.SelectedIndex]);
+            }
+            else if(TrapListBox.SelectedItem.ToString() == "Custom")
+            {
+
+            }
+        }
+
+        void FillTrapsListBox()
+        {
+            TrapListBox.Items.Clear();
+            foreach (Traps Trap in GameObjects.Traps)
+                TrapListBox.Items.Add(Trap.Name);
+            TrapListBox.Items.Add("Custom");
+        }
+
+        void DisplayTrapProperties(Traps Trap)
+        {
+            TrapStatsBox.Text = Trap.Name + "\n\nDMG: " + Trap.DiceNum + "D" + Trap.DiceSize + "+" + Trap.Modifier + "\nSave Type: " + Trap.SaveType +
+                "\nSave Target: " + Trap.SaveTarget; ;
         }
 
         #endregion
