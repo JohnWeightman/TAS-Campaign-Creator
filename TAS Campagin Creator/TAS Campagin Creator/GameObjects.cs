@@ -171,6 +171,7 @@ namespace TAS_Campagin_Creator
         public int Cost = 0;
     }
 
+    [Serializable]
     class Traps
     {
         public string Name = "";

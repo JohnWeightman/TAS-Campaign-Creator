@@ -95,10 +95,23 @@ namespace TAS_Campagin_Creator
         public Options Options = new Options();
         public Encounters Encounter = new Encounters();
         public Shops Shop = new Shops();
+        public Traps Trap = new Traps();
         public string Name = "Module1";
         public byte ModType = 0;
         public string ID = "";
         public List<string> Story = new List<string>();
+
+        public void NewTrap(Traps TrapObj)
+        {
+            Trap.Name = TrapObj.Name;
+            Trap.DiceNum = TrapObj.DiceNum;
+            Trap.DiceSize = TrapObj.DiceSize;
+            Trap.Modifier = TrapObj.Modifier;
+            Trap.SaveType = TrapObj.SaveType;
+            Trap.SaveTarget = TrapObj.SaveTarget;
+            Trap.SaveSuccess = TrapObj.SaveSuccess;
+            Trap.SaveFail = TrapObj.SaveFail;
+        }
     }
 
     [Serializable]
@@ -123,5 +136,37 @@ namespace TAS_Campagin_Creator
         public List<Armour> ArmourStock = new List<Armour>();
         public List<Potions> PotionStock = new List<Potions>();
         public sbyte ItemType;
+
+        public void AddWeapon(Weapon NewWeapon)
+        {
+            Weapon Weapon = new Weapon();
+            Weapon.Name = NewWeapon.Name;
+            Weapon.Damage = NewWeapon.Damage;
+            Weapon.TwoHanded = NewWeapon.TwoHanded;
+            Weapon.Versatile = NewWeapon.Versatile;
+            Weapon.Cost = NewWeapon.Cost;
+            WeaponStock.Add(Weapon);
+        }
+
+        public void AddArmour(Armour NewArmour)
+        {
+            Armour Armour = new Armour();
+            Armour.Name = NewArmour.Name;
+            Armour.AC = NewArmour.AC;
+            Armour.Weight = NewArmour.Weight;
+            Armour.Cost = NewArmour.Cost;
+            ArmourStock.Add(Armour);
+        }
+
+        public void AddPotion(Potions NewPotion)
+        {
+            Potions Potion = new Potions();
+            Potion.Name = NewPotion.Name;
+            Potion.DiceNum = NewPotion.DiceNum;
+            Potion.DiceSize = NewPotion.DiceSize;
+            Potion.Modifier = NewPotion.Modifier;
+            Potion.Cost = NewPotion.Cost;
+            PotionStock.Add(Potion);
+        }
     }
 }

@@ -678,19 +678,19 @@ namespace TAS_Campagin_Creator
             string Cost = "";
             if (ItemTup.Item1 == 1)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Shop.WeaponStock.Add(GameObjects.Weapons[ItemTup.Item2]);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.AddWeapon(GameObjects.Weapons[ItemTup.Item2]);
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 0;
                 Cost = Convert.ToString(GameObjects.Weapons[ItemTup.Item2].Cost);
             }
             else if (ItemTup.Item1 == 2)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Shop.ArmourStock.Add(GameObjects.Armour[ItemTup.Item2]);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.AddArmour(GameObjects.Armour[ItemTup.Item2]);
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 1;
                 Cost = Convert.ToString(GameObjects.Armour[ItemTup.Item2].Cost);
             }
             else if(ItemTup.Item1 == 3)
             {
-                Storage.Campaign.Modules[Storage.ModNum].Shop.PotionStock.Add(GameObjects.Potions[ItemTup.Item2]);
+                Storage.Campaign.Modules[Storage.ModNum].Shop.AddPotion(GameObjects.Potions[ItemTup.Item2]);
                 Storage.Campaign.Modules[Storage.ModNum].Shop.ItemType = 2;
                 Cost = Convert.ToString(GameObjects.Potions[ItemTup.Item2].Cost);
             }
@@ -777,13 +777,90 @@ namespace TAS_Campagin_Creator
 
         private void TrapListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(TrapListBox.SelectedItem != null && TrapListBox.SelectedItem.ToString() != "Custom")
+            if(TrapListBox.SelectedItem != null)
             {
-                DisplayTrapProperties(GameObjects.Traps[TrapListBox.SelectedIndex]);
+                Storage.Campaign.Modules[Storage.ModNum].NewTrap(GameObjects.Traps[TrapListBox.SelectedIndex]);
+                DisplayTrapProperties(Storage.Campaign.Modules[Storage.ModNum].Trap);
+                DisplaySuccessFailText(Storage.Campaign.Modules[Storage.ModNum].Trap);
+                SetTrapControls(Storage.Campaign.Modules[Storage.ModNum].Trap);
             }
-            else if(TrapListBox.SelectedItem.ToString() == "Custom")
-            {
+        }
 
+        private void SaveTypeCBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            if (SaveTypeCBox.SelectedItem != null)
+            {
+                switch (SaveTypeCBox.SelectedIndex)
+                {
+                    case 0:
+                        Storage.Campaign.Modules[Storage.ModNum].Trap.SaveType = "Str";
+                        break;
+                    case 1:
+                        Storage.Campaign.Modules[Storage.ModNum].Trap.SaveType = "Dex";
+                        break;
+                    case 2:
+                        Storage.Campaign.Modules[Storage.ModNum].Trap.SaveType = "Con";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            DisplayTrapProperties(Storage.Campaign.Modules[Storage.ModNum].Trap);
+        }
+
+        private void SaveTargetNUD_ValueChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Trap.SaveTarget = Convert.ToInt32(SaveTargetNUD.Value);
+            DisplayTrapProperties(Storage.Campaign.Modules[Storage.ModNum].Trap);
+        }
+
+        private void DiceNumberNUD_ValueChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Trap.DiceNum = Convert.ToInt32(DiceNumberNUD.Value);
+            DisplayTrapProperties(Storage.Campaign.Modules[Storage.ModNum].Trap);
+        }
+
+        private void DiceSizeNUD_ValueChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Trap.DiceSize = Convert.ToInt32(DiceSizeNUD.Value);
+            DisplayTrapProperties(Storage.Campaign.Modules[Storage.ModNum].Trap);
+        }
+
+        private void ModifierNUD_ValueChanged(object sender, EventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Trap.Modifier = Convert.ToInt32(ModifierNUD.Value);
+            DisplayTrapProperties(Storage.Campaign.Modules[Storage.ModNum].Trap);
+        }
+
+        private void SaveSuccesTBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Trap.SaveSuccess = SaveSuccesTBox.Text;
+        }
+
+        private void SaveFailTBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].Trap.SaveFail = SaveFailTBox.Text;
+        }
+
+        private void SearchTrapsTBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(SearchTrapsTBox.Text != "")
+            {
+                TrapListBox.Items.Clear();
+                string Search = SearchTrapsTBox.Text.ToLower();
+                foreach(Traps Trap in GameObjects.Traps)
+                {
+                    string Name = Trap.Name.ToLower();
+                    if (Name.Contains(Search))
+                    {
+                        TrapListBox.Items.Add(Trap.Name);
+                    }
+                }
+            }
+            else
+            {
+                FillTrapsListBox();
             }
         }
 
@@ -792,7 +869,6 @@ namespace TAS_Campagin_Creator
             TrapListBox.Items.Clear();
             foreach (Traps Trap in GameObjects.Traps)
                 TrapListBox.Items.Add(Trap.Name);
-            TrapListBox.Items.Add("Custom");
         }
 
         void DisplayTrapProperties(Traps Trap)
@@ -801,6 +877,20 @@ namespace TAS_Campagin_Creator
                 "\nSave Target: " + Trap.SaveTarget; ;
         }
 
+        void DisplaySuccessFailText(Traps Trap)
+        {
+            SaveSuccesTBox.Text = Trap.SaveSuccess;
+            SaveFailTBox.Text = Trap.SaveFail;
+        }
+
+        void SetTrapControls(Traps Trap)
+        {
+            SaveTypeCBox.Text = Trap.SaveType;
+            SaveTargetNUD.Value = Trap.SaveTarget;
+            DiceNumberNUD.Value = Trap.DiceNum;
+            DiceSizeNUD.Value = Trap.DiceSize;
+            ModifierNUD.Value = Trap.Modifier;
+        }
         #endregion
 
         #endregion
