@@ -16,6 +16,7 @@ namespace TAS_Campagin_Creator
         static int OptionJobs = 0;
         static int EncounterJobs = 0;
         static int ShopJobs = 0;
+        static int TrapJobs = 0;
         static int Progress = 0;
 
         public static void ExportCampaign()
@@ -38,123 +39,147 @@ namespace TAS_Campagin_Creator
             XML.WriteStartElement(Storage.Campaign.Name);
             for(int ModNum = 0; ModNum < Storage.Campaign.Modules.Count; ModNum++)
             {
-                WriteModuleData(XML, ModNum);
+                WriteModuleData(XML, Storage.Campaign.Modules[ModNum]);
             }
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
         }
 
-        static void WriteModuleData(XmlWriter XML, int ModNum)
+        static void WriteModuleData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("Module");
-            XML.WriteAttributeString("Name", Storage.Campaign.Modules[ModNum].Name);
-            XML.WriteAttributeString("ModType", Convert.ToString(Storage.Campaign.Modules[ModNum].ModType));
-            XML.WriteAttributeString("ID", Storage.Campaign.Modules[ModNum].ID);
-            WriteModuleStoryData(XML, ModNum);
-            WriteModuleOptionData(XML, ModNum);
-            if (Storage.Campaign.Modules[ModNum].ModType == 1)
-                WriteModuleEncounterData(XML, ModNum);
-            else if (Storage.Campaign.Modules[ModNum].ModType == 2)
-                WriteModuleShopData(XML, ModNum);
+            XML.WriteAttributeString("Name", Mod.Name);
+            XML.WriteAttributeString("ModType", Convert.ToString(Mod.ModType));
+            XML.WriteAttributeString("ID", Mod.ID);
+            WriteModuleStoryData(XML, Mod);
+            WriteModuleOptionData(XML, Mod);
+            switch (Mod.ModType)
+            {
+                case 1:
+                    WriteModuleEncounterData(XML, Mod);
+                    break;
+                case 2:
+                    WriteModuleShopData(XML, Mod);
+                    break;
+                case 3:
+                    WriteModuleTrapData(XML, Mod);
+                    break;
+                default:
+                    break;
+            }
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
         }
 
-        static void WriteModuleStoryData(XmlWriter XML, int ModNum)
+        static void WriteModuleStoryData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("Story");
-            for(int x = 0; x < Storage.Campaign.Modules[ModNum].Story.Count; x++)
-                XML.WriteAttributeString("Part" + (x + 1), Storage.Campaign.Modules[ModNum].Story[x]);
+            for(int x = 0; x < Mod.Story.Count; x++)
+                XML.WriteAttributeString("Part" + (x + 1), Mod.Story[x]);
             XML.WriteEndElement();
         }
 
-        static void WriteModuleOptionData(XmlWriter XML, int ModNum)
+        static void WriteModuleOptionData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("Options");
-            WriteModuleOptionListData(XML, ModNum);
-            WriteModuleOptionDirectionData(XML, ModNum);
+            WriteModuleOptionListData(XML, Mod);
+            WriteModuleOptionDirectionData(XML, Mod);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
         }
 
-        static void WriteModuleOptionListData(XmlWriter XML, int ModNum)
+        static void WriteModuleOptionListData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("OptionsList");
-            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Options.OptionsList.Count; x++)
-                XML.WriteAttributeString("Option" + (x + 1), Storage.Campaign.Modules[ModNum].Options.OptionsList[x]);
+            for (int x = 0; x < Mod.Options.OptionsList.Count; x++)
+                XML.WriteAttributeString("Option" + (x + 1), Mod.Options.OptionsList[x]);
             XML.WriteEndElement();
         }
 
-        static void WriteModuleOptionDirectionData(XmlWriter XML, int ModNum)
+        static void WriteModuleOptionDirectionData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("OptionDirections");
-            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Options.OptionDirections.Count; x++)
-                XML.WriteAttributeString("OptionDirection" + (x + 1), Convert.ToString(Storage.Campaign.Modules[ModNum].Options.OptionDirections[x]));
+            for (int x = 0; x < Mod.Options.OptionDirections.Count; x++)
+                XML.WriteAttributeString("OptionDirection" + (x + 1), Convert.ToString(Mod.Options.OptionDirections[x]));
             XML.WriteEndElement();
         }
 
-        static void WriteModuleEncounterData(XmlWriter XML, int ModNum)
+        static void WriteModuleEncounterData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("Encounter");
-            WriteModuleEncounterEnemyTypeData(XML, ModNum);
-            WriteModuleEncounterEnemyNumberData(XML, ModNum);
+            WriteModuleEncounterEnemyTypeData(XML, Mod);
+            WriteModuleEncounterEnemyNumberData(XML, Mod);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
         }
 
-        static void WriteModuleEncounterEnemyTypeData(XmlWriter XML, int ModNum)
+        static void WriteModuleEncounterEnemyTypeData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("EncounterEnemyType");
-            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Encounter.EnemyTypes.Count; x++)
-                XML.WriteAttributeString("EnemyType" + (x + 1), Storage.Campaign.Modules[ModNum].Encounter.EnemyTypes[x]);
+            for (int x = 0; x < Mod.Encounter.EnemyTypes.Count; x++)
+                XML.WriteAttributeString("EnemyType" + (x + 1), Mod.Encounter.EnemyTypes[x]);
             XML.WriteEndElement();
         }
 
-        static void WriteModuleEncounterEnemyNumberData(XmlWriter XML, int ModNum)
+        static void WriteModuleEncounterEnemyNumberData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("EncounterEnemyNumber");
-            for (int x = 0; x < Storage.Campaign.Modules[ModNum].Encounter.EnemyNumber.Count; x++)
-                XML.WriteAttributeString("EnemyNumber" + (x + 1), Convert.ToString(Storage.Campaign.Modules[ModNum].Encounter.EnemyNumber[x]));
+            for (int x = 0; x < Mod.Encounter.EnemyNumber.Count; x++)
+                XML.WriteAttributeString("EnemyNumber" + (x + 1), Convert.ToString(Mod.Encounter.EnemyNumber[x]));
             XML.WriteEndElement();
         }
 
-        static void WriteModuleShopData(XmlWriter XML, int ModNum)
+        static void WriteModuleShopData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("Shop");
-            if (Storage.Campaign.Modules[ModNum].Shop.WeaponStock.Count > 0)
-                WriteModuleShopWeaponStockData(XML, ModNum);
-            if (Storage.Campaign.Modules[ModNum].Shop.ArmourStock.Count > 0)
-                WriteModuleShopArmourStockData(XML, ModNum);
+            if (Mod.Shop.WeaponStock.Count > 0)
+                WriteModuleShopWeaponStockData(XML, Mod);
+            if (Mod.Shop.ArmourStock.Count > 0)
+                WriteModuleShopArmourStockData(XML, Mod);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
         }
 
-        static void WriteModuleShopWeaponStockData(XmlWriter XML, int ModNum)
+        static void WriteModuleShopWeaponStockData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("WeaponStock");
-            for(int x = 0; x < Storage.Campaign.Modules[ModNum].Shop.WeaponStock.Count; x++)
+            for(int x = 0; x < Mod.Shop.WeaponStock.Count; x++)
             {
-                XML.WriteStartElement(Storage.Campaign.Modules[ModNum].Shop.WeaponStock[x].Name);
-                XML.WriteAttributeString("Cost", Convert.ToString(Storage.Campaign.Modules[ModNum].Shop.WeaponStock[x].Cost));
+                XML.WriteStartElement(Mod.Shop.WeaponStock[x].Name);
+                XML.WriteAttributeString("Cost", Convert.ToString(Mod.Shop.WeaponStock[x].Cost));
                 XML.WriteEndElement();
             }
             XML.WriteEndElement();
         }
 
-        static void WriteModuleShopArmourStockData(XmlWriter XML, int ModNum)
+        static void WriteModuleShopArmourStockData(XmlWriter XML, Module Mod)
         {
             XML.WriteStartElement("ArmourStock");
-            for(int x = 0; x < Storage.Campaign.Modules[ModNum].Shop.ArmourStock.Count; x++)
+            for(int x = 0; x < Mod.Shop.ArmourStock.Count; x++)
             {
-                XML.WriteStartElement(Storage.Campaign.Modules[ModNum].Shop.ArmourStock[x].Name);
-                XML.WriteAttributeString("Cost", Convert.ToString(Storage.Campaign.Modules[ModNum].Shop.ArmourStock[x].Cost));
+                XML.WriteStartElement(Mod.Shop.ArmourStock[x].Name);
+                XML.WriteAttributeString("Cost", Convert.ToString(Mod.Shop.ArmourStock[x].Cost));
                 XML.WriteEndElement();
             }
+            XML.WriteEndElement();
+        }
+
+        static void WriteModuleTrapData(XmlWriter XML, Module Mod)
+        {
+            XML.WriteStartElement("Trap");
+            XML.WriteAttributeString("Name", Mod.Trap.Name);
+            XML.WriteAttributeString("DiceNumber", Convert.ToString(Mod.Trap.DiceNum));
+            XML.WriteAttributeString("DiceSize", Convert.ToString(Mod.Trap.DiceSize));
+            XML.WriteAttributeString("Modifier", Convert.ToString(Mod.Trap.Modifier));
+            XML.WriteAttributeString("SaveType", Mod.Trap.SaveType);
+            XML.WriteAttributeString("SaveTarget", Convert.ToString(Mod.Trap.SaveTarget));
+            XML.WriteAttributeString("SaveSuccess", Mod.Trap.SaveSuccess);
+            XML.WriteAttributeString("SaveFail", Mod.Trap.SaveFail);
             XML.WriteEndElement();
         }
 
@@ -164,12 +189,22 @@ namespace TAS_Campagin_Creator
             OptionJobs = Storage.Campaign.Modules.Count;
             foreach(Module Mod in Storage.Campaign.Modules)
             {
-                if (Mod.ModType == 1)
-                    EncounterJobs += 1;
-                else if (Mod.ModType == 2)
-                    ShopJobs += 1;
+                switch (Mod.ModType)
+                {
+                    case 1:
+                        EncounterJobs++;
+                        break;
+                    case 2:
+                        ShopJobs++;
+                        break;
+                    case 3:
+                        TrapJobs++;
+                        break;
+                    default:
+                        break;
+                }            
             }
-            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs + ShopJobs;
+            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs + ShopJobs + TrapJobs;
         }
 
         static void ResetExport()
@@ -180,6 +215,7 @@ namespace TAS_Campagin_Creator
             OptionJobs = 0;
             EncounterJobs = 0;
             ShopJobs = 0;
+            TrapJobs = 0;
             Progress = 0;
             foreach (Module Mod in Storage.Campaign.Modules)
                 Mod.Options.OptionDirections.Clear();
