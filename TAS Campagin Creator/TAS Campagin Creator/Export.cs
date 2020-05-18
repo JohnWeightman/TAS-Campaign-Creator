@@ -180,6 +180,7 @@ namespace TAS_Campagin_Creator
             XML.WriteAttributeString("SaveTarget", Convert.ToString(Mod.Trap.SaveTarget));
             XML.WriteAttributeString("SaveSuccess", Mod.Trap.SaveSuccess);
             XML.WriteAttributeString("SaveFail", Mod.Trap.SaveFail);
+            XML.WriteAttributeString("XPValue", Convert.ToString(Mod.Trap.XPValue));
             XML.WriteEndElement();
         }
 

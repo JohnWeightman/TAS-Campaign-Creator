@@ -873,8 +873,20 @@ namespace TAS_Campagin_Creator
 
         void DisplayTrapProperties(Traps Trap)
         {
+            CalculateTrapStats(Trap);
             TrapStatsBox.Text = Trap.Name + "\n\nDMG: " + Trap.DiceNum + "D" + Trap.DiceSize + "+" + Trap.Modifier + "\nSave Type: " + Trap.SaveType +
-                "\nSave Target: " + Trap.SaveTarget; ;
+                "\nSave Target: " + Trap.SaveTarget + "\n\nAverage Damage: " + Trap.AvgDamage + "\nMinimum Damage: " + Trap.MinDamage + "\nMaximum Damage: " +
+                Trap.MaxDamage + "\n\nXP Value: " + Trap.XPValue;
+        }
+
+        void CalculateTrapStats(Traps Trap)
+        {
+            float Temp = ((((float)Trap.DiceSize + (float)1) / (float)2) * (float)Trap.DiceNum) + (float)Trap.Modifier;
+            Trap.AvgDamage = Convert.ToInt32(Temp);
+            Trap.MinDamage = Trap.DiceNum + Trap.Modifier;
+            Trap.MaxDamage = (Trap.DiceNum * Trap.DiceSize) + Trap.Modifier;
+            Temp = ((float)Trap.MinDamage + (float)Trap.AvgDamage + (float)Trap.MaxDamage + (float)Trap.SaveTarget) / 4;
+            Trap.XPValue = Convert.ToInt32(Temp);
         }
 
         void DisplaySuccessFailText(Traps Trap)

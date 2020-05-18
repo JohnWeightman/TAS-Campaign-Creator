@@ -182,5 +182,9 @@ namespace TAS_Campagin_Creator
         public int SaveTarget = 0;
         public string SaveSuccess = "";
         public string SaveFail = "";
+        public int AvgDamage = 0;
+        public int MinDamage = 0;
+        public int MaxDamage = 0;
+        public int XPValue = 0;
     }
 }
