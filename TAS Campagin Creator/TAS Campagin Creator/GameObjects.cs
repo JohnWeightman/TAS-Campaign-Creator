@@ -132,6 +132,7 @@ namespace TAS_Campagin_Creator
                 TrapTemp[Count].SaveTarget = Convert.ToInt32(Child.Attributes[5].Value);
                 TrapTemp[Count].SaveSuccess = Child.Attributes[6].Value;
                 TrapTemp[Count].SaveFail = Child.Attributes[7].Value;
+                TrapTemp[Count].XPValue = Convert.ToInt32(Child.Attributes[8].Value);
                 Count += 1;
             }
             foreach (Traps Trap in TrapTemp)

@@ -27,10 +27,20 @@ namespace TAS_Campagin_Creator
                 AddOptions(x);
                 AddOptionDirections(x);
                 AddModuleType(x);
-                if (Campaign.Modules[x].ModType == 1)
-                    AddModuleEncounter(x);
-                else if (Campaign.Modules[x].ModType == 2)
-                    AddModuleShop(x);
+                switch (Campaign.Modules[x].ModType)
+                {
+                    case 1:
+                        AddModuleEncounter(x);
+                        break;
+                    case 2:
+                        AddModuleShop(x);
+                        break;
+                    case 3:
+                        AddModuleTrap(x);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -57,7 +67,7 @@ namespace TAS_Campagin_Creator
 
         static void AddModuleType(int Mod)
         {
-            Campaign.Modules[Mod].ModType = Convert.ToByte(Ran.Next(0, 3));
+            Campaign.Modules[Mod].ModType = Convert.ToByte(Ran.Next(0, 4));
         }
 
         static void AddModuleEncounter(int Mod)
@@ -73,13 +83,18 @@ namespace TAS_Campagin_Creator
             Campaign.Modules[Mod].Shop.ArmourStock.Add(GameObjects.Armour[0]);
         }
 
+        static void AddModuleTrap(int Mod)
+        {
+            int Trap = Ran.Next(0, GameObjects.Traps.Count);
+            Campaign.Modules[Mod].NewTrap(GameObjects.Traps[Trap]);
+        }
         #endregion
 
         #region Playablecampaign
 
         public static void PlayableCampaign()
         {
-            while(Storage.Campaign.Modules.Count < 6)
+            while(Campaign.Modules.Count < 6)
             {
                 Campaign.NewModule();
             }
@@ -113,7 +128,7 @@ namespace TAS_Campagin_Creator
 
         static void Module3()
         {
-            Campaign.Modules[2].Story.Add("You head to the shop but its closed.");
+            Campaign.Modules[2].Story.Add("You head to the shop and a young clerk greets you.");
             Campaign.Modules[2].ModType = 0;
             Campaign.Modules[2].Options.OptionsList.Add("Return to Town");
             Campaign.Modules[2].Options.OptionDirectionStrings.Add(Campaign.Modules[1].ID);

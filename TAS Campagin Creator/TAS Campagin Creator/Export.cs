@@ -27,16 +27,30 @@ namespace TAS_Campagin_Creator
             Storage.Campaign.InitiliaseDataForExport();
             XmlWriter XML = XmlWriter.Create("Campaigns\\" + Storage.Campaign.Name + ".xml");
             XML.WriteStartDocument();
-            WriteCampaignData(XML);
+            WriteXMLFile(XML);
             XML.WriteEndDocument();
             XML.Close();
             Pro.Hide();
             ResetExport();
         }
 
-        static void WriteCampaignData(XmlWriter XML)
+        static void WriteXMLFile(XmlWriter XML)
         {
             XML.WriteStartElement(Storage.Campaign.Name);
+            WriteSettingsData(XML);
+            WriteCampaignData(XML);
+            XML.WriteEndElement();
+        }
+
+        static void WriteSettingsData(XmlWriter XML)
+        {
+            XML.WriteStartElement("Settings");
+            XML.WriteEndElement();
+        }
+
+        static void WriteCampaignData(XmlWriter XML)
+        {
+            XML.WriteStartElement("Campaign");
             for(int ModNum = 0; ModNum < Storage.Campaign.Modules.Count; ModNum++)
             {
                 WriteModuleData(XML, Storage.Campaign.Modules[ModNum]);

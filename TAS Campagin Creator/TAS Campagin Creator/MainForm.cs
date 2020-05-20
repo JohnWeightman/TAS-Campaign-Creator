@@ -13,6 +13,8 @@ namespace TAS_Campagin_Creator
 {
     public partial class MainForm : Form
     {
+        CampaignSettings CampaignSettings = new CampaignSettings();
+
         #region Program Start
 
         public MainForm()
@@ -126,6 +128,11 @@ namespace TAS_Campagin_Creator
                 Storage.Campaign.NewModule();
                 UpdateDisplay(Storage.Campaign.Modules[0].Name, false);
             }
+        }
+
+        private void campaignSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CampaignSettings.Show();
         }
 
         #endregion
@@ -386,6 +393,7 @@ namespace TAS_Campagin_Creator
                         break;
                 }
                 DisplayModuleGroupBox();
+                SortModuleOptions(Storage.Campaign.Modules[Storage.ModNum].ModType);
             }
         }
 
@@ -394,6 +402,53 @@ namespace TAS_Campagin_Creator
             FillEnemyListBox();
             FillItemsListBox(0);
             FillTrapsListBox();
+        }
+
+        void SortModuleOptions(int ModType)
+        {
+            switch (ModType)
+            {
+                case 1:
+                    SetOptionBoxesDetails("Post Fight", false);
+                    break;
+                case 2:
+                    SetOptionBoxesDetails("Leave Shop", false);
+                    break;
+                case 3:
+                    SetOptionBoxesDetails("Post Trap", false);
+                    break;
+                case 4:
+                    SetOptionBoxesDetails("Campaign Menu", true);
+                    break;
+                case 0:
+                default:
+                    ResetOptionBoxesDetails();
+                    break;
+            }
+        }
+
+        void SetOptionBoxesDetails(string Det, bool End)
+        {
+            OptionsBox.Text = Det;
+            OptionsBox.Enabled = false;
+            OptionsBox2.Items.Clear();
+            if (!End)
+            {
+                OptionsBox2.Items.Add(Det);
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Clear();
+                Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Add("");
+            }
+            else
+            {
+                OptionsBox2.Visible = false;
+            }
+        }
+
+        void ResetOptionBoxesDetails()
+        {
+            OptionsBox.Text = "";
+            OptionsBox.Enabled = true;
+            OptionsBox2.Items.Clear();
         }
 
         #endregion

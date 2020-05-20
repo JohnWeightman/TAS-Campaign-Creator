@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Campaign.cs" />
+    <Compile Include="CampaignSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CampaignSettings.Designer.cs">
+      <DependentUpon>CampaignSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Export.cs" />
     <Compile Include="GameObjects.cs" />
     <Compile Include="GetTextInput.cs">

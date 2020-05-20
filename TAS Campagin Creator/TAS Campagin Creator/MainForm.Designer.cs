@@ -64,6 +64,16 @@ namespace TAS_Campagin_Creator
             this.SearchItemsTBox = new System.Windows.Forms.TextBox();
             this.ItemListBox = new System.Windows.Forms.ListBox();
             this.TrapGBox = new System.Windows.Forms.GroupBox();
+            this.ModifierNUD = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.DiceSizeNUD = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.SaveTypeCBox = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.DiceNumberNUD = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.SaveTargetNUD = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.SaveFailTBox = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,24 +81,15 @@ namespace TAS_Campagin_Creator
             this.TrapStatsBox = new System.Windows.Forms.RichTextBox();
             this.SearchTrapsTBox = new System.Windows.Forms.TextBox();
             this.TrapListBox = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SaveTargetNUD = new System.Windows.Forms.NumericUpDown();
-            this.DiceNumberNUD = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.SaveTypeCBox = new System.Windows.Forms.ComboBox();
-            this.DiceSizeNUD = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.ModifierNUD = new System.Windows.Forms.NumericUpDown();
+            this.campaignSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.ShopGBox.SuspendLayout();
             this.TrapGBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveTargetNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DiceNumberNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DiceSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ModifierNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiceSizeNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiceNumberNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveTargetNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -167,7 +168,8 @@ namespace TAS_Campagin_Creator
             this.CampaignToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.renameCampaignToolStripMenuItem,
             this.addModuleToolStripMenuItem,
-            this.removeModuleToolStripMenuItem});
+            this.removeModuleToolStripMenuItem,
+            this.campaignSettingsToolStripMenuItem});
             this.CampaignToolStripMenuItem.Name = "CampaignToolStripMenuItem";
             this.CampaignToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
             this.CampaignToolStripMenuItem.Text = "Campaign";
@@ -176,7 +178,7 @@ namespace TAS_Campagin_Creator
             // 
             this.renameCampaignToolStripMenuItem.Name = "renameCampaignToolStripMenuItem";
             this.renameCampaignToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
+            this.renameCampaignToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
             this.renameCampaignToolStripMenuItem.Text = "Rename Campaign";
             this.renameCampaignToolStripMenuItem.Click += new System.EventHandler(this.renameCampaignToolStripMenuItem_Click);
             // 
@@ -184,7 +186,7 @@ namespace TAS_Campagin_Creator
             // 
             this.addModuleToolStripMenuItem.Name = "addModuleToolStripMenuItem";
             this.addModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
+            this.addModuleToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
             this.addModuleToolStripMenuItem.Text = "&Add Module";
             this.addModuleToolStripMenuItem.Click += new System.EventHandler(this.addModuleToolStripMenuItem_Click);
             // 
@@ -193,7 +195,7 @@ namespace TAS_Campagin_Creator
             this.removeModuleToolStripMenuItem.Name = "removeModuleToolStripMenuItem";
             this.removeModuleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.removeModuleToolStripMenuItem.Size = new System.Drawing.Size(284, 26);
+            this.removeModuleToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
             this.removeModuleToolStripMenuItem.Text = "Remove Module";
             this.removeModuleToolStripMenuItem.Click += new System.EventHandler(this.removeModuleToolStripMenuItem_Click);
             // 
@@ -455,6 +457,101 @@ namespace TAS_Campagin_Creator
             this.TrapGBox.TabStop = false;
             this.TrapGBox.Visible = false;
             // 
+            // ModifierNUD
+            // 
+            this.ModifierNUD.Location = new System.Drawing.Point(415, 350);
+            this.ModifierNUD.Name = "ModifierNUD";
+            this.ModifierNUD.Size = new System.Drawing.Size(120, 22);
+            this.ModifierNUD.TabIndex = 19;
+            this.ModifierNUD.ValueChanged += new System.EventHandler(this.ModifierNUD_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(415, 320);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(82, 24);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Modifier:";
+            // 
+            // DiceSizeNUD
+            // 
+            this.DiceSizeNUD.Location = new System.Drawing.Point(415, 280);
+            this.DiceSizeNUD.Name = "DiceSizeNUD";
+            this.DiceSizeNUD.Size = new System.Drawing.Size(120, 22);
+            this.DiceSizeNUD.TabIndex = 17;
+            this.DiceSizeNUD.ValueChanged += new System.EventHandler(this.DiceSizeNUD_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(415, 250);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(94, 24);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Dice Size:";
+            // 
+            // SaveTypeCBox
+            // 
+            this.SaveTypeCBox.FormattingEnabled = true;
+            this.SaveTypeCBox.Items.AddRange(new object[] {
+            "Strength",
+            "Dexterity",
+            "Constitution"});
+            this.SaveTypeCBox.Location = new System.Drawing.Point(415, 70);
+            this.SaveTypeCBox.Name = "SaveTypeCBox";
+            this.SaveTypeCBox.Size = new System.Drawing.Size(121, 24);
+            this.SaveTypeCBox.TabIndex = 15;
+            this.SaveTypeCBox.SelectedValueChanged += new System.EventHandler(this.SaveTypeCBox_SelectedValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(415, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(105, 24);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Save Type:";
+            // 
+            // DiceNumberNUD
+            // 
+            this.DiceNumberNUD.Location = new System.Drawing.Point(415, 210);
+            this.DiceNumberNUD.Name = "DiceNumberNUD";
+            this.DiceNumberNUD.Size = new System.Drawing.Size(120, 22);
+            this.DiceNumberNUD.TabIndex = 13;
+            this.DiceNumberNUD.ValueChanged += new System.EventHandler(this.DiceNumberNUD_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(415, 180);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(127, 24);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Dice Number:";
+            // 
+            // SaveTargetNUD
+            // 
+            this.SaveTargetNUD.Location = new System.Drawing.Point(415, 140);
+            this.SaveTargetNUD.Name = "SaveTargetNUD";
+            this.SaveTargetNUD.Size = new System.Drawing.Size(120, 22);
+            this.SaveTargetNUD.TabIndex = 11;
+            this.SaveTargetNUD.ValueChanged += new System.EventHandler(this.SaveTargetNUD_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(415, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(116, 24);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Save Target:";
+            // 
             // SaveFailTBox
             // 
             this.SaveFailTBox.Location = new System.Drawing.Point(430, 405);
@@ -519,100 +616,14 @@ namespace TAS_Campagin_Creator
             this.TrapListBox.TabIndex = 0;
             this.TrapListBox.SelectedIndexChanged += new System.EventHandler(this.TrapListBox_SelectedIndexChanged);
             // 
-            // label4
+            // campaignSettingsToolStripMenuItem
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(415, 110);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 24);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Save Target:";
-            // 
-            // SaveTargetNUD
-            // 
-            this.SaveTargetNUD.Location = new System.Drawing.Point(415, 140);
-            this.SaveTargetNUD.Name = "SaveTargetNUD";
-            this.SaveTargetNUD.Size = new System.Drawing.Size(120, 22);
-            this.SaveTargetNUD.TabIndex = 11;
-            this.SaveTargetNUD.ValueChanged += new System.EventHandler(this.SaveTargetNUD_ValueChanged);
-            // 
-            // DiceNumberNUD
-            // 
-            this.DiceNumberNUD.Location = new System.Drawing.Point(415, 210);
-            this.DiceNumberNUD.Name = "DiceNumberNUD";
-            this.DiceNumberNUD.Size = new System.Drawing.Size(120, 22);
-            this.DiceNumberNUD.TabIndex = 13;
-            this.DiceNumberNUD.ValueChanged += new System.EventHandler(this.DiceNumberNUD_ValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(415, 180);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(127, 24);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Dice Number:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(415, 40);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 24);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Save Type:";
-            // 
-            // SaveTypeCBox
-            // 
-            this.SaveTypeCBox.FormattingEnabled = true;
-            this.SaveTypeCBox.Items.AddRange(new object[] {
-            "Strength",
-            "Dexterity",
-            "Constitution"});
-            this.SaveTypeCBox.Location = new System.Drawing.Point(415, 70);
-            this.SaveTypeCBox.Name = "SaveTypeCBox";
-            this.SaveTypeCBox.Size = new System.Drawing.Size(121, 24);
-            this.SaveTypeCBox.TabIndex = 15;
-            this.SaveTypeCBox.SelectedValueChanged += new System.EventHandler(this.SaveTypeCBox_SelectedValueChanged);
-            // 
-            // DiceSizeNUD
-            // 
-            this.DiceSizeNUD.Location = new System.Drawing.Point(415, 280);
-            this.DiceSizeNUD.Name = "DiceSizeNUD";
-            this.DiceSizeNUD.Size = new System.Drawing.Size(120, 22);
-            this.DiceSizeNUD.TabIndex = 17;
-            this.DiceSizeNUD.ValueChanged += new System.EventHandler(this.DiceSizeNUD_ValueChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(415, 250);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 24);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Dice Size:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(415, 320);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 24);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Modifier:";
-            // 
-            // ModifierNUD
-            // 
-            this.ModifierNUD.Location = new System.Drawing.Point(415, 350);
-            this.ModifierNUD.Name = "ModifierNUD";
-            this.ModifierNUD.Size = new System.Drawing.Size(120, 22);
-            this.ModifierNUD.TabIndex = 19;
-            this.ModifierNUD.ValueChanged += new System.EventHandler(this.ModifierNUD_ValueChanged);
+            this.campaignSettingsToolStripMenuItem.Name = "campaignSettingsToolStripMenuItem";
+            this.campaignSettingsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.campaignSettingsToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
+            this.campaignSettingsToolStripMenuItem.Text = "Campaign Settings";
+            this.campaignSettingsToolStripMenuItem.Click += new System.EventHandler(this.campaignSettingsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -646,10 +657,10 @@ namespace TAS_Campagin_Creator
             this.ShopGBox.PerformLayout();
             this.TrapGBox.ResumeLayout(false);
             this.TrapGBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveTargetNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DiceNumberNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DiceSizeNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ModifierNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiceSizeNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiceNumberNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveTargetNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -710,6 +721,7 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown SaveTargetNUD;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem campaignSettingsToolStripMenuItem;
     }
 }
 
