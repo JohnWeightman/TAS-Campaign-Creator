@@ -10,6 +10,7 @@ namespace TAS_Campagin_Creator
     class Campaign
     {
         public string Name = "Campaign1";
+        public Settings Settings = new Settings();
         public List<Module> Modules = new List<Module>();
 
         public void NewModule()
@@ -169,4 +170,25 @@ namespace TAS_Campagin_Creator
             PotionStock.Add(Potion);
         }
     }
+
+    #region Campaign Settings
+    [Serializable]
+    class Settings
+    {
+        public General General = new General();
+        public EnemySettings Enemeis = new EnemySettings();
+    }
+
+    [Serializable]
+    class General
+    {
+
+    }
+
+    [Serializable]
+    class EnemySettings
+    {
+
+    }
+    #endregion
 }

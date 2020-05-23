@@ -82,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializeData.cs" />
     <Compile Include="Storage.cs" />
+    <EmbeddedResource Include="CampaignSettings.resx">
+      <DependentUpon>CampaignSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GetTextInput.resx">
       <DependentUpon>GetTextInput.cs</DependentUpon>
     </EmbeddedResource>

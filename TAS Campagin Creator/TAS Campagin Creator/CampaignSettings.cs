@@ -16,5 +16,29 @@ namespace TAS_Campagin_Creator
         {
             InitializeComponent();
         }
+
+        private void SettingsLBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(SettingsLBox.SelectedItem != null)
+            {
+                switch (SettingsLBox.SelectedIndex)
+                {
+                    case 0:
+                        GeneralGBox.Visible = true;
+                        break;
+                    case 1:
+                        EnemeisGBox.Visible = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        void HideGroupBoxes()
+        {
+            GeneralGBox.Visible = false;
+            EnemeisGBox.Visible = false;
+        }
     }
 }
