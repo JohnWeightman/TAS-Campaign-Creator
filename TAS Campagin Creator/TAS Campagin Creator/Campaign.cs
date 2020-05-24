@@ -176,6 +176,7 @@ namespace TAS_Campagin_Creator
     class Settings
     {
         public General General = new General();
+        public PlayerSettings Player = new PlayerSettings();
         public EnemySettings Enemeis = new EnemySettings();
     }
 
@@ -186,9 +187,20 @@ namespace TAS_Campagin_Creator
     }
 
     [Serializable]
+    class PlayerSettings
+    {
+        public int FirstLevelUp = 50;
+        public int LevelUpIncrease = 25;
+    }
+
+    [Serializable]
     class EnemySettings
     {
-
+        public int EnemyNamePlateColourGreen = 100;
+        public int EnemyNamePlateColourDarkGreen = 80;
+        public int EnemyNamePlateColourDarkYellow = 50;
+        public int EnemyNamePlateColourRed = 20;
+        public int EnemyNamePlateColourDarkRed = 1;
     }
     #endregion
 }

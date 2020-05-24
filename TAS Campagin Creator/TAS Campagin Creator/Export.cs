@@ -11,6 +11,7 @@ namespace TAS_Campagin_Creator
     {
         static Progress Pro = new Progress();
         static int TotalJobs = 0;
+        static int SettingsJobs = 4;
         static int CampaignJobs = 1;
         static int ModuleJobs = 0;
         static int OptionJobs = 0;
@@ -37,15 +38,51 @@ namespace TAS_Campagin_Creator
         static void WriteXMLFile(XmlWriter XML)
         {
             XML.WriteStartElement(Storage.Campaign.Name);
-            WriteSettingsData(XML);
+            WriteSettingsData(XML, Storage.Campaign.Settings);
             WriteCampaignData(XML);
             XML.WriteEndElement();
         }
 
-        static void WriteSettingsData(XmlWriter XML)
+        static void WriteSettingsData(XmlWriter XML, Settings Settings)
         {
             XML.WriteStartElement("Settings");
+            WriteSettingsGeneralData(XML, Settings.General);
+            WriteSettingsPlayerData(XML, Settings.Player);
+            WriteSettingsEnemiesData(XML, Settings.Enemeis);
             XML.WriteEndElement();
+            Progress += 1;
+            Pro.UpdateProgress(Progress);
+        }
+
+        static void WriteSettingsGeneralData(XmlWriter XML, General General)
+        {
+            XML.WriteStartElement("General");
+            XML.WriteEndElement();
+            Progress += 1;
+            Pro.UpdateProgress(Progress);
+        }
+
+        static void WriteSettingsPlayerData(XmlWriter XML, PlayerSettings PSettings)
+        {
+            XML.WriteStartElement("Player");
+            XML.WriteAttributeString("FirstLevelUp", Convert.ToString(PSettings.FirstLevelUp));
+            XML.WriteAttributeString("LevelUpIncrease", Convert.ToString(PSettings.LevelUpIncrease));
+            XML.WriteEndElement();
+            Progress += 1;
+            Pro.UpdateProgress(Progress);
+        }
+
+        static void WriteSettingsEnemiesData(XmlWriter XML, EnemySettings ESettings)
+        {
+            XML.WriteStartElement("Enemies");
+            XML.WriteAttributeString("EnemyNamePlateColourGreen", Convert.ToString(ESettings.EnemyNamePlateColourGreen));
+            XML.WriteAttributeString("EnemyNamePlateColourDarkGreen", Convert.ToString(ESettings.EnemyNamePlateColourDarkGreen));
+            XML.WriteAttributeString("EnemyNamePlateColourDarkYellow", Convert.ToString(ESettings.EnemyNamePlateColourDarkYellow));
+            XML.WriteAttributeString("EnemyNamePlateColourRed", Convert.ToString(ESettings.EnemyNamePlateColourRed));
+            XML.WriteAttributeString("EnemyNamePlateColourDarkRed", Convert.ToString(ESettings.EnemyNamePlateColourDarkRed));
+            XML.WriteEndElement();
+            Progress += 1;
+            Pro.UpdateProgress(Progress);
         }
 
         static void WriteCampaignData(XmlWriter XML)
@@ -219,13 +256,12 @@ namespace TAS_Campagin_Creator
                         break;
                 }            
             }
-            TotalJobs = CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs + ShopJobs + TrapJobs;
+            TotalJobs = SettingsJobs + CampaignJobs + ModuleJobs + OptionJobs + EncounterJobs + ShopJobs + TrapJobs;
         }
 
         static void ResetExport()
         {
             TotalJobs = 0;
-            CampaignJobs = 1;
             ModuleJobs = 0;
             OptionJobs = 0;
             EncounterJobs = 0;
