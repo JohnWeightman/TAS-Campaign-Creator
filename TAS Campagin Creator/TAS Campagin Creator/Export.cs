@@ -67,9 +67,23 @@ namespace TAS_Campagin_Creator
             XML.WriteStartElement("Player");
             XML.WriteAttributeString("FirstLevelUp", Convert.ToString(PSettings.FirstLevelUp));
             XML.WriteAttributeString("LevelUpIncrease", Convert.ToString(PSettings.LevelUpIncrease));
+            WriteSettingsPlayerStatsData(XML, PSettings);
             XML.WriteEndElement();
             Progress += 1;
             Pro.UpdateProgress(Progress);
+        }
+
+        static void WriteSettingsPlayerStatsData(XmlWriter XML, PlayerSettings PSettings)
+        {
+            XML.WriteStartElement("PlayerStats");
+            XML.WriteAttributeString("UseStats", Convert.ToString(PSettings.SetPlayerStats));
+            XML.WriteAttributeString("Strength", Convert.ToString(PSettings.Str));
+            XML.WriteAttributeString("Dexterity", Convert.ToString(PSettings.Dex));
+            XML.WriteAttributeString("Constitution", Convert.ToString(PSettings.Con));
+            XML.WriteAttributeString("HP", Convert.ToString(PSettings.HP));
+            XML.WriteAttributeString("Weapon", PSettings.Weapon);
+            XML.WriteAttributeString("Armour", PSettings.Armour);
+            XML.WriteEndElement();
         }
 
         static void WriteSettingsEnemiesData(XmlWriter XML, EnemySettings ESettings)

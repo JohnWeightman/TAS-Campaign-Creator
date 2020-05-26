@@ -191,6 +191,13 @@ namespace TAS_Campagin_Creator
     {
         public int FirstLevelUp = 50;
         public int LevelUpIncrease = 25;
+        public bool SetPlayerStats = false;
+        public int HP = 0;
+        public int Str = 0;
+        public int Dex = 0;
+        public int Con = 0;
+        public string Weapon = "";
+        public string Armour = "";
     }
 
     [Serializable]

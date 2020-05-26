@@ -7,14 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace TAS_Campagin_Creator
 {
     public partial class MainForm : Form
     {
-        CampaignSettings CampaignSettings = new CampaignSettings();
-
         #region Program Start
 
         public MainForm()
@@ -132,6 +129,7 @@ namespace TAS_Campagin_Creator
 
         private void campaignSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CampaignSettings CampaignSettings = new CampaignSettings();
             CampaignSettings.Show();
         }
 
