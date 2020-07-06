@@ -232,6 +232,9 @@ namespace TAS_Campagin_Creator
                     ModTypeCBox.SelectedItem = "Trap Module";
                     break;
                 case 4:
+                    ModTypeCBox.SelectedItem = "Ability Save Module";
+                    break;
+                case 5:
                     ModTypeCBox.SelectedItem = "End Campaign Module";
                     break;
                 default:
@@ -244,6 +247,7 @@ namespace TAS_Campagin_Creator
             EncounterGBox.Visible = false;
             ShopGBox.Visible = false;
             TrapGBox.Visible = false;
+            AbilitySavesGBox.Visible = false;
             switch (Storage.Campaign.Modules[Storage.ModNum].ModType)
             {
                 case 1:
@@ -254,6 +258,9 @@ namespace TAS_Campagin_Creator
                     break;
                 case 3:
                     TrapGBox.Visible = true;
+                    break;
+                case 4:
+                    AbilitySavesGBox.Visible = true;
                     break;
                 default:
                     break;
@@ -385,6 +392,9 @@ namespace TAS_Campagin_Creator
                     case 4:
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 4;
                         break;
+                    case 5:
+                        Storage.Campaign.Modules[Storage.ModNum].ModType = 5;
+                        break;
                     case 0:
                     default:
                         Storage.Campaign.Modules[Storage.ModNum].ModType = 0;
@@ -407,16 +417,19 @@ namespace TAS_Campagin_Creator
             switch (ModType)
             {
                 case 1:
-                    SetOptionBoxesDetails("Post Fight", false);
+                    SetOptionBoxesDetails(false, Det1: "Post Fight");
                     break;
                 case 2:
-                    SetOptionBoxesDetails("Leave Shop", false);
+                    SetOptionBoxesDetails(false, Det1: "Leave Shop");
                     break;
                 case 3:
-                    SetOptionBoxesDetails("Post Trap", false);
+                    SetOptionBoxesDetails(false, Det1: "Post Trap");
                     break;
                 case 4:
-                    SetOptionBoxesDetails("Campaign Menu", true);
+                    SetOptionBoxesDetails(false, Det1: "Pass Save", Det2: "Fail Save");
+                    break;
+                case 5:
+                    SetOptionBoxesDetails(true, Det1: "Campaign Menu");
                     break;
                 case 0:
                 default:
@@ -425,16 +438,22 @@ namespace TAS_Campagin_Creator
             }
         }
 
-        void SetOptionBoxesDetails(string Det, bool End)
+        void SetOptionBoxesDetails(bool End, string Det1 = "", string Det2 = "")
         {
-            OptionsBox.Text = Det;
+            OptionsBox.Text = Det1;
             OptionsBox.Enabled = false;
             OptionsBox2.Items.Clear();
             if (!End)
             {
-                OptionsBox2.Items.Add(Det);
+                OptionsBox2.Items.Add(Det1);
                 Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Clear();
                 Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Add("");
+                if(Det2 != "")
+                {
+                    OptionsBox.Text = Det1 + "\n" + Det2;
+                    OptionsBox2.Items.Add(Det2);
+                    Storage.Campaign.Modules[Storage.ModNum].Options.OptionDirectionStrings.Add("");
+                }
             }
             else
             {
@@ -956,6 +975,44 @@ namespace TAS_Campagin_Creator
             DiceSizeNUD.Value = Trap.DiceSize;
             ModifierNUD.Value = Trap.Modifier;
         }
+        #endregion
+
+        #region Ability Save Module
+
+        private void ABSaveTypeCBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ABSaveTypeCBox.SelectedIndex)
+            {
+                case 0:
+                    Storage.Campaign.Modules[Storage.ModNum].ABSaves.SaveType = "Str";
+                    break;
+                case 1:
+                    Storage.Campaign.Modules[Storage.ModNum].ABSaves.SaveType = "Dex";
+                    break;
+                case 2:
+                    Storage.Campaign.Modules[Storage.ModNum].ABSaves.SaveType = "Con";
+                    break;
+            }
+        }
+
+        private void ABSaveTargetUD_ValueChanged(object sender, EventArgs e)
+        {
+            if (ABSaveTargetUD.Value >= 0)
+                Storage.Campaign.Modules[Storage.ModNum].ABSaves.SaveTarget = Convert.ToInt32(ABSaveTargetUD.Value);
+            else
+                ABSaveTargetUD.Value = 0;
+        }
+
+        private void ABSaveFailTBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].ABSaves.SaveFail = ABSaveFailTBox.Text;
+        }
+
+        private void ABSaveSuccessTBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            Storage.Campaign.Modules[Storage.ModNum].ABSaves.SaveSuccess = ABSaveSuccessTBox.Text;
+        }
+
         #endregion
 
         #endregion

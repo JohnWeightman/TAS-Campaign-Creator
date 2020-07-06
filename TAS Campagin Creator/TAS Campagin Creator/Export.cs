@@ -130,6 +130,9 @@ namespace TAS_Campagin_Creator
                 case 3:
                     WriteModuleTrapData(XML, Mod);
                     break;
+                case 4:
+                    WriteModuleAbilitySaveData(XML, Mod);
+                    break;
                 default:
                     break;
             }
@@ -246,6 +249,16 @@ namespace TAS_Campagin_Creator
             XML.WriteAttributeString("SaveSuccess", Mod.Trap.SaveSuccess);
             XML.WriteAttributeString("SaveFail", Mod.Trap.SaveFail);
             XML.WriteAttributeString("XPValue", Convert.ToString(Mod.Trap.XPValue));
+            XML.WriteEndElement();
+        }
+
+        static void WriteModuleAbilitySaveData(XmlWriter XML, Module Mod)
+        {
+            XML.WriteStartElement("AbilitySaves");
+            XML.WriteAttributeString("SaveType", Convert.ToString(Mod.ABSaves.SaveType));
+            XML.WriteAttributeString("SaveTarget", Convert.ToString(Mod.ABSaves.SaveTarget));
+            XML.WriteAttributeString("SaveSuccess", Convert.ToString(Mod.ABSaves.SaveSuccess));
+            XML.WriteAttributeString("SaveFfail", Convert.ToString(Mod.ABSaves.SaveFail));
             XML.WriteEndElement();
         }
 

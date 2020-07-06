@@ -97,6 +97,7 @@ namespace TAS_Campagin_Creator
         public Encounters Encounter = new Encounters();
         public Shops Shop = new Shops();
         public Traps Trap = new Traps();
+        public AbilitySaves ABSaves = new AbilitySaves();
         public string Name = "Module1";
         public byte ModType = 0;
         public string ID = "";
@@ -169,6 +170,15 @@ namespace TAS_Campagin_Creator
             Potion.Cost = NewPotion.Cost;
             PotionStock.Add(Potion);
         }
+    }
+
+    [Serializable]
+    class AbilitySaves
+    {
+        public string SaveType = "";
+        public int SaveTarget = 0;
+        public string SaveSuccess = "";
+        public string SaveFail = "";
     }
 
     #region Campaign Settings

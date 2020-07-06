@@ -40,6 +40,7 @@ namespace TAS_Campagin_Creator
             this.renameCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeModuleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.campaignSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CampaignNameLabel = new System.Windows.Forms.Label();
             this.ModuleBox = new System.Windows.Forms.ListBox();
             this.StoryBox = new System.Windows.Forms.RichTextBox();
@@ -81,7 +82,15 @@ namespace TAS_Campagin_Creator
             this.TrapStatsBox = new System.Windows.Forms.RichTextBox();
             this.SearchTrapsTBox = new System.Windows.Forms.TextBox();
             this.TrapListBox = new System.Windows.Forms.ListBox();
-            this.campaignSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AbilitySavesGBox = new System.Windows.Forms.GroupBox();
+            this.ABSaveTypeCBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ABSaveTargetUD = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.ABSaveFailTBox = new System.Windows.Forms.RichTextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ABSaveSuccessTBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.EncounterGBox.SuspendLayout();
             this.ShopGBox.SuspendLayout();
@@ -90,6 +99,8 @@ namespace TAS_Campagin_Creator
             ((System.ComponentModel.ISupportInitialize)(this.DiceSizeNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiceNumberNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveTargetNUD)).BeginInit();
+            this.AbilitySavesGBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ABSaveTargetUD)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -198,6 +209,15 @@ namespace TAS_Campagin_Creator
             this.removeModuleToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
             this.removeModuleToolStripMenuItem.Text = "Remove Module";
             this.removeModuleToolStripMenuItem.Click += new System.EventHandler(this.removeModuleToolStripMenuItem_Click);
+            // 
+            // campaignSettingsToolStripMenuItem
+            // 
+            this.campaignSettingsToolStripMenuItem.Name = "campaignSettingsToolStripMenuItem";
+            this.campaignSettingsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.campaignSettingsToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
+            this.campaignSettingsToolStripMenuItem.Text = "Campaign Settings";
+            this.campaignSettingsToolStripMenuItem.Click += new System.EventHandler(this.campaignSettingsToolStripMenuItem_Click);
             // 
             // CampaignNameLabel
             // 
@@ -351,6 +371,7 @@ namespace TAS_Campagin_Creator
             "Encounter Module",
             "Shop Module",
             "Trap Module",
+            "Ability Save Module",
             "End Campaign Module"});
             this.ModTypeCBox.Location = new System.Drawing.Point(725, 205);
             this.ModTypeCBox.Name = "ModTypeCBox";
@@ -616,20 +637,108 @@ namespace TAS_Campagin_Creator
             this.TrapListBox.TabIndex = 0;
             this.TrapListBox.SelectedIndexChanged += new System.EventHandler(this.TrapListBox_SelectedIndexChanged);
             // 
-            // campaignSettingsToolStripMenuItem
+            // AbilitySavesGBox
             // 
-            this.campaignSettingsToolStripMenuItem.Name = "campaignSettingsToolStripMenuItem";
-            this.campaignSettingsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.campaignSettingsToolStripMenuItem.Size = new System.Drawing.Size(299, 26);
-            this.campaignSettingsToolStripMenuItem.Text = "Campaign Settings";
-            this.campaignSettingsToolStripMenuItem.Click += new System.EventHandler(this.campaignSettingsToolStripMenuItem_Click);
+            this.AbilitySavesGBox.Controls.Add(this.ABSaveTypeCBox);
+            this.AbilitySavesGBox.Controls.Add(this.label11);
+            this.AbilitySavesGBox.Controls.Add(this.ABSaveTargetUD);
+            this.AbilitySavesGBox.Controls.Add(this.label13);
+            this.AbilitySavesGBox.Controls.Add(this.ABSaveFailTBox);
+            this.AbilitySavesGBox.Controls.Add(this.label14);
+            this.AbilitySavesGBox.Controls.Add(this.label15);
+            this.AbilitySavesGBox.Controls.Add(this.ABSaveSuccessTBox);
+            this.AbilitySavesGBox.Location = new System.Drawing.Point(920, 170);
+            this.AbilitySavesGBox.Name = "AbilitySavesGBox";
+            this.AbilitySavesGBox.Size = new System.Drawing.Size(650, 671);
+            this.AbilitySavesGBox.TabIndex = 20;
+            this.AbilitySavesGBox.TabStop = false;
+            this.AbilitySavesGBox.Visible = false;
+            // 
+            // ABSaveTypeCBox
+            // 
+            this.ABSaveTypeCBox.FormattingEnabled = true;
+            this.ABSaveTypeCBox.Items.AddRange(new object[] {
+            "Strength",
+            "Dexterity",
+            "Constitution"});
+            this.ABSaveTypeCBox.Location = new System.Drawing.Point(5, 40);
+            this.ABSaveTypeCBox.Name = "ABSaveTypeCBox";
+            this.ABSaveTypeCBox.Size = new System.Drawing.Size(121, 24);
+            this.ABSaveTypeCBox.TabIndex = 15;
+            this.ABSaveTypeCBox.SelectedIndexChanged += new System.EventHandler(this.ABSaveTypeCBox_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(5, 10);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 24);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Save Type:";
+            // 
+            // ABSaveTargetUD
+            // 
+            this.ABSaveTargetUD.Location = new System.Drawing.Point(175, 40);
+            this.ABSaveTargetUD.Name = "ABSaveTargetUD";
+            this.ABSaveTargetUD.Size = new System.Drawing.Size(120, 22);
+            this.ABSaveTargetUD.TabIndex = 11;
+            this.ABSaveTargetUD.ValueChanged += new System.EventHandler(this.ABSaveTargetUD_ValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(175, 10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 24);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Save Target:";
+            // 
+            // ABSaveFailTBox
+            // 
+            this.ABSaveFailTBox.Location = new System.Drawing.Point(330, 120);
+            this.ABSaveFailTBox.Name = "ABSaveFailTBox";
+            this.ABSaveFailTBox.Size = new System.Drawing.Size(300, 535);
+            this.ABSaveFailTBox.TabIndex = 9;
+            this.ABSaveFailTBox.Text = "";
+            this.ABSaveFailTBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ABSaveFailTBox_KeyUp);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(345, 90);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(152, 25);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "Save Fail Text";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(10, 90);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(200, 25);
+            this.label15.TabIndex = 7;
+            this.label15.Text = "Save Success Text";
+            // 
+            // ABSaveSuccessTBox
+            // 
+            this.ABSaveSuccessTBox.Location = new System.Drawing.Point(15, 120);
+            this.ABSaveSuccessTBox.Name = "ABSaveSuccessTBox";
+            this.ABSaveSuccessTBox.Size = new System.Drawing.Size(300, 535);
+            this.ABSaveSuccessTBox.TabIndex = 6;
+            this.ABSaveSuccessTBox.Text = "";
+            this.ABSaveSuccessTBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ABSaveSuccessTBox_KeyUp);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.AbilitySavesGBox);
             this.Controls.Add(this.ModNameTBox);
             this.Controls.Add(this.ModTypeCBox);
             this.Controls.Add(this.ModuleTypeLabel);
@@ -661,6 +770,9 @@ namespace TAS_Campagin_Creator
             ((System.ComponentModel.ISupportInitialize)(this.DiceSizeNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DiceNumberNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveTargetNUD)).EndInit();
+            this.AbilitySavesGBox.ResumeLayout(false);
+            this.AbilitySavesGBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ABSaveTargetUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -722,6 +834,15 @@ namespace TAS_Campagin_Creator
         private System.Windows.Forms.NumericUpDown SaveTargetNUD;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripMenuItem campaignSettingsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox AbilitySavesGBox;
+        private System.Windows.Forms.ComboBox ABSaveTypeCBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown ABSaveTargetUD;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RichTextBox ABSaveFailTBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.RichTextBox ABSaveSuccessTBox;
     }
 }
 
